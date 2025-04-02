@@ -10,19 +10,21 @@
 
 import { toast } from 'react-toastify';
 import { apiSlice } from '@/redux/api/apiSlice';
-import { pushAllData } from './usersSlice';
+import { getAllUsersRTK } from './usersSlice';
 import { IUser } from '@/app/api/v1/users/userModel';
 export const usersApi = apiSlice.injectEndpoints({
   endpoints: builder => ({
     // endpoints here
     getUsers: builder.query({
-      query: () => `/users`,
+      // http://localhost:3000/api/v1/users?page=1&limit=2
+      query: ({ page, limit }) => `/api/v1/users?page=${page || 1}&limit=${limit || 10}`,
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const query = await queryFulfilled;
+          console.log('query : ', query);
           // default all users is fetching.
           // after query is completed dispatch to usersSlice.
-          query.data.forEach((i: IUser) => dispatch(pushAllData(i)));
+          query.data.data.forEach((i: IUser) => dispatch(getAllUsersRTK(i)));
         } catch (e: unknown) {
           if (e instanceof Error) {
             toast.error(e.message, {

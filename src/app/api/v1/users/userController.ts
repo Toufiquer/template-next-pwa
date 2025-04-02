@@ -56,10 +56,10 @@ export async function getUsers(req: Request) {
 
     const users = await User.find({}).skip(skip).limit(limit);
     const totalUsers = await User.countDocuments();
-
+    console.log('server:', users.length, totalUsers);
     return NextResponse.json(
       {
-        data: users,
+        data: users || [], // Ensure data is always an array
         total: totalUsers,
         page,
         limit,
