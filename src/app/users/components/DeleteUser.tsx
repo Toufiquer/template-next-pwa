@@ -1,29 +1,52 @@
 import React from 'react';
-import { IUser } from '../page';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { IUser } from '@/app/api/v1/users/userModel';
 
-interface DeleteUserProps {
+const DeleteUser: React.FC<{
   isOpen: boolean;
-  onClose: () => void;
-  user: IUser | null;
-  onDelete: (userId: string) => void;
-}
-
-const DeleteUser: React.FC<DeleteUserProps> = ({ isOpen, onClose, user, onDelete }) => {
-  const handleDelete = () => {
-    if (user) {
-      onDelete(user.id);
-      onClose();
-    }
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedUser: IUser | null;
+  setUsers: React.Dispatch<React.SetStateAction<IUser[]>>;
+  users: IUser[];
+}> = ({ isOpen, setIsOpen, selectedUser, setUsers, users }) => {
+  const handleDeleteUser = () => {
+    if (!selectedUser) return;
+    const updatedUsers = users.filter(user => user.email !== selectedUser.email);
+    setUsers(updatedUsers);
+    setIsOpen(false);
   };
 
-  if (!isOpen || !user) return null;
-
   return (
-    <div>
-      {/* ...existing delete user modal structure... */}
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={onClose}>Cancel</button>
-    </div>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Confirm Deletion</DialogTitle>
+        </DialogHeader>
+        {selectedUser && (
+          <div className="py-4">
+            <p>
+              You are about to delete user:{' '}
+              <span className="font-semibold">{selectedUser.name}</span>
+            </p>
+          </div>
+        )}
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button variant="destructive" onClick={handleDeleteUser}>
+            Delete
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
