@@ -68,15 +68,15 @@ const UserManagementPage: React.FC = () => {
 
       <ViewUsersTable
         users={users}
-        openViewModal={(user: IUser) => {
+        onView={user => {
           setSelectedUser(user);
           setIsViewModalOpen(true);
         }}
-        openEditModal={(user: IUser) => {
+        onEdit={user => {
           setSelectedUser(user);
           setIsEditModalOpen(true);
         }}
-        openDeleteModal={(user: IUser) => {
+        onDelete={user => {
           setSelectedUser(user);
           setIsDeleteModalOpen(true);
         }}
