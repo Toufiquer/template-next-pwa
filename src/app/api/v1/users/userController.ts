@@ -165,12 +165,15 @@ export async function bulkDeleteUsers(req: Request) {
         const isFindUser = await User.findById(id);
         if (isFindUser) {
           const deletedUser = await User.findByIdAndDelete(id);
-          deletedUser && deletedIds.push(id);
+          if (deletedUser) {
+            deletedIds.push(id);
+          }
         } else {
           invalidIds.push(id);
         }
       } catch (error) {
         invalidIds.push(id);
+        console.log('error : ', error);
       }
     }
 

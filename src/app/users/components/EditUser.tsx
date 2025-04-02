@@ -30,8 +30,10 @@ const EditUser: React.FC<{
 }> = ({ isOpen, setIsOpen, selectedUser, newUser, setNewUser, setUsers, users }) => {
   useEffect(() => {
     console.log('selectedUser : ', selectedUser);
-    selectedUser && setNewUser(selectedUser);
-  }, []);
+    if (selectedUser) {
+      setNewUser(selectedUser);
+    }
+  }, [selectedUser, setNewUser]);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
