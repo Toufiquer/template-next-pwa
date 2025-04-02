@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import {
   getUsers,
   createUser,
@@ -8,17 +7,6 @@ import {
   bulkDeleteUsers,
   getUserById,
 } from './userController';
-import User from './userModel';
-import { connectDB } from '@/lib/mongoose';
-
-interface UserUpdateData {
-  id: string;
-  [key: string]: unknown; // Replace `any` with `unknown` for stricter typing
-}
-
-interface UserDeleteData {
-  id: string;
-}
 
 // GET all users
 export async function GET(req: Request) {

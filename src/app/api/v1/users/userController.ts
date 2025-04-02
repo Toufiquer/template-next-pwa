@@ -2,6 +2,49 @@ import { NextResponse } from 'next/server';
 import User from './userModel';
 import { connectDB } from '@/lib/mongoose';
 
+// CREATE user
+export async function createUser(req: Request) {
+  try {
+    await connectDB();
+    const userData = await req.json();
+    const newUser = await User.create({ ...userData });
+    return NextResponse.json(
+      { data: newUser, message: 'User created successfully', status: 201 },
+      { status: 201 },
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
+  }
+}
+
+// GET single user by ID
+export async function getUserById(req: Request) {
+  try {
+    await connectDB();
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ message: 'User ID is required', status: 400 }, { status: 400 });
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return NextResponse.json({ message: 'User not found', status: 404 }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { data: user, message: 'User fetched successfully', status: 200 },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: (error as Error).message, status: 500 }, { status: 500 });
+  }
+}
+
 // GET all users with pagination
 export async function getUsers(req: Request) {
   try {
@@ -14,36 +57,24 @@ export async function getUsers(req: Request) {
     const users = await User.find({}).skip(skip).limit(limit);
     const totalUsers = await User.countDocuments();
 
-    return NextResponse.json({
-      data: users,
-      total: totalUsers,
-      page,
-      limit,
-      message: 'Users fetched successfully',
-    });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: 'Error fetching users' }, { status: 500 });
-  }
-}
-
-// CREATE user
-export async function createUser(req: Request) {
-  try {
-    await connectDB();
-    const userData = await req.json();
-    const newUser = await User.create({ ...userData });
     return NextResponse.json(
-      { data: newUser, message: 'User created successfully' },
-      { status: 201 },
+      {
+        data: users,
+        total: totalUsers,
+        page,
+        limit,
+        message: 'Users fetched successfully',
+        status: 200,
+      },
+      { status: 200 },
     );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+    return NextResponse.json({ message: 'Error fetching users', status: 500 }, { status: 500 });
   }
 }
 
-// UPDATE user
+// UPDATE single user by ID
 export async function updateUser(req: Request) {
   try {
     await connectDB();
@@ -55,14 +86,18 @@ export async function updateUser(req: Request) {
     });
 
     if (!updatedUser) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+      return NextResponse.json({ message: 'User not found', status: 404 }, { status: 404 });
     }
-    return NextResponse.json({ data: updatedUser, message: 'User updated successfully' });
+    return NextResponse.json(
+      { data: updatedUser, message: 'User updated successfully', status: 200 },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+    return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
   }
 }
+
 // BULK UPDATE users
 export async function bulkUpdateUsers(req: Request) {
   try {
@@ -82,18 +117,22 @@ export async function bulkUpdateUsers(req: Request) {
       .filter(result => result.status === 'rejected' || !result.value)
       .map((_, index) => updates[index].id);
 
-    return NextResponse.json({
-      updated: successfulUpdates,
-      failed: failedUpdates,
-      message: 'Bulk update completed',
-    });
+    return NextResponse.json(
+      {
+        updated: successfulUpdates,
+        failed: failedUpdates,
+        message: 'Bulk update completed',
+        status: 200,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+    return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
   }
 }
 
-// DELETE user
+// DELETE single user by ID
 export async function deleteUser(req: Request) {
   try {
     await connectDB();
@@ -101,12 +140,15 @@ export async function deleteUser(req: Request) {
     const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+      return NextResponse.json({ message: 'User not found', status: 404 }, { status: 404 });
     }
-    return NextResponse.json({ message: 'User deleted successfully' });
+    return NextResponse.json(
+      { message: 'User deleted successfully', status: 200 },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+    return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
   }
 }
 
@@ -132,38 +174,18 @@ export async function bulkDeleteUsers(req: Request) {
       }
     }
 
-    return NextResponse.json({
-      deleted: deletedIds.length,
-      deletedIds,
-      invalidIds,
-      message: 'Bulk delete operation completed',
-    });
+    return NextResponse.json(
+      {
+        deleted: deletedIds.length,
+        deletedIds,
+        invalidIds,
+        message: 'Bulk delete operation completed',
+        status: 200,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
-  }
-}
-
-// GET single user by ID
-export async function getUserById(req: Request) {
-  try {
-    await connectDB();
-    const url = new URL(req.url);
-    const id = url.searchParams.get('id');
-
-    if (!id) {
-      return NextResponse.json({ message: 'User ID is required' }, { status: 400 });
-    }
-
-    const user = await User.findById(id);
-
-    if (!user) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 });
-    }
-
-    return NextResponse.json({ data: user, message: 'User fetched successfully' });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 500 });
+    return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
   }
 }
