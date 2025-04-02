@@ -1,6 +1,6 @@
 1. Create Account in MongoDB => https://account.mongodb.com/account/login
 2. Copy uri from MongoDB => cluster/connect/ => [copyuri]
-3. pase uri from MongoDB => 
+3. pase uri from MongoDB => .env.local.mongooseURI
 1. Update => src/lib/mongoose.ts [past code]
 2. Update => .env.local [past code]
 2. Update => src/app/api/... [past code] 

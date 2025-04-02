@@ -3,9 +3,9 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  getUserById,
   bulkUpdateUsers,
   bulkDeleteUsers,
-  getUserById,
 } from './userController';
 
 // GET all users
