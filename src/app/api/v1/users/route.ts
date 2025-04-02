@@ -6,6 +6,7 @@ import {
   deleteUser,
   bulkUpdateUsers,
   bulkDeleteUsers,
+  getUserById,
 } from './userController';
 import User from './userModel';
 import { connectDB } from '@/lib/mongoose';
@@ -21,6 +22,11 @@ interface UserDeleteData {
 
 // GET all users
 export async function GET(req: Request) {
+  const url = new URL(req.url);
+  const id = url.searchParams.get('id');
+  if (id) {
+    return getUserById(req);
+  }
   return getUsers(req);
 }
 

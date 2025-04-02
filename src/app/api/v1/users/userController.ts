@@ -63,6 +63,35 @@ export async function updateUser(req: Request) {
     return NextResponse.json({ message: (error as Error).message }, { status: 400 });
   }
 }
+// BULK UPDATE users
+export async function bulkUpdateUsers(req: Request) {
+  try {
+    await connectDB();
+    const updates = await req.json(); // Expecting an array of { id, updateData }
+    const results = await Promise.allSettled(
+      updates.map(({ id, updateData }: { id: string; updateData: Record<string, unknown> }) =>
+        User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }),
+      ),
+    );
+
+    const successfulUpdates = results
+      .filter(result => result.status === 'fulfilled' && result.value)
+      .map(result => (result as PromiseFulfilledResult<typeof User>).value);
+
+    const failedUpdates = results
+      .filter(result => result.status === 'rejected' || !result.value)
+      .map((_, index) => updates[index].id);
+
+    return NextResponse.json({
+      updated: successfulUpdates,
+      failed: failedUpdates,
+      message: 'Bulk update completed',
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+  }
+}
 
 // DELETE user
 export async function deleteUser(req: Request) {
@@ -81,37 +110,60 @@ export async function deleteUser(req: Request) {
   }
 }
 
-// BULK UPDATE users
-export async function bulkUpdateUsers(req: Request) {
+// BULK DELETE users
+export async function bulkDeleteUsers(req: Request) {
   try {
     await connectDB();
-    const updates = await req.json(); // Expecting an array of { id, updateData }
-    const updatePromises = updates.map(
-      ({ id, updateData }: { id: string; updateData: Record<string, unknown> }) =>
-        User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true }),
-    );
+    const { ids } = await req.json(); // Expecting an array of user IDs
+    // Validate and filter valid IDs
+    const deletedIds: string[] = [];
+    const invalidIds: string[] = [];
+    for (const id of ids) {
+      try {
+        const isFindUser = await User.findById(id);
+        if (isFindUser) {
+          const deletedUser = await User.findByIdAndDelete(id);
+          deletedUser && deletedIds.push(id);
+        } else {
+          invalidIds.push(id);
+        }
+      } catch (error) {
+        invalidIds.push(id);
+      }
+    }
 
-    const updatedUsers = await Promise.all(updatePromises);
-    return NextResponse.json({ data: updatedUsers, message: 'Users updated successfully' });
+    return NextResponse.json({
+      deleted: deletedIds.length,
+      deletedIds,
+      invalidIds,
+      message: 'Bulk delete operation completed',
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: (error as Error).message }, { status: 400 });
   }
 }
 
-// BULK DELETE users
-export async function bulkDeleteUsers(req: Request) {
+// GET single user by ID
+export async function getUserById(req: Request) {
   try {
     await connectDB();
-    const { ids } = await req.json(); // Expecting an array of user IDs
-    const deleteResult = await User.deleteMany({ _id: { $in: ids } });
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
 
-    return NextResponse.json({
-      data: deleteResult,
-      message: `${deleteResult.deletedCount} users deleted successfully`,
-    });
+    if (!id) {
+      return NextResponse.json({ message: 'User ID is required' }, { status: 400 });
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ data: user, message: 'User fetched successfully' });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message }, { status: 400 });
+    return NextResponse.json({ message: (error as Error).message }, { status: 500 });
   }
 }
