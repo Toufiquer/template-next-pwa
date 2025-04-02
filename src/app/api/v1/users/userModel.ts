@@ -22,3 +22,13 @@ const userSchema = new Schema(
 );
 
 export default mongoose.models.User || mongoose.model('User', userSchema);
+
+export interface IUser {
+  name: string;
+  email: string;
+  passCode: string;
+  alias: string;
+  role: 'user' | 'admin' | 'moderator';
+  createdAt?: Date;
+  updatedAt?: Date;
+}
