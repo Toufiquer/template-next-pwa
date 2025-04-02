@@ -57,13 +57,17 @@ const UserTable: React.FC = () => {
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">User Management</h1>
-        <Button onClick={() => setIsAddModalOpen(true)}>
+        <Button
+          className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer"
+          onClick={() => setIsAddModalOpen(true)}
+        >
           <PlusIcon className="w-4 h-4 mr-2" />
           Add User
         </Button>
       </div>
       <ViewUsersTable
         users={users}
+        setNewUser={setNewUser}
         setSelectedUser={setSelectedUser}
         setIsViewModalOpen={setIsViewModalOpen}
         setIsEditModalOpen={setIsEditModalOpen}

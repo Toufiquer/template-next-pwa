@@ -38,10 +38,18 @@ const DeleteUser: React.FC<{
           </div>
         )}
         <DialogFooter>
-          <Button variant="outline" onClick={() => setIsOpen(false)}>
+          <Button
+            className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
+            variant="outline"
+            onClick={() => setIsOpen(false)}
+          >
             Cancel
           </Button>
-          <Button variant="destructive" onClick={handleDeleteUser}>
+          <Button
+            className="cursor-pointer border-1 border-rose-400 hover:border-rose-500 text-rose-500"
+            variant="outline"
+            onClick={handleDeleteUser}
+          >
             Delete
           </Button>
         </DialogFooter>

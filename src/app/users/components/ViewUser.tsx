@@ -68,7 +68,12 @@ const ViewUser: React.FC<{
           </div>
         )}
         <DialogFooter>
-          <Button onClick={() => setIsOpen(false)}>Close</Button>
+          <Button
+            className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
+            onClick={() => setIsOpen(false)}
+          >
+            Close
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

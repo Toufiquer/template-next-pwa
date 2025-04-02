@@ -14,11 +14,19 @@ import { IUser } from '@/app/api/v1/users/userModel';
 
 const ViewUsersTable: React.FC<{
   users: IUser[];
+  setNewUser: React.Dispatch<React.SetStateAction<Partial<IUser>>>;
   setSelectedUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   setIsViewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ users, setSelectedUser, setIsViewModalOpen, setIsEditModalOpen, setIsDeleteModalOpen }) => {
+}> = ({
+  users,
+  setNewUser,
+  setSelectedUser,
+  setIsViewModalOpen,
+  setIsEditModalOpen,
+  setIsDeleteModalOpen,
+}) => {
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
   return (
@@ -50,6 +58,7 @@ const ViewUsersTable: React.FC<{
             <TableCell>
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button
+                  className="cursor-pointer"
                   variant="outline"
                   size="sm"
                   onClick={() => {
@@ -62,9 +71,11 @@ const ViewUsersTable: React.FC<{
                 </Button>
                 <Button
                   variant="outline"
+                  className="cursor-pointer"
                   size="sm"
                   onClick={() => {
                     setSelectedUser(user);
+                    setNewUser(user);
                     setIsEditModalOpen(true);
                   }}
                 >
@@ -78,7 +89,7 @@ const ViewUsersTable: React.FC<{
                     setSelectedUser(user);
                     setIsDeleteModalOpen(true);
                   }}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-rose-400 hover:text-rose-500 cursor-pointer"
                 >
                   <TrashIcon className="w-4 h-4 mr-1" />
                   Delete
