@@ -26,6 +26,9 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     // After fetch all data it will dispatch from userApi.
+    getAllUsersRTK: (state, action) => {
+      state.data.push(action.payload);
+    },
     pushAllData: (state, action) => {
       state.data.push(action.payload);
     },
@@ -43,5 +46,5 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { pushAllData, addOneUser, removeOneUser } = usersSlice.actions;
+export const { getAllUsersRTK, pushAllData, addOneUser, removeOneUser } = usersSlice.actions;
 export default usersSlice.reducer;

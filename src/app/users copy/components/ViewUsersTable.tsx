@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { format } from 'date-fns';
@@ -32,17 +25,7 @@ const ViewUsersTable: React.FC<{
   return (
     <Table>
       <TableHeader>
-        <TableRow>
-          <TableHead className=" font-bold text-slate-900">Name</TableHead>
-          <TableHead className="hidden md:table-cell font-bold text-slate-900">Email</TableHead>
-          <TableHead className="hidden lg:table-cell font-bold text-slate-900">Pass Code</TableHead>
-          <TableHead className="hidden md:table-cell font-bold text-slate-900">Alias</TableHead>
-          <TableHead>Role</TableHead>
-          <TableHead className="hidden lg:table-cell font-bold text-slate-900">
-            Created At
-          </TableHead>
-          <TableHead className=" font-bold text-slate-900 justify-end flex">Actions</TableHead>
-        </TableRow>
+        <TableRow>{/* ...existing table headers... */}</TableRow>
       </TableHeader>
       <TableBody>
         {users.map((user: IUser, index) => (
@@ -65,7 +48,7 @@ const ViewUsersTable: React.FC<{
               </span>
             </TableCell>
             <TableCell className="hidden lg:table-cell">{formatDate(user.createdAt)}</TableCell>
-            <TableCell className="justify-end flex">
+            <TableCell>
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button
                   className="cursor-pointer"
