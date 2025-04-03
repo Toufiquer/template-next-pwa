@@ -13,10 +13,12 @@ import { useUserStore } from '../store/userStore';
 import Pagination from './Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { toast } from 'react-toastify';
 
 const ViewUsersTable: React.FC = () => {
+  const pageLimitArr = [2, 10, 50, 100, 200];
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(5);
+  const [limit, setLimit] = useState<number>(pageLimitArr[0]);
   const { setSelectedUser, toggleViewModal, toggleEditModal, toggleDeleteModal } = useUserStore();
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
@@ -131,13 +133,13 @@ const ViewUsersTable: React.FC = () => {
               setLimit(Number(value));
               setPage(1);
             }}
-            defaultValue={limit + ''}
+            defaultValue={limit.toString()}
           >
             <SelectTrigger className="col-span-4">
               <SelectValue placeholder="Select a limit" />
             </SelectTrigger>
             <SelectContent>
-              {[2, 10, 50, 100, 200].map(i => (
+              {pageLimitArr.map(i => (
                 <SelectItem key={i} className="cursor-pointer hover:bg-slate-200" value={i.toString()}>
                   {i}
                 </SelectItem>
