@@ -9,14 +9,16 @@
 // This file is use for rest api
 
 import { toast } from 'react-toastify';
-import { apiSlice } from '@/redux/api/apiSlice';
+
 import { getAllUsersRTK } from './usersSlice';
+
+import { apiSlice } from '@/redux/api/apiSlice';
 import { IUser } from '@/app/api/v1/users/userModel';
+
 export const usersApi = apiSlice.injectEndpoints({
   endpoints: builder => ({
     // endpoints here
     getUsers: builder.query({
-      // http://localhost:3000/api/v1/users?page=1&limit=2
       query: ({ page, limit }) => `/api/v1/users?page=${page || 1}&limit=${limit || 10}`,
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {

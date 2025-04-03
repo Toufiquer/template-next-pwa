@@ -9,8 +9,9 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { apiSlice } from '@/redux/api/apiSlice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+
+import { apiSlice } from '@/redux/api/apiSlice';
 
 import usersSlice from '@/redux/features/users/usersSlice';
 
