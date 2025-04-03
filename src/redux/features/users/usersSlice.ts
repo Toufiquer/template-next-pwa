@@ -25,12 +25,6 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    // After fetch all data it will dispatch from userApi.
-    getAllUsersRTK: (state, action) => {
-      console.log('state : getAllUsersRTK', JSON.stringify(state.data));
-      console.log('action : getAllUsersRTK', action);
-      state.data.push(action.payload);
-    },
     pushAllData: (state, action) => {
       console.log('rtk : pushAllData', state);
       console.log('rtk : pushAllData', action);
@@ -39,10 +33,8 @@ const usersSlice = createSlice({
     addOneUser: (state, action) => {
       console.log('rtk : addOneUser', state);
       console.log('rtk : addOneUser', action);
-      const idx = state.data.indexOf(action.payload);
-      if (idx === -1) {
-        state.data.push(action.payload);
-      }
+      // Add the new user to the state data array.
+      state.data.push(action.payload);
     },
     removeOneUser: (state, action) => {
       console.log('rtk : removeOneUser', state);
@@ -54,5 +46,5 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { getAllUsersRTK, pushAllData, addOneUser, removeOneUser } = usersSlice.actions;
+export const { pushAllData, addOneUser, removeOneUser } = usersSlice.actions;
 export default usersSlice.reducer;

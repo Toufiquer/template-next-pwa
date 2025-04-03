@@ -41,7 +41,7 @@ const AddUser: React.FC = () => {
       setUsers([...users, user]);
       toggleAddModal(false);
       setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
-      toast.success('User has been added', { updateId: Math.random() * 100 });
+      // toast.success('User has been added', { updateId: Math.random() * 100 });
     } catch (error) {
       console.error('Failed to add user:', error);
       toast.error('Failed to add user', { updateId: Math.random() * 100 });
