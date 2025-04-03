@@ -58,6 +58,29 @@ export const usersApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    updateUser: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `/api/v1/users`,
+        method: 'PUT',
+        body: { id: id, ...data },
+      }),
+      invalidatesTags: [{ type: 'Users' }], // Invalidate cache after mutation
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data }: { data: { message: string } } = await queryFulfilled;
+          console.log(' --  rtk -- data : ', data);
+          toast.success(data.message, {
+            toastId: (Math.random() * 1000).toFixed(0),
+          });
+        } catch (e: unknown) {
+          if (e instanceof Error) {
+            toast.error(e.message, {
+              toastId: (Math.random() * 1000).toFixed(0),
+            });
+          }
+        }
+      },
+    }),
   }),
 });
-export const { useGetUsersQuery, useAddUserMutation } = usersApi;
+export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation } = usersApi;

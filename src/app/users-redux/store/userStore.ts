@@ -19,35 +19,7 @@ interface UserStore {
 }
 
 export const useUserStore = create<UserStore>(set => ({
-  users: [
-    {
-      name: 'John Doe',
-      email: 'john@example.com',
-      passCode: 'pass123',
-      alias: 'johndoe',
-      role: 'admin',
-      createdAt: new Date('2024-03-15'),
-      updatedAt: new Date('2024-04-01'),
-    },
-    {
-      name: 'Jane Smith',
-      email: 'jane@example.com',
-      passCode: 'pass456',
-      alias: 'janesmith',
-      role: 'moderator',
-      createdAt: new Date('2024-03-20'),
-      updatedAt: new Date('2024-03-28'),
-    },
-    {
-      name: 'Bob Johnson',
-      email: 'bob@example.com',
-      passCode: 'pass789',
-      alias: 'bobjohnson',
-      role: 'user',
-      createdAt: new Date('2024-03-25'),
-      updatedAt: new Date('2024-03-27'),
-    },
-  ],
+  users: [],
   selectedUser: null,
   newUser: { name: '', email: '', passCode: '', alias: '', role: 'user' },
 

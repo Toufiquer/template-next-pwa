@@ -8,10 +8,13 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 import { useUserStore } from '../store/userStore';
+import { useUpdateUserMutation } from '@/redux/features/users/usersApi';
 
 export const userRole = ['user', 'admin', 'moderator'];
 const EditUser: React.FC = () => {
-  const { toggleEditModal, isEditModalOpen, users, newUser, selectedUser, setNewUser, setUsers } = useUserStore();
+  const { toggleEditModal, isEditModalOpen, newUser, selectedUser, setNewUser } = useUserStore();
+  const [updateUser] = useUpdateUserMutation(); // RTK mutation hook
+
   useEffect(() => {
     if (selectedUser) {
       setNewUser(selectedUser);
@@ -25,12 +28,18 @@ const EditUser: React.FC = () => {
     setNewUser({ ...newUser, role: value as 'user' | 'admin' | 'moderator' });
   };
 
-  const handleEditUser = () => {
+  const handleEditUser = async () => {
     if (!selectedUser) return;
-    const updatedUsers = users.map(user => (user.email === selectedUser.email ? { ...user, ...newUser, updatedAt: new Date() } : user));
-    console.log('');
-    setUsers(updatedUsers);
-    toggleEditModal(false);
+
+    try {
+      console.log(' id : ', selectedUser._id);
+      console.log(' selectedUser : ', selectedUser);
+      console.log(' newUser : ', newUser);
+      await updateUser({ id: selectedUser._id, ...newUser }).unwrap(); // Call RTK mutation
+      toggleEditModal(false);
+    } catch (error) {
+      console.error('Failed to update user:', error);
+    }
   };
 
   return (

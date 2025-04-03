@@ -24,6 +24,7 @@ const userSchema = new Schema(
 export default mongoose.models.User || mongoose.model('User', userSchema);
 
 export interface IUser {
+  _id: string;
   name: string;
   email: string;
   passCode: string;
