@@ -10,7 +10,7 @@ import { IUser } from '@/app/api/v1/users/userModel';
 import { useUserStore } from '../store/userStore';
 
 const AddUser: React.FC = () => {
-  const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers, setIsOpen } = useUserStore();
+  const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
@@ -83,10 +83,12 @@ const AddUser: React.FC = () => {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => toggleAddModal(false)}>
+          <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(false)}>
             Cancel
           </Button>
-          <Button onClick={handleAddUser}>Add User</Button>
+          <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={handleAddUser}>
+            Add User
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

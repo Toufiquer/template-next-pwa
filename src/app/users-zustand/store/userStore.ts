@@ -5,7 +5,6 @@ interface UserStore {
   users: IUser[];
   selectedUser: IUser | null;
   newUser: Partial<IUser>;
-  isOpen: boolean;
   isAddModalOpen: boolean;
   isViewModalOpen: boolean;
   isEditModalOpen: boolean;
@@ -17,7 +16,6 @@ interface UserStore {
   toggleViewModal: (isOpen: boolean) => void;
   toggleEditModal: (isOpen: boolean) => void;
   toggleDeleteModal: (isOpen: boolean) => void;
-  setIsOpen: (isOpen: boolean) => void;
 }
 
 export const useUserStore = create<UserStore>(set => ({
@@ -52,19 +50,19 @@ export const useUserStore = create<UserStore>(set => ({
   ],
   selectedUser: null,
   newUser: { name: '', email: '', passCode: '', alias: '', role: 'user' },
-  isOpen: false,
+
   isAddModalOpen: false,
   isViewModalOpen: false,
   isEditModalOpen: false,
   isDeleteModalOpen: false,
   setUsers: (users: IUser[]) => set({ users }),
   setSelectedUser: user => set({ selectedUser: user }),
-  setNewUser: user => set(state => ({
-    newUser: typeof user === 'function' ? user(state.newUser) : user,
-  })),
+  setNewUser: user =>
+    set(state => ({
+      newUser: typeof user === 'function' ? user(state.newUser) : user,
+    })),
   toggleAddModal: isOpen => set({ isAddModalOpen: isOpen }),
   toggleViewModal: isOpen => set({ isViewModalOpen: isOpen }),
   toggleEditModal: isOpen => set({ isEditModalOpen: isOpen }),
   toggleDeleteModal: isOpen => set({ isDeleteModalOpen: isOpen }),
-  setIsOpen: isOpen => set({ isOpen }),
 }));

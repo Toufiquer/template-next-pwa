@@ -1,5 +1,5 @@
 // ErrorMessage.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
@@ -47,12 +47,13 @@ const ErrorMessageComponent: React.FC<ErrorMessageProps> = ({
       button: 'text-rose-600 hover:text-rose-800',
     },
   };
-  const handleDismiss = () => {
+  
+  const handleDismiss = useCallback(() => {
     setIsVisible(false);
     if (onDismiss) {
       onDismiss();
     }
-  };
+  }, [onDismiss]);
 
   // Auto-hide functionality
   useEffect(() => {

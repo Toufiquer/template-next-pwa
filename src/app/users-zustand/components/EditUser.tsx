@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 import { useUserStore } from '../store/userStore';
 
+export const userRole = ['user', 'admin', 'moderator'];
 const EditUser: React.FC = () => {
   const { toggleEditModal, isEditModalOpen, users, newUser, selectedUser, setNewUser, setUsers } = useUserStore();
   useEffect(() => {
@@ -68,14 +69,17 @@ const EditUser: React.FC = () => {
               <Label htmlFor="edit-role" className="text-right">
                 Role
               </Label>
+
               <Select onValueChange={handleRoleChange} defaultValue={newUser.role}>
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="user">User</SelectItem>
-                  <SelectItem value="moderator">Moderator</SelectItem>
-                  <SelectItem value="admin">Admin</SelectItem>
+                  {userRole?.map((i, index) => (
+                    <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
+                      {i}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
