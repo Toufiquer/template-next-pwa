@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
@@ -9,14 +11,19 @@ import ErrorMessageComponent from '@/components/common/Errer';
 import { useGetUsersQuery } from '@/redux/features/users/usersApi';
 import { useUserStore } from '../store/userStore';
 import Pagination from './Pagination';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const ViewUsersTable: React.FC = () => {
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(2);
   const { setSelectedUser, toggleViewModal, toggleEditModal, toggleDeleteModal } = useUserStore();
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
-  const { data: getResponseData, isLoading, isError, error } = useGetUsersQuery({ page: 1, limit: 10 });
-
+  const { data: getResponseData, isLoading, isError, error } = useGetUsersQuery({ page, limit });
+  console.log(' -- getResponseData : ', getResponseData);
+  console.log(' -- getResponseData : ', getResponseData);
   const getAllUsersData = getResponseData?.data || [];
   let renderUI = <div>first Load</div>;
   if (isLoading && !isError) {
@@ -113,7 +120,24 @@ const ViewUsersTable: React.FC = () => {
             ))}
           </TableBody>
         </Table>
-        <Pagination currentPage={1} itemsPerPage={10} onPageChange={() => ''} totalItems={100} />
+        <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData.total} />
+        <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">
+          <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin">
+            User per page
+          </Label>
+          <Select onValueChange={value => setLimit(Number(value))} defaultValue={limit + ''}>
+            <SelectTrigger className="col-span-4">
+              <SelectValue placeholder="Select a limit" />
+            </SelectTrigger>
+            <SelectContent>
+              {[2, 10, 50, 100, 200].map(i => (
+                <SelectItem key={i} className="cursor-pointer hover:bg-slate-200" value={i.toString()}>
+                  {i}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
     );
   }

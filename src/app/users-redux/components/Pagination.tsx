@@ -34,7 +34,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsP
         <button
           onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className={`flex items-center justify-center h-10 w-10 rounded-md transition-colors ${
+          className={`flex cursor-pointer items-center justify-center h-10 w-10 rounded-md transition-colors ${
             currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
           }`}
           aria-label="Previous page"
@@ -76,7 +76,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsP
             {getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1 && <span className="h-10 flex items-center justify-center text-gray-500">...</span>}
             <button
               onClick={() => onPageChange(totalPages)}
-              className={`flex items-center justify-center h-10 w-10 rounded-md transition-colors ${
+              className={`flex cursor-pointer items-center justify-center h-10 w-10 rounded-md transition-colors ${
                 currentPage === totalPages ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
               }`}
             >
@@ -89,7 +89,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsP
         <button
           onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className={`flex items-center justify-center h-10 w-10 rounded-md transition-colors ${
+          className={`flex cursor-pointer items-center justify-center h-10 w-10 rounded-md transition-colors ${
             currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
           }`}
           aria-label="Next page"
