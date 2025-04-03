@@ -16,14 +16,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 const ViewUsersTable: React.FC = () => {
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(2);
+  const [limit, setLimit] = useState<number>(5);
   const { setSelectedUser, toggleViewModal, toggleEditModal, toggleDeleteModal } = useUserStore();
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
   const { data: getResponseData, isLoading, isError, error } = useGetUsersQuery({ page, limit });
-  console.log(' -- getResponseData : ', getResponseData);
-  console.log(' -- getResponseData : ', getResponseData);
+
   const getAllUsersData = getResponseData?.data || [];
   let renderUI = <div>first Load</div>;
   if (isLoading && !isError) {
@@ -46,18 +45,20 @@ const ViewUsersTable: React.FC = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className=" font-bold text-slate-900">Name</TableHead>
+              <TableHead className="font-bold text-slate-900">Sl</TableHead>
+              <TableHead className="font-bold text-slate-900">Name</TableHead>
               <TableHead className="hidden md:table-cell font-bold text-slate-900">Email</TableHead>
               <TableHead className="hidden lg:table-cell font-bold text-slate-900">Pass Code</TableHead>
               <TableHead className="hidden md:table-cell font-bold text-slate-900">Alias</TableHead>
               <TableHead>Role</TableHead>
               <TableHead className="hidden lg:table-cell font-bold text-slate-900">Created At</TableHead>
-              <TableHead className=" font-bold text-slate-900 justify-end flex">Actions</TableHead>
+              <TableHead className="font-bold text-slate-900 justify-end flex">Actions</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="border-1 border-slate-600">
             {getAllUsersData.map((user: IUser, index: number) => (
               <TableRow key={user.email || index}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell className="font-medium">{user.name}</TableCell>
                 <TableCell className="hidden md:table-cell">{user.email}</TableCell>
                 <TableCell className="hidden lg:table-cell">{user.passCode}</TableCell>
@@ -123,9 +124,15 @@ const ViewUsersTable: React.FC = () => {
         <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData.total} />
         <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">
           <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin">
-            User per page
+            User per page <div className="text-xs">(total:{getResponseData.total})</div>
           </Label>
-          <Select onValueChange={value => setLimit(Number(value))} defaultValue={limit + ''}>
+          <Select
+            onValueChange={value => {
+              setLimit(Number(value));
+              setPage(1);
+            }}
+            defaultValue={limit + ''}
+          >
             <SelectTrigger className="col-span-4">
               <SelectValue placeholder="Select a limit" />
             </SelectTrigger>
