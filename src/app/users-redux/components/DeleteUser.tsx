@@ -4,14 +4,20 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import { useUserStore } from '../store/userStore';
+import { useDeleteUserMutation } from '@/redux/features/users/usersApi';
 
 const DeleteUser: React.FC = () => {
-  const { toggleDeleteModal, isDeleteModalOpen, users, selectedUser, setUsers } = useUserStore();
-  const handleDeleteUser = () => {
+  const { toggleDeleteModal, isDeleteModalOpen, selectedUser } = useUserStore();
+  const [deleteUser] = useDeleteUserMutation();
+
+  const handleDeleteUser = async () => {
     if (!selectedUser) return;
-    const updatedUsers = users.filter(user => user.email !== selectedUser.email);
-    setUsers(updatedUsers);
-    toggleDeleteModal(false);
+    try {
+      await deleteUser({ id: selectedUser._id }).unwrap();
+      toggleDeleteModal(false);
+    } catch (error) {
+      console.error('Failed to delete user:', error);
+    }
   };
 
   return (

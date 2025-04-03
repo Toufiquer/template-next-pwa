@@ -68,7 +68,30 @@ export const usersApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data }: { data: { message: string } } = await queryFulfilled;
-          console.log(' --  rtk -- data : ', data);
+
+          toast.success(data.message, {
+            toastId: (Math.random() * 1000).toFixed(0),
+          });
+        } catch (e: unknown) {
+          if (e instanceof Error) {
+            toast.error(e.message, {
+              toastId: (Math.random() * 1000).toFixed(0),
+            });
+          }
+        }
+      },
+    }),
+    deleteUser: builder.mutation({
+      query: ({ id }) => ({
+        url: `/api/v1/users`,
+        method: 'DELETE',
+        body: { id },
+      }),
+      invalidatesTags: [{ type: 'Users' }], // Invalidate cache after mutation
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data }: { data: { message: string } } = await queryFulfilled;
+
           toast.success(data.message, {
             toastId: (Math.random() * 1000).toFixed(0),
           });
@@ -83,4 +106,4 @@ export const usersApi = apiSlice.injectEndpoints({
     }),
   }),
 });
-export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation } = usersApi;
+export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation } = usersApi;
