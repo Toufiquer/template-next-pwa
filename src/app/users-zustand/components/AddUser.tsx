@@ -1,40 +1,16 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { IUser } from '@/app/api/v1/users/userModel';
+
 import { useUserStore } from '../store/userStore';
 
 const AddUser: React.FC = () => {
-  const {
-    toggleAddModal,
-    isAddModalOpen,
-    isViewModalOpen,
-    isEditModalOpen,
-    isDeleteModalOpen,
-    users,
-    newUser,
-    selectedUser,
-    setNewUser,
-    setSelectedUser,
-    setUsers,
-    setIsOpen,
-    isOpen,
-  } = useUserStore();
+  const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers, setIsOpen } = useUserStore();
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
@@ -55,66 +31,40 @@ const AddUser: React.FC = () => {
       updatedAt: new Date(),
     };
     setUsers([...users, user]);
-    setIsOpen(false);
+    toggleAddModal(false);
     setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isAddModalOpen} onOpenChange={toggleAddModal}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add New User</DialogTitle>
-        </DialogHeader>{' '}
+        </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input
-              id="name"
-              name="name"
-              value={newUser.name}
-              onChange={handleInputChange}
-              className="col-span-3"
-            />
+            <Input id="name" name="name" value={newUser.name} onChange={handleInputChange} className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="email" className="text-right">
               Email
             </Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={newUser.email}
-              onChange={handleInputChange}
-              className="col-span-3"
-            />
+            <Input id="email" name="email" type="email" value={newUser.email} onChange={handleInputChange} className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="passCode" className="text-right">
               Pass Code
             </Label>
-            <Input
-              id="passCode"
-              name="passCode"
-              type="password"
-              value={newUser.passCode}
-              onChange={handleInputChange}
-              className="col-span-3"
-            />
+            <Input id="passCode" name="passCode" type="password" value={newUser.passCode} onChange={handleInputChange} className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="alias" className="text-right">
               Alias
             </Label>
-            <Input
-              id="alias"
-              name="alias"
-              value={newUser.alias}
-              onChange={handleInputChange}
-              className="col-span-3"
-            />
+            <Input id="alias" name="alias" value={newUser.alias} onChange={handleInputChange} className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="role" className="text-right">
@@ -133,7 +83,7 @@ const AddUser: React.FC = () => {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => setIsOpen(false)}>
+          <Button variant="outline" onClick={() => toggleAddModal(false)}>
             Cancel
           </Button>
           <Button onClick={handleAddUser}>Add User</Button>

@@ -1,30 +1,20 @@
 'use client';
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import { PlusIcon } from 'lucide-react';
-import ViewUsersTable from './components/ViewUsersTable';
-import AddUser from './components/AddUser';
-import ViewUser from './components/ViewUser';
-import EditUser from './components/EditUser';
-import DeleteUser from './components/DeleteUser';
+
+import { Button } from '@/components/ui/button';
+
 import { useUserStore } from './store/userStore';
 
+import AddUser from './components/AddUser';
+import EditUser from './components/EditUser';
+import ViewUser from './components/ViewUser';
+import DeleteUser from './components/DeleteUser';
+import ViewUsersTable from './components/ViewUsersTable';
+
 const UserTable: React.FC = () => {
-  const {
-    toggleAddModal,
-    isAddModalOpen,
-    isViewModalOpen,
-    isEditModalOpen,
-    isDeleteModalOpen,
-    users,
-    newUser,
-    selectedUser,
-    setNewUser,
-    setSelectedUser,
-    setUsers,
-    setIsOpen,
-  } = useUserStore();
+  const { setIsOpen, toggleAddModal } = useUserStore();
 
   return (
     <div className="container mx-auto p-4">
@@ -34,7 +24,6 @@ const UserTable: React.FC = () => {
           className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer"
           onClick={() => {
             toggleAddModal(true);
-            setIsOpen(true);
           }}
         >
           <PlusIcon className="w-4 h-4 mr-2" />
