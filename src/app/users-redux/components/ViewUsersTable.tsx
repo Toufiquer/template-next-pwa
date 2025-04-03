@@ -125,7 +125,7 @@ const ViewUsersTable: React.FC = () => {
         <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData.total} />
         <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">
           <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin">
-            User per page <div className="text-xs">(total:{getResponseData.total})</div>
+            User per page
           </Label>
           <Select
             onValueChange={value => {

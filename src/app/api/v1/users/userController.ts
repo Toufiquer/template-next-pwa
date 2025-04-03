@@ -8,10 +8,7 @@ export async function createUser(req: Request) {
     await connectDB();
     const userData = await req.json();
     const newUser = await User.create({ ...userData });
-    return NextResponse.json(
-      { data: newUser, message: 'User created successfully', status: 201 },
-      { status: 201 },
-    );
+    return NextResponse.json({ data: newUser, message: 'User created successfully', status: 201 }, { status: 201 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
@@ -35,10 +32,7 @@ export async function getUserById(req: Request) {
       return NextResponse.json({ message: 'User not found', status: 404 }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { data: user, message: 'User fetched successfully', status: 200 },
-      { status: 200 },
-    );
+    return NextResponse.json({ data: user, message: 'User fetched successfully', status: 200 }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: (error as Error).message, status: 500 }, { status: 500 });
@@ -54,9 +48,10 @@ export async function getUsers(req: Request) {
     const limit = parseInt(url.searchParams.get('limit') || '10', 10);
     const skip = (page - 1) * limit;
 
-    const users = await User.find({}).skip(skip).limit(limit);
+    // Sort by latest updated or created data
+    const users = await User.find({}).sort({ updatedAt: -1, createdAt: -1 }).skip(skip).limit(limit);
     const totalUsers = await User.countDocuments();
-    console.log('server:', users.length, totalUsers);
+
     return NextResponse.json(
       {
         data: users || [], // Ensure data is always an array
@@ -88,10 +83,7 @@ export async function updateUser(req: Request) {
     if (!updatedUser) {
       return NextResponse.json({ message: 'User not found', status: 404 }, { status: 404 });
     }
-    return NextResponse.json(
-      { data: updatedUser, message: 'User updated successfully', status: 200 },
-      { status: 200 },
-    );
+    return NextResponse.json({ data: updatedUser, message: 'User updated successfully', status: 200 }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
@@ -113,9 +105,7 @@ export async function bulkUpdateUsers(req: Request) {
       .filter(result => result.status === 'fulfilled' && result.value)
       .map(result => (result as PromiseFulfilledResult<typeof User>).value);
 
-    const failedUpdates = results
-      .filter(result => result.status === 'rejected' || !result.value)
-      .map((_, index) => updates[index].id);
+    const failedUpdates = results.filter(result => result.status === 'rejected' || !result.value).map((_, index) => updates[index].id);
 
     return NextResponse.json(
       {
@@ -142,10 +132,7 @@ export async function deleteUser(req: Request) {
     if (!deletedUser) {
       return NextResponse.json({ message: 'User not found', status: 404 }, { status: 404 });
     }
-    return NextResponse.json(
-      { message: 'User deleted successfully', status: 200 },
-      { status: 200 },
-    );
+    return NextResponse.json({ message: 'User deleted successfully', status: 200 }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });

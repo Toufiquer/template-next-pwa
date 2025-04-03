@@ -18,6 +18,7 @@ export const usersApi = apiSlice.injectEndpoints({
     // endpoints here
     getUsers: builder.query({
       query: ({ page, limit }) => `/api/v1/users?page=${page || 1}&limit=${limit || 2}`,
+      providesTags: [{ type: 'Users', id: 'LIST' }], // Add tag for cache invalidation
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const query = await queryFulfilled;
@@ -37,6 +38,7 @@ export const usersApi = apiSlice.injectEndpoints({
         method: 'POST',
         body: newUser,
       }),
+      invalidatesTags: [{ type: 'Users' }], // Automatically invalidate cache after mutation
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const { data }: { data: { data: IUser; message: string } } = await queryFulfilled;
@@ -45,13 +47,8 @@ export const usersApi = apiSlice.injectEndpoints({
             toastId: (Math.random() * 1000).toFixed(0),
           });
 
-          // Update cache for getUsers
-          dispatch(
-            usersApi.util.updateQueryData('getUsers', { page: 1, limit: 2 }, draft => {
-              draft.data.push(data.data); // Assuming `data.user` contains the new user
-              draft.data.total = draft.data.total + 1; // Increment total count
-            }),
-          );
+          // Invalidate cache for getUsers to trigger re-fetch
+          dispatch(usersApi.util.invalidateTags([{ type: 'Users' }]));
         } catch (e: unknown) {
           if (e instanceof Error) {
             toast.error(e.message, {
