@@ -13,7 +13,6 @@ import { useUserStore } from '../store/userStore';
 import Pagination from './Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { toast } from 'react-toastify';
 
 const ViewUsersTable: React.FC = () => {
   const pageLimitArr = [2, 10, 50, 100, 200];

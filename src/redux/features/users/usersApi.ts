@@ -36,6 +36,27 @@ export const usersApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    addUser: builder.mutation({
+      query: newUser => ({
+        url: '/api/v1/users',
+        method: 'POST',
+        body: newUser,
+      }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          toast.success(data.message, {
+            toastId: (Math.random() * 1000).toFixed(0),
+          });
+        } catch (e: unknown) {
+          if (e instanceof Error) {
+            toast.error(e.message, {
+              toastId: (Math.random() * 1000).toFixed(0),
+            });
+          }
+        }
+      },
+    }),
   }),
 });
-export const { useGetUsersQuery } = usersApi;
+export const { useGetUsersQuery, useAddUserMutation } = usersApi;

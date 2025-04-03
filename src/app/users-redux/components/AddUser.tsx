@@ -6,11 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { IUser } from '@/app/api/v1/users/userModel';
+import { useAddUserMutation } from '@/redux/features/users/usersApi';
+import { toast } from 'react-toastify';
 
 import { useUserStore } from '../store/userStore';
 
 const AddUser: React.FC = () => {
   const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
+  const [addUser] = useAddUserMutation();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
@@ -20,7 +24,7 @@ const AddUser: React.FC = () => {
     setNewUser({ ...newUser, role: value as 'user' | 'admin' | 'moderator' });
   };
 
-  const handleAddUser = () => {
+  const handleAddUser = async () => {
     const user: IUser = {
       name: newUser.name || '',
       email: newUser.email || '',
@@ -30,9 +34,18 @@ const AddUser: React.FC = () => {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    setUsers([...users, user]);
-    toggleAddModal(false);
-    setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
+
+    try {
+      await addUser(user).unwrap();
+
+      setUsers([...users, user]);
+      toggleAddModal(false);
+      setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
+      toast.success('User has been added', { updateId: Math.random() * 100 });
+    } catch (error) {
+      console.error('Failed to add user:', error);
+      toast.error('Failed to add user', { updateId: Math.random() * 100 });
+    }
   };
 
   return (
