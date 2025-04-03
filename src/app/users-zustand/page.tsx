@@ -14,7 +14,7 @@ import DeleteUser from './components/DeleteUser';
 import ViewUsersTable from './components/ViewUsersTable';
 
 const UserTable: React.FC = () => {
-  const { setIsOpen, toggleAddModal } = useUserStore();
+  const { toggleAddModal } = useUserStore();
 
   return (
     <div className="container mx-auto p-4">

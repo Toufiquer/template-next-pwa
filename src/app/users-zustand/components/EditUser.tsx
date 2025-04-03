@@ -1,43 +1,17 @@
 import React, { useEffect } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { IUser } from '@/app/api/v1/users/userModel';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 import { useUserStore } from '../store/userStore';
 
 const EditUser: React.FC = () => {
-  const {
-    toggleAddModal,
-    isAddModalOpen,
-    isViewModalOpen,
-    isEditModalOpen,
-    isDeleteModalOpen,
-    users,
-    newUser,
-    selectedUser,
-    setNewUser,
-    setSelectedUser,
-    setUsers,
-    setIsOpen,
-    isOpen,
-  } = useUserStore();
+  const { toggleEditModal, isEditModalOpen, users, newUser, selectedUser, setNewUser, setUsers } = useUserStore();
   useEffect(() => {
-    console.log('selectedUser : ', selectedUser);
     if (selectedUser) {
       setNewUser(selectedUser);
     }
@@ -46,25 +20,20 @@ const EditUser: React.FC = () => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
   };
-  console.log('selectedUser : ', selectedUser);
   const handleRoleChange = (value: string) => {
     setNewUser({ ...newUser, role: value as 'user' | 'admin' | 'moderator' });
   };
 
   const handleEditUser = () => {
-    console.log('handle log');
-    console.log('newUser', newUser);
     if (!selectedUser) return;
-    const updatedUsers = users.map(user =>
-      user.email === selectedUser.email ? { ...user, ...newUser, updatedAt: new Date() } : user,
-    );
+    const updatedUsers = users.map(user => (user.email === selectedUser.email ? { ...user, ...newUser, updatedAt: new Date() } : user));
     console.log('');
     setUsers(updatedUsers);
-    setIsOpen(false);
+    toggleEditModal(false);
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isEditModalOpen} onOpenChange={toggleEditModal}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit User</DialogTitle>
@@ -75,51 +44,25 @@ const EditUser: React.FC = () => {
               <Label htmlFor="edit-name" className="text-right">
                 Name
               </Label>
-              <Input
-                id="edit-name"
-                name="name"
-                value={newUser.name}
-                onChange={handleInputChange}
-                className="col-span-3"
-              />
+              <Input id="edit-name" name="name" value={newUser.name} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-email" className="text-right">
                 Email
               </Label>
-              <Input
-                id="edit-email"
-                name="email"
-                type="email"
-                value={newUser.email}
-                onChange={handleInputChange}
-                className="col-span-3"
-              />
+              <Input id="edit-email" name="email" type="email" value={newUser.email} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-passCode" className="text-right">
                 Pass Code
               </Label>
-              <Input
-                id="edit-passCode"
-                name="passCode"
-                type="password"
-                value={newUser.passCode}
-                onChange={handleInputChange}
-                className="col-span-3"
-              />
+              <Input id="edit-passCode" name="passCode" type="password" value={newUser.passCode} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-alias" className="text-right">
                 Alias
               </Label>
-              <Input
-                id="edit-alias"
-                name="alias"
-                value={newUser.alias}
-                onChange={handleInputChange}
-                className="col-span-3"
-              />
+              <Input id="edit-alias" name="alias" value={newUser.alias} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-role" className="text-right">
@@ -140,17 +83,10 @@ const EditUser: React.FC = () => {
           <div className="mt-12 pt-12" />
         </ScrollArea>
         <DialogFooter>
-          <Button
-            className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
-            variant="outline"
-            onClick={() => setIsOpen(false)}
-          >
+          <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleEditModal(false)}>
             Cancel
           </Button>
-          <Button
-            onClick={handleEditUser}
-            className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
-          >
+          <Button onClick={handleEditUser} className="cursor-pointer border-1 border-slate-400 hover:border-slate-500">
             Save Changes
           </Button>
         </DialogFooter>
