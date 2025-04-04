@@ -55,32 +55,39 @@ const EditUser: React.FC = () => {
               <Label htmlFor="edit-name" className="text-right">
                 Name
               </Label>
-              <Input id="edit-name" name="name" value={newUser.name} onChange={handleInputChange} className="col-span-3" />
+              <Input id="edit-name" name="name" value={(newUser.name as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-email" className="text-right">
                 Email
               </Label>
-              <Input id="edit-email" name="email" type="email" value={newUser.email} onChange={handleInputChange} className="col-span-3" />
+              <Input id="edit-email" name="email" type="email" value={(newUser.email as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-passCode" className="text-right">
                 Pass Code
               </Label>
-              <Input id="edit-passCode" name="passCode" type="password" value={newUser.passCode} onChange={handleInputChange} className="col-span-3" />
+              <Input
+                id="edit-passCode"
+                name="passCode"
+                type="password"
+                value={(newUser.passCode as string) || ''}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-alias" className="text-right">
                 Alias
               </Label>
-              <Input id="edit-alias" name="alias" value={newUser.alias} onChange={handleInputChange} className="col-span-3" />
+              <Input id="edit-alias" name="alias" value={(newUser.alias as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-role" className="text-right">
                 Role
               </Label>
 
-              <Select onValueChange={handleRoleChange} defaultValue={newUser.role}>
+              <Select onValueChange={handleRoleChange} defaultValue={(newUser.role as string) || ''}>
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>

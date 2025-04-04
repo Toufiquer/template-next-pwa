@@ -141,14 +141,14 @@ const ViewUsersTable: React.FC = () => {
           </TableHeader>
           <TableBody className="border-1 border-slate-600">
             {sortedUsersData.map((user: IUser, index: number) => (
-              <TableRow key={user.email || index}>
+              <TableRow key={(user.email as string) || '' || index}>
                 <TableCell>
                   <Checkbox onCheckedChange={checked => handleSelectRow(!!checked, user)} checked={bulkData.some(item => item.email === user.email)} />
                 </TableCell>
-                <TableCell className="font-medium">{user.name}</TableCell>
-                <TableCell className="hidden md:table-cell">{user.email}</TableCell>
-                <TableCell className="hidden lg:table-cell">{user.passCode}</TableCell>
-                <TableCell className="hidden md:table-cell">{user.alias}</TableCell>
+                <TableCell className="font-medium">{(user.name as string) || ''}</TableCell>
+                <TableCell className="hidden md:table-cell">{(user.email as string) || ''}</TableCell>
+                <TableCell className="hidden lg:table-cell">{(user.passCode as string) || ''}</TableCell>
+                <TableCell className="hidden md:table-cell">{(user.alias as string) || ''}</TableCell>
                 <TableCell>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -159,7 +159,7 @@ const ViewUsersTable: React.FC = () => {
                           : 'bg-green-100 text-green-700'
                     }`}
                   >
-                    {user.role}
+                    {(user.role as string) || ''}
                   </span>
                 </TableCell>
                 <TableCell className="hidden lg:table-cell">{formatDate(user.createdAt)}</TableCell>

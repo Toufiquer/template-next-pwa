@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -57,25 +57,32 @@ const AddUser: React.FC = () => {
               <Label htmlFor="name" className="text-right">
                 Name
               </Label>
-              <Input id="name" name="name" value={newUser.name} onChange={handleInputChange} className="col-span-3" />
+              <Input id="name" name="name" value={(newUser.name as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="email" className="text-right">
                 Email
               </Label>
-              <Input id="email" name="email" type="email" value={newUser.email} onChange={handleInputChange} className="col-span-3" />
+              <Input id="email" name="email" type="email" value={(newUser.email as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="passCode" className="text-right">
                 Pass Code
               </Label>
-              <Input id="passCode" name="passCode" type="password" value={newUser.passCode} onChange={handleInputChange} className="col-span-3" />
+              <Input
+                id="passCode"
+                name="passCode"
+                type="password"
+                value={(newUser.passCode as string) || ''}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="alias" className="text-right">
                 Alias
               </Label>
-              <Input id="alias" name="alias" value={newUser.alias} onChange={handleInputChange} className="col-span-3" />
+              <Input id="alias" name="alias" value={(newUser.alias as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="role" className="text-right">
@@ -98,7 +105,7 @@ const AddUser: React.FC = () => {
           <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(false)}>
             Cancel
           </Button>
-          <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={handleAddUser}>
+          <Button disabled={isLoading} variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={handleAddUser}>
             Add User
           </Button>
         </DialogFooter>

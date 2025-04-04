@@ -13,6 +13,35 @@ interface ErrorMessageProps {
   onDismiss?: () => void;
 }
 
+const colorScheme = {
+  warning: { bg: 'bg-amber-50', border: 'border-amber-500', text: 'text-amber-800', icon: 'text-amber-500', button: 'text-amber-500 hover:text-amber-700' },
+  error: { bg: 'bg-red-50', border: 'border-red-500', text: 'text-red-800', icon: 'text-red-500', button: 'text-red-500 hover:text-red-700' },
+  critical: { bg: 'bg-rose-100', border: 'border-rose-600', text: 'text-rose-900', icon: 'text-rose-600', button: 'text-rose-600 hover:text-rose-800' },
+};
+
+const icons = {
+  warning: (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+      />
+    </svg>
+  ),
+  error: (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  critical: (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+};
+
 const ErrorMessageComponent: React.FC<ErrorMessageProps> = ({
   message,
   type = 'error',
@@ -23,100 +52,17 @@ const ErrorMessageComponent: React.FC<ErrorMessageProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
-  // Color schemes for different error types
-  const colorScheme = {
-    warning: {
-      bg: 'bg-amber-50',
-      border: 'border-amber-500',
-      text: 'text-amber-800',
-      icon: 'text-amber-500',
-      button: 'text-amber-500 hover:text-amber-700',
-    },
-    error: {
-      bg: 'bg-red-50',
-      border: 'border-red-500',
-      text: 'text-red-800',
-      icon: 'text-red-500',
-      button: 'text-red-500 hover:text-red-700',
-    },
-    critical: {
-      bg: 'bg-rose-100',
-      border: 'border-rose-600',
-      text: 'text-rose-900',
-      icon: 'text-rose-600',
-      button: 'text-rose-600 hover:text-rose-800',
-    },
-  };
-  
   const handleDismiss = useCallback(() => {
     setIsVisible(false);
-    if (onDismiss) {
-      onDismiss();
-    }
+    onDismiss?.();
   }, [onDismiss]);
 
-  // Auto-hide functionality
   useEffect(() => {
     if (autoHideDuration && isVisible) {
-      const timer = setTimeout(() => {
-        handleDismiss();
-      }, autoHideDuration);
-
+      const timer = setTimeout(handleDismiss, autoHideDuration);
       return () => clearTimeout(timer);
     }
   }, [autoHideDuration, isVisible, handleDismiss]);
-
-  // Icons for different error types
-  const icons = {
-    warning: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-        />
-      </svg>
-    ),
-    error: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-    critical: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    ),
-  };
 
   return (
     <AnimatePresence>
@@ -129,47 +75,18 @@ const ErrorMessageComponent: React.FC<ErrorMessageProps> = ({
           className={`w-full rounded-lg border-l-4 p-4 shadow-md mb-4 ${colorScheme[type].bg} ${colorScheme[type].border}`}
         >
           <div className="flex items-start">
-            {showIcon && (
-              <motion.div
-                initial={{ rotate: -45, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-                className={`mr-3 flex-shrink-0 ${colorScheme[type].icon}`}
-              >
-                {icons[type]}
-              </motion.div>
-            )}
-
+            {showIcon && <motion.div className={`mr-3 flex-shrink-0 ${colorScheme[type].icon}`}>{icons[type]}</motion.div>}
             <div className="flex-grow">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.3 }}
-                className={`text-sm md:text-base ${colorScheme[type].text}`}
-              >
-                {`${message}`}
-              </motion.div>
+              <motion.div className={`text-sm md:text-base ${colorScheme[type].text}`}>{`${message}`}</motion.div>
             </div>
-
             {dismissible && (
-              <button
-                onClick={handleDismiss}
-                className={`ml-3 flex-shrink-0 ${colorScheme[type].button} transition-colors duration-200`}
-                aria-label="Dismiss"
-              >
+              <button onClick={handleDismiss} className={`ml-3 flex-shrink-0 ${colorScheme[type].button} transition-colors duration-200`} aria-label="Dismiss">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             )}
           </div>
-
-          {/* Progress bar for auto-dismiss */}
           {autoHideDuration && (
             <motion.div className="mt-2 h-1 w-full bg-gray-200 rounded-full overflow-hidden">
               <motion.div

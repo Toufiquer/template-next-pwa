@@ -34,23 +34,23 @@ const ViewUser: React.FC = () => {
           <DialogTitle>User Details</DialogTitle>
         </DialogHeader>
         {selectedUser && (
-                <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+          <ScrollArea className="h-[400px] w-full rounded-md border p-4">
             <div className="grid gap-2">
               <div className="grid grid-cols-3 gap-2">
                 <div className="font-semibold">Name:</div>
-                <div className="col-span-2">{selectedUser.name}</div>
+                <div className="col-span-2">{(selectedUser.name as string) || ''}</div>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="font-semibold">Email:</div>
-                <div className="col-span-2">{selectedUser.email}</div>
+                <div className="col-span-2">{(selectedUser.email as string) || ''}</div>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="font-semibold">Pass Code:</div>
-                <div className="col-span-2">{selectedUser.passCode}</div>
+                <div className="col-span-2">{(selectedUser.passCode as string) || ''}</div>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="font-semibold">Alias:</div>
-                <div className="col-span-2">{selectedUser.alias}</div>
+                <div className="col-span-2">{(selectedUser.alias as string) || ''}</div>
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="font-semibold">Role:</div>
@@ -64,7 +64,7 @@ const ViewUser: React.FC = () => {
                           : 'bg-green-100 text-green-700'
                     }`}
                   >
-                    {selectedUser.role}
+                    {(selectedUser.role as string) || ''}
                   </span>
                 </div>
               </div>

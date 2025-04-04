@@ -30,7 +30,7 @@ const DeleteUser: React.FC = () => {
         {selectedUser && (
           <div className="py-4">
             <p>
-              You are about to delete user: <span className="font-semibold">{selectedUser.name}</span>
+              You are about to delete user: <span className="font-semibold">{(selectedUser.name as string) || ''}</span>
             </p>
           </div>
         )}

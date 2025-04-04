@@ -51,18 +51,18 @@ const BulkEditUser: React.FC = () => {
             </p>
           </div>
         )}
-                <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+        <ScrollArea className="h-[400px] w-full rounded-md border p-4">
           <div className="w-full flex flex-col">
             {bulkData.map((curr, idx) => (
-              <div key={curr._id} className="w-full flex items-center justify-between gap-2 mt-1">
+              <div key={(curr._id as string) || idx} className="w-full flex items-center justify-between gap-2 mt-1">
                 <div className="">
-                  {idx + 1}. {curr.name}
+                  {idx + 1}. {(curr.name as string) || ''}
                 </div>
                 <div className="flex justify-between items-center gap-4 min-w-[180px]">
                   <Label htmlFor="edit-role" className="text-right">
                     Role
                   </Label>
-                  <Select onValueChange={e => handleRoleChange(curr, e)} defaultValue={curr.role}>
+                  <Select onValueChange={e => handleRoleChange(curr, e)} defaultValue={(curr.role as string) || ''}>
                     <SelectTrigger className="col-span-3 bg-slate-50">
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
