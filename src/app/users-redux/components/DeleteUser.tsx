@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '../store/userStore';
-import { baseIUser } from '../store/userStoreConstants';
+import { useUserStore } from '@/app/users-redux/store/userStore';
+import { baseIUser } from '@/app/users-redux/store/userStoreConstants';
 import { useDeleteUserMutation } from '@/redux/features/users/usersApi';
 import { IUser } from '@/app/api/v1/users/userModel';
 

@@ -7,10 +7,10 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useAddUserMutation } from '@/redux/features/users/usersApi';
 
-import { useUserStore } from '../store/userStore';
+import { useUserStore } from '@/app/users-redux/store/userStore';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'react-toastify';
-import { userRole } from './EditUser';
+import { defaultUserData, defaultUserRole, IUserRole, userRole } from '@/app/users-redux/store/userStoreConstants';
 
 const InputField: React.FC<{
   id: string;
@@ -48,7 +48,7 @@ const AddUser: React.FC = () => {
     }
   }, [isError, error]);
   const handleRoleChange = (value: string) => {
-    setNewUser({ ...newUser, role: value as 'user' | 'admin' | 'moderator' });
+    setNewUser({ ...newUser, role: value as IUserRole });
   };
 
   const handleAddUser = async () => {
@@ -57,7 +57,7 @@ const AddUser: React.FC = () => {
       email: newUser.email || '',
       passCode: newUser.passCode || '',
       alias: newUser.alias || '',
-      role: (newUser.role as 'user' | 'admin' | 'moderator') || 'user',
+      role: (newUser.role as IUserRole) || defaultUserRole,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -66,7 +66,7 @@ const AddUser: React.FC = () => {
       const addedUser = await addUser(user).unwrap(); // Get the returned data
       setUsers([...users, addedUser]); // Use the returned data instead of the local `user` object
       toggleAddModal(false);
-      setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
+      setNewUser(defaultUserData);
     } catch (error) {
       console.error('Failed to add user:', error);
     }

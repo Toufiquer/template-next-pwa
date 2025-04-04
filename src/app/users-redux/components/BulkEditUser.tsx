@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '../store/userStore';
+import { useUserStore } from '@/app/users-redux/store/userStore';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { userRole } from './EditUser';
+import { userRole } from '@/app/users-redux/store/userStoreConstants';
 import { IUser } from '@/app/api/v1/users/userModel';
 import { useBulkUpdateUsersMutation } from '@/redux/features/users/usersApi';
 import { ScrollArea } from '@/components/ui/scroll-area';

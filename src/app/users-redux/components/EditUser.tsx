@@ -7,12 +7,11 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { useUserStore } from '../store/userStore';
-import { baseIUser } from '../store/userStoreConstants';
+import { useUserStore } from '@/app/users-redux/store/userStore';
 import { useUpdateUserMutation } from '@/redux/features/users/usersApi';
 import { IUser } from '@/app/api/v1/users/userModel';
+import { IUserRole, userRole, baseIUser } from '@/app/users-redux/store/userStoreConstants';
 
-export const userRole = ['user', 'admin', 'moderator'];
 const EditUser: React.FC = () => {
   const { toggleEditModal, isEditModalOpen, newUser, selectedUser, setNewUser, setSelectedUser } = useUserStore();
   const [updateUser] = useUpdateUserMutation(); // RTK mutation hook
@@ -27,7 +26,7 @@ const EditUser: React.FC = () => {
     setNewUser({ ...newUser, [name]: value });
   };
   const handleRoleChange = (value: string) => {
-    setNewUser({ ...newUser, role: value as 'user' | 'admin' | 'moderator' });
+    setNewUser({ ...newUser, role: value as IUserRole });
   };
 
   const handleEditUser = async () => {

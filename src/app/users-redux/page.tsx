@@ -4,16 +4,16 @@ import React from 'react';
 import { PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { useUserStore } from './store/userStore';
-import ViewUsersTable from './components/ViewUsersTable';
+import { useUserStore } from '@/app/users-redux/store/userStore';
+import ViewUsersTable from '@/app/users-redux/components/ViewUsersTable';
 import { useGetUsersQuery } from '@/redux/features/users/usersApi';
 
-import AddUser from './components/AddUser';
-import EditUser from './components/EditUser';
-import ViewUser from './components/ViewUser';
-import DeleteUser from './components/DeleteUser';
-import BulkDeleteUser from './components/BulkDeleteUser';
-import BulkEditUser from './components/BulkEditUser';
+import AddUser from '@/app/users-redux/components/AddUser';
+import EditUser from '@/app/users-redux/components/EditUser';
+import ViewUser from '@/app/users-redux/components/ViewUser';
+import DeleteUser from '@/app/users-redux/components/DeleteUser';
+import BulkDeleteUser from '@/app/users-redux/components/BulkDeleteUser';
+import BulkEditUser from '@/app/users-redux/components/BulkEditUser';
 
 const UserTable: React.FC = () => {
   const { toggleAddModal } = useUserStore();

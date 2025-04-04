@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { IUser } from '@/app/api/v1/users/userModel';
-import { UserStore } from './userStoreTypes';
-import { baseIUser } from './userStoreConstants';
+import { UserStore } from '@/app/users-redux/store/userStoreTypes';
+import { baseIUser } from '@/app/users-redux/store/userStoreConstants';
 
 export const useUserStore = create<UserStore>(set => ({
   users: [],

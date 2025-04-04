@@ -9,14 +9,14 @@ import { IUser } from '@/app/api/v1/users/userModel';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
 import { useGetUsersQuery } from '@/redux/features/users/usersApi';
-import { useUserStore } from '../store/userStore';
-import Pagination from './Pagination';
+import { useUserStore } from '@/app/users-redux/store/userStore';
+import Pagination from '@/app/users-redux/components/Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { pageLimitArr } from '@/app/users-redux/store/userStoreConstants';
 
 const ViewUsersTable: React.FC = () => {
-  const pageLimitArr = [2, 10, 50, 100, 200];
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(pageLimitArr[0]);
   const [sortConfig, setSortConfig] = useState<{ key: keyof IUser; direction: 'asc' | 'desc' } | null>(null);
