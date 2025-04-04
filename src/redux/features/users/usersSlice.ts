@@ -1,6 +1,6 @@
 /*
 |-----------------------------------------
-| setting up UsersSlice for the App
+| setting up _1_template_Slice for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
 | @copyright: Toufiquer, February, 2024
 |-----------------------------------------

@@ -2,18 +2,18 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useUserStore } from '@/app/users-redux/store/userStore';
-import { useBulkDeleteUsersMutation } from '@/redux/features/users/usersApi';
+import { useBulkDelete_1_template_Mutation } from '@/redux/features/users/usersApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkDeleteUser: React.FC = () => {
   const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData, setBulkData } = useUserStore();
-  const [bulkDeleteUsers, { isLoading }] = useBulkDeleteUsersMutation();
+  const [bulkDelete_1_template_, { isLoading }] = useBulkDelete_1_template_Mutation();
 
   const handleBulkDeleteUser = async () => {
     if (!bulkData?.length) return;
     try {
       const ids = bulkData.map(user => user._id);
-      await bulkDeleteUsers({ ids }).unwrap();
+      await bulkDelete_1_template_({ ids }).unwrap();
       toggleBulkDeleteModal(false);
       setBulkData([]);
     } catch (error) {

@@ -9,7 +9,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
-  tagTypes: ['Users'],
+  tagTypes: ['_5_template_tags_'],
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.baseURL,

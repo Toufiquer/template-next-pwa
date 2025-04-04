@@ -6,18 +6,18 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { userRole } from '@/app/users-redux/store/userStoreConstants';
 import { IUser } from '@/app/api/v1/users/userModel';
-import { useBulkUpdateUsersMutation } from '@/redux/features/users/usersApi';
+import { useBulkUpdate_1_template_Mutation } from '@/redux/features/users/usersApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkEditUser: React.FC = () => {
   const { isBulkEditModalOpen, toggleBulkEditModal, bulkData, setBulkData } = useUserStore();
-  const [bulkUpdateUsers, { isLoading }] = useBulkUpdateUsersMutation();
+  const [bulkUpdate_1_template_, { isLoading }] = useBulkUpdate_1_template_Mutation();
 
   const handleBulkEditUser = async () => {
     if (!bulkData.length) return;
     try {
       const newBulkData = bulkData.map(({ _id, ...rest }) => ({ id: _id, updateData: rest }));
-      await bulkUpdateUsers(newBulkData).unwrap();
+      await bulkUpdate_1_template_(newBulkData).unwrap();
       toggleBulkEditModal(false);
       setBulkData([]);
     } catch (error) {

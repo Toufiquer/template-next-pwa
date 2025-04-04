@@ -5,8 +5,8 @@ import { PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { useUserStore } from '@/app/users-redux/store/userStore';
-import ViewUsersTable from '@/app/users-redux/components/ViewUsersTable';
-import { useGetUsersQuery } from '@/redux/features/users/usersApi';
+import View_1_template_Table from '@/app/users-redux/components/View_1_template_Table';
+import { useGet_1_template_Query } from '@/redux/features/users/usersApi';
 
 import AddUser from '@/app/users-redux/components/AddUser';
 import EditUser from '@/app/users-redux/components/EditUser';
@@ -17,7 +17,7 @@ import BulkEditUser from '@/app/users-redux/components/BulkEditUser';
 
 const UserTable: React.FC = () => {
   const { toggleAddModal } = useUserStore();
-  const { data: getResponseData, isSuccess } = useGetUsersQuery({ page: 1, limit: 1 });
+  const { data: getResponseData, isSuccess } = useGet_1_template_Query({ page: 1, limit: 1 });
 
   const modals = [AddUser, ViewUser, BulkDeleteUser, BulkEditUser, EditUser, DeleteUser];
 
@@ -30,7 +30,7 @@ const UserTable: React.FC = () => {
           Add User
         </Button>
       </div>
-      <ViewUsersTable />
+      <View_1_template_Table />
       {modals.map((ModalComponent, index) => (
         <ModalComponent key={index} />
       ))}

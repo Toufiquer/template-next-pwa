@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { IUser } from '@/app/api/v1/users/userModel';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
-import { useGetUsersQuery } from '@/redux/features/users/usersApi';
+import { useGet_1_template_Query } from '@/redux/features/users/usersApi';
 import { useUserStore } from '@/app/users-redux/store/userStore';
 import Pagination from '@/app/users-redux/components/Pagination';
 import { Label } from '@/components/ui/label';
@@ -16,15 +16,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { pageLimitArr } from '@/app/users-redux/store/userStoreConstants';
 
-const ViewUsersTable: React.FC = () => {
+const View_1_template_Table: React.FC = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(pageLimitArr[0]);
   const [sortConfig, setSortConfig] = useState<{ key: keyof IUser; direction: 'asc' | 'desc' } | null>(null);
   const { setSelectedUser, toggleBulkEditModal, toggleViewModal, toggleEditModal, toggleDeleteModal, bulkData, setBulkData, toggleBulkDeleteModal } =
     useUserStore();
 
-  const { data: getResponseData, isLoading, isError, error } = useGetUsersQuery({ page, limit });
-  const getAllUsersData = useMemo(() => getResponseData?.data?.users || [], [getResponseData]);
+  const { data: getResponseData, isLoading, isError, error } = useGet_1_template_Query({ page, limit });
+  const getAll_1_template_Data = useMemo(() => getResponseData?.data?.users || [], [getResponseData]);
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
@@ -32,16 +32,16 @@ const ViewUsersTable: React.FC = () => {
     setSortConfig(prev => (prev?.key === key ? { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' } : { key, direction: 'asc' }));
   };
 
-  const sortedUsersData = useMemo(() => {
-    if (!sortConfig) return getAllUsersData;
-    return [...getAllUsersData].sort((a, b) => {
+  const sorted_1_template_Data = useMemo(() => {
+    if (!sortConfig) return getAll_1_template_Data;
+    return [...getAll_1_template_Data].sort((a, b) => {
       if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1;
       if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1;
       return 0;
     });
-  }, [getAllUsersData, sortConfig]);
+  }, [getAll_1_template_Data, sortConfig]);
 
-  const handleSelectAll = (isChecked: boolean) => setBulkData(isChecked ? getAllUsersData : []);
+  const handleSelectAll = (isChecked: boolean) => setBulkData(isChecked ? getAll_1_template_Data : []);
   const handleSelectRow = (isChecked: boolean, user: IUser) =>
     setBulkData(isChecked ? [...bulkData, user] : bulkData.filter(item => item.email !== user.email));
 
@@ -83,7 +83,7 @@ const ViewUsersTable: React.FC = () => {
     </div>
   );
   const renderTableRows = () =>
-    sortedUsersData.map((user: IUser, index: number) => (
+    sorted_1_template_Data.map((user: IUser, index: number) => (
       <TableRow key={(user.email as string) || index}>
         <TableCell>
           <Checkbox onCheckedChange={checked => handleSelectRow(!!checked, user)} checked={bulkData.some(item => item.email === user.email)} />
@@ -106,7 +106,7 @@ const ViewUsersTable: React.FC = () => {
 
   if (isLoading) return <LoadingComponent />;
   if (isError) return <ErrorMessageComponent message={error || 'An error occurred'} />;
-  if (getAllUsersData.length === 0) return <div className="py-12 text-2xl text-slate-500">Ops! Nothing was found.</div>;
+  if (getAll_1_template_Data.length === 0) return <div className="py-12 text-2xl text-slate-500">Ops! Nothing was found.</div>;
 
   return (
     <div className="w-full flex flex-col">
@@ -135,7 +135,7 @@ const ViewUsersTable: React.FC = () => {
         <TableHeader className="bg-slate-600 text-slate-50 rounded overflow-hidden border-1 border-slate-600">
           <TableRow>
             <TableHead>
-              <Checkbox onCheckedChange={checked => handleSelectAll(!!checked)} checked={bulkData.length === getAllUsersData.length} />
+              <Checkbox onCheckedChange={checked => handleSelectAll(!!checked)} checked={bulkData.length === getAll_1_template_Data.length} />
             </TableHead>
             {['name', 'email', 'passCode', 'alias', 'role', 'createdAt'].map(key => (
               <TableHead
@@ -179,4 +179,4 @@ const ViewUsersTable: React.FC = () => {
   );
 };
 
-export default ViewUsersTable;
+export default View_1_template_Table;

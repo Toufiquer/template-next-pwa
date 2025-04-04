@@ -12,7 +12,7 @@ export interface UserStore {
   isBulkEditModalOpen: boolean;
   isBulkDeleteModalOpen: boolean;
   bulkData: IUser[];
-  setUsers: (users: IUser[]) => void;
+  set_1_template_: (users: IUser[]) => void;
   setSelectedUser: (user: IUser | null) => void;
   toggleAddModal: (isOpen: boolean) => void;
   toggleViewModal: (isOpen: boolean) => void;

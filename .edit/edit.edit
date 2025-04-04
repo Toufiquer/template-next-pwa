@@ -2,29 +2,31 @@
 2. users = _2_template_
 3. User  = _3_template_
 4. user  = _4_template_
+5. Users = _5_template_tags_ [Tags, redux invalidation]
 
 folder path 
   1. api/v1/...
   2. app/...
   3. app/redux/features/...
+  4. app/redux/api/ [edit tags]
 
 
-  1. api/v1/users/route
-  2. api/v1/users/userController
-  3. api/v1/users/useModel
+1  1. api/v1/users/route
+1  2. api/v1/users/userController
+1  3. api/v1/users/useModel
 
-  1. app/redux/features/users/usersApi
-  2. app/redux/features/users/usersSlice
+51  1. app/redux/features/users/usersApi
+51  2. app/redux/features/users/usersSlice
 
-  1. app/users-redux/page
-  2. app/users-redux/components/AddUser
-  3. app/users-redux/components/BulkDeleteUser
-  4. app/users-redux/components/BulkEditUser
-  5. app/users-redux/components/DeleteUser
-  6. app/users-redux/components/EditUser
-  7. app/users-redux/components/Pagination
-  8. app/users-redux/components/ViewUser
-  9. app/users-redux/components/ViewUsersTable
+1  1. app/users-redux/page
+1  2. app/users-redux/components/AddUser
+1  3. app/users-redux/components/BulkDeleteUser
+1  4. app/users-redux/components/BulkEditUser
+1  5. app/users-redux/components/DeleteUser
+1  6. app/users-redux/components/EditUser
+1  7. app/users-redux/components/Pagination
+1  8. app/users-redux/components/ViewUser
+1  9. app/users-redux/components/ViewUsersTable
 
   1. app/users-redux/store/userStore
   2. app/users-redux/store/StoreConstants

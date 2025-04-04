@@ -29,7 +29,7 @@ const InputField: React.FC<{
 );
 
 const AddUser: React.FC = () => {
-  const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
+  const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, set_1_template_ } = useUserStore();
   const [addUser, { isLoading, isError, error }] = useAddUserMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +64,7 @@ const AddUser: React.FC = () => {
 
     try {
       const addedUser = await addUser(user).unwrap(); // Get the returned data
-      setUsers([...users, addedUser]); // Use the returned data instead of the local `user` object
+      set_1_template_([...users, addedUser]); // Use the returned data instead of the local `user` object
       toggleAddModal(false);
       setNewUser(defaultUserData);
     } catch (error) {

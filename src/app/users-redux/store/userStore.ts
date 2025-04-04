@@ -15,7 +15,7 @@ export const useUserStore = create<UserStore>(set => ({
   isDeleteModalOpen: false,
   bulkData: [],
   setBulkData: (bulkData: IUser[]) => set({ bulkData }),
-  setUsers: (users: IUser[]) => set({ users }),
+  set_1_template_: (users: IUser[]) => set({ users }),
   setSelectedUser: user => set({ selectedUser: user }),
   setNewUser: user =>
     set(state => ({

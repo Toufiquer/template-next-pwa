@@ -46,8 +46,8 @@ export async function getUserById(req: Request) {
   });
 }
 
-// GET all users with pagination
-export async function getUsers(req: Request) {
+// GET all _1_template_ with pagination
+export async function get_1_template_(req: Request) {
   return withDB(async () => {
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get('page') || '1', 10);
@@ -55,8 +55,8 @@ export async function getUsers(req: Request) {
     const skip = (page - 1) * limit;
 
     const users = await User.find({}).sort({ updatedAt: -1, createdAt: -1 }).skip(skip).limit(limit);
-    const totalUsers = await User.countDocuments();
-    return formatResponse({ users: users || [], total: totalUsers, page, limit }, 'Users fetched successfully', 200);
+    const total_1_template_ = await User.countDocuments();
+    return formatResponse({ users: users || [], total: total_1_template_, page, limit }, '_1_template_ fetched successfully', 200);
   });
 }
 
@@ -80,8 +80,8 @@ export async function updateUser(req: Request) {
   });
 }
 
-// BULK UPDATE users
-export async function bulkUpdateUsers(req: Request) {
+// BULK UPDATE _1_template_
+export async function bulkUpdate_1_template_(req: Request) {
   return withDB(async () => {
     const updates = await req.json();
     const results = await Promise.allSettled(
@@ -107,8 +107,8 @@ export async function deleteUser(req: Request) {
   });
 }
 
-// BULK DELETE users
-export async function bulkDeleteUsers(req: Request) {
+// BULK DELETE _1_template_
+export async function bulkDelete_1_template_(req: Request) {
   return withDB(async () => {
     const { ids } = await req.json();
     const deletedIds: string[] = [];
