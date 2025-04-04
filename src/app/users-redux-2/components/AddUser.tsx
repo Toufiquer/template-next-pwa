@@ -13,7 +13,7 @@ import { useUserStore } from '../store/userStore';
 
 const AddUser: React.FC = () => {
   const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
-  const [addUser] = useAddUserMutation();
+  const [addUser, { isLoading }] = useAddUserMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,7 +25,7 @@ const AddUser: React.FC = () => {
   };
 
   const handleAddUser = async () => {
-    const user: IUser = {
+    const user = {
       name: newUser.name || '',
       email: newUser.email || '',
       passCode: newUser.passCode || '',
@@ -36,12 +36,11 @@ const AddUser: React.FC = () => {
     };
 
     try {
-      await addUser(user).unwrap();
-
-      setUsers([...users, user]);
+      const addedUser = await addUser(user).unwrap(); // Get the returned data
+      setUsers([...users, addedUser]); // Use the returned data instead of the local `user` object
       toggleAddModal(false);
       setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
-      // toast.success('User has been added', { updateId: Math.random() * 100 });
+      toast.success('User has been added', { updateId: Math.random() * 100 });
     } catch (error) {
       console.error('Failed to add user:', error);
       toast.error('Failed to add user', { updateId: Math.random() * 100 });

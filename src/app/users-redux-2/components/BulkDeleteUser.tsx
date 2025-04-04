@@ -8,7 +8,7 @@ import { useBulkDeleteUsersMutation } from '@/redux/features/users/usersApi';
 
 const BulkDeleteUser: React.FC = () => {
   const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData, setBulkData } = useUserStore();
-  const [bulkDeleteUsers] = useBulkDeleteUsersMutation();
+  const [bulkDeleteUsers, { isLoading }] = useBulkDeleteUsersMutation();
 
   const handleBulkDeleteUser = async () => {
     if (bulkData.length === 0) {
@@ -49,7 +49,12 @@ const BulkDeleteUser: React.FC = () => {
           <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleBulkDeleteModal(false)}>
             Cancel
           </Button>
-          <Button className="cursor-pointer border-1 border-rose-400 hover:border-rose-500 text-rose-500" variant="outline" onClick={handleBulkDeleteUser}>
+          <Button
+            disabled={isLoading}
+            className="cursor-pointer border-1 border-rose-400 hover:border-rose-500 text-rose-500"
+            variant="outline"
+            onClick={handleBulkDeleteUser}
+          >
             Delete Selected
           </Button>
         </DialogFooter>

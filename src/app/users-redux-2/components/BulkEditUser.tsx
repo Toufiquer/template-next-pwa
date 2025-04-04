@@ -12,7 +12,7 @@ import { useBulkUpdateUsersMutation } from '@/redux/features/users/usersApi';
 
 const BulkEditUser: React.FC = () => {
   const { isBulkEditModalOpen, toggleBulkEditModal, bulkData, setBulkData } = useUserStore();
-  const [bulkUpdateUsers] = useBulkUpdateUsersMutation();
+  const [bulkUpdateUsers, { isLoading }] = useBulkUpdateUsersMutation();
 
   const handleBulkEditUser = async () => {
     if (bulkData.length === 0) {
@@ -80,7 +80,12 @@ const BulkEditUser: React.FC = () => {
           <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleBulkEditModal(false)}>
             Cancel
           </Button>
-          <Button className="cursor-pointer border-1 border-green-400 hover:border-green-500 text-green-500" variant="outline" onClick={handleBulkEditUser}>
+          <Button
+            disabled={isLoading}
+            className="cursor-pointer border-1 border-green-400 hover:border-green-500 text-green-500"
+            variant="outline"
+            onClick={handleBulkEditUser}
+          >
             Update Selected
           </Button>
         </DialogFooter>
