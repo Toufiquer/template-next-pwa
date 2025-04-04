@@ -5,8 +5,8 @@ import { PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { useUserStore } from '@/app/6template/store/userStore';
-import View_1_template_Table from '@/app/6template/components/View_1_template_Table';
-import { useGet_1_template_Query } from '@/redux/features/6template/_2_template_Api';
+import View_1_template_Table from '@/app/6template/components/View7filenameTable';
+import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
 
 import AddUser from '@/app/6template/components/AddUser';
 import EditUser from '@/app/6template/components/EditUser';

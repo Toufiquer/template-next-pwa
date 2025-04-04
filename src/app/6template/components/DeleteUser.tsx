@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useUserStore } from '@/app/6template/store/userStore';
 import { baseIUser } from '@/app/6template/store/userStoreConstants';
-import { useDeleteUserMutation } from '@/redux/features/6template/_2_template_Api';
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { useDeleteUserMutation } from '@/redux/features/6template/7filenameApi';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 
 const DeleteUser: React.FC = () => {
   const { toggleDeleteModal, isDeleteModalOpen, selectedUser, setSelectedUser } = useUserStore();

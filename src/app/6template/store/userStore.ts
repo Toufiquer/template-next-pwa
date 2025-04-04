@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 import { UserStore } from '@/app/6template/store/userStoreTypes';
 import { baseIUser } from '@/app/6template/store/userStoreConstants';
 

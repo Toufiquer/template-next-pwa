@@ -11,7 +11,7 @@
 import { toast } from 'react-toastify';
 
 import { apiSlice } from '@/redux/api/apiSlice';
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 
 export const _2_template_Api = apiSlice.injectEndpoints({
   endpoints: builder => ({

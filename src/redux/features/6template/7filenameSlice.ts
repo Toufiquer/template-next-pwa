@@ -7,7 +7,7 @@
 */
 
 // If you want to update store then this file help you to update
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {

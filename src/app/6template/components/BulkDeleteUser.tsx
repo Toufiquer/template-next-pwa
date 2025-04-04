@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useUserStore } from '@/app/6template/store/userStore';
-import { useBulkDelete_1_template_Mutation } from '@/redux/features/6template/_2_template_Api';
+import { useBulkDelete_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkDeleteUser: React.FC = () => {

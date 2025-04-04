@@ -1,4 +1,4 @@
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 
 export interface UserStore {
   _2_template_: IUser[];

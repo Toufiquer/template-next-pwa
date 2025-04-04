@@ -6,9 +6,9 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 
 import { useUserStore } from '@/app/6template/store/userStore';
 import { baseIUser } from '@/app/6template/store/userStoreConstants';
-import { useGetUserByIdQuery } from '@/redux/features/6template/_2_template_Api';
+import { useGetUserByIdQuery } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 
 const ViewUser: React.FC = () => {
   const { isViewModalOpen, selectedUser, toggleViewModal, setSelectedUser } = useUserStore();

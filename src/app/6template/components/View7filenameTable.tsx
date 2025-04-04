@@ -5,10 +5,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
-import { useGet_1_template_Query } from '@/redux/features/6template/_2_template_Api';
+import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
 import { useUserStore } from '@/app/6template/store/userStore';
 import Pagination from '@/app/6template/components/Pagination';
 import { Label } from '@/components/ui/label';

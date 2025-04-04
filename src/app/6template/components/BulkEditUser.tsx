@@ -5,8 +5,8 @@ import { useUserStore } from '@/app/6template/store/userStore';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { userRole } from '@/app/6template/store/userStoreConstants';
-import { IUser } from '@/app/api/v1/6template/userModel';
-import { useBulkUpdate_1_template_Mutation } from '@/redux/features/6template/_2_template_Api';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { useBulkUpdate_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkEditUser: React.FC = () => {

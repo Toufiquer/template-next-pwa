@@ -8,8 +8,8 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 import { useUserStore } from '@/app/6template/store/userStore';
-import { useUpdateUserMutation } from '@/redux/features/6template/_2_template_Api';
-import { IUser } from '@/app/api/v1/6template/userModel';
+import { useUpdateUserMutation } from '@/redux/features/6template/7filenameApi';
+import { IUser } from '@/app/api/v1/6template/7filenameModel';
 import { IUserRole, userRole, baseIUser } from '@/app/6template/store/userStoreConstants';
 
 const EditUser: React.FC = () => {

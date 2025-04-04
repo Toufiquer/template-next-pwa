@@ -1,4 +1,4 @@
-import User from './userModel';
+import User from './7filenameModel';
 import connectDB from '@/lib/mongoose';
 import { IResponse } from './route';
 

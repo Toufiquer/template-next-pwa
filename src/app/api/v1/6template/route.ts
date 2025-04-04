@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { get_1_template_, createUser, updateUser, deleteUser, getUserById, bulkUpdate_1_template_, bulkDelete_1_template_ } from './userController';
+import { get_1_template_, createUser, updateUser, deleteUser, getUserById, bulkUpdate_1_template_, bulkDelete_1_template_ } from './7filenameController';
 
 export interface IResponse {
   data: unknown;
