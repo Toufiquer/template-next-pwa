@@ -34,9 +34,6 @@ const EditUser: React.FC = () => {
     if (!selectedUser) return;
 
     try {
-      console.log(' id : ', selectedUser._id);
-      console.log(' selectedUser : ', selectedUser);
-      console.log(' newUser : ', newUser);
       await updateUser({ id: selectedUser._id, ...newUser }).unwrap(); // Call RTK mutation
       toggleEditModal(false);
     } catch (error) {

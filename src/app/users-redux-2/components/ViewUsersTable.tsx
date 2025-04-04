@@ -7,7 +7,7 @@ import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { IUser } from '@/app/api/v1/users/userModel';
 import LoadingComponent from '@/components/common/Loading';
-import ErrorMessageComponent from '@/components/common/Errer';
+import ErrorMessageComponent from '@/components/common/Error';
 import { useGetUsersQuery } from '@/redux/features/users/usersApi';
 import { useUserStore } from '../store/userStore';
 import Pagination from './Pagination';
@@ -24,7 +24,7 @@ const ViewUsersTable: React.FC = () => {
     useUserStore();
 
   const { data: getResponseData, isLoading, isError, error } = useGetUsersQuery({ page, limit });
-  const getAllUsersData = useMemo(() => getResponseData?.data || [], [getResponseData]);
+  const getAllUsersData = useMemo(() => getResponseData?.data?.users || [], [getResponseData]);
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
@@ -48,6 +48,7 @@ const ViewUsersTable: React.FC = () => {
   const renderActions = (user: IUser) => (
     <div className="flex flex-col sm:flex-row gap-2">
       <Button
+        className="cursor-pointer "
         variant="outline"
         size="sm"
         onClick={() => {
@@ -58,6 +59,7 @@ const ViewUsersTable: React.FC = () => {
         <EyeIcon className="w-4 h-4 mr-1" /> View
       </Button>
       <Button
+        className="cursor-pointer "
         variant="outline"
         size="sm"
         onClick={() => {
@@ -70,7 +72,7 @@ const ViewUsersTable: React.FC = () => {
       <Button
         variant="outline"
         size="sm"
-        className="text-rose-400 hover:text-rose-500"
+        className="text-rose-400 hover:text-rose-500 cursor-pointer "
         onClick={() => {
           setSelectedUser(user);
           toggleDeleteModal(true);
@@ -80,7 +82,6 @@ const ViewUsersTable: React.FC = () => {
       </Button>
     </div>
   );
-
   const renderTableRows = () =>
     sortedUsersData.map((user: IUser, index: number) => (
       <TableRow key={(user.email as string) || index}>
@@ -114,14 +115,14 @@ const ViewUsersTable: React.FC = () => {
           <div className="px-2 gap-2 flex items-center justify-start w-full">
             Total Selected <span className="text-xs text-slate-500">({bulkData.length})</span>
           </div>
-          <div className="px-2 flex items-center justify-end w-full">
-            <Button variant="outline" size="sm" onClick={() => toggleBulkEditModal(true)} disabled={bulkData.length === 0}>
+          <div className="px-2 gap-2 flex items-center justify-end w-full">
+            <Button className="cursor-pointer " variant="outline" size="sm" onClick={() => toggleBulkEditModal(true)} disabled={bulkData.length === 0}>
               <PencilIcon className="w-4 h-4 mr-1" /> Edit
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="text-rose-400 hover:text-rose-500"
+              className="text-rose-400 hover:text-rose-500 cursor-pointer "
               onClick={() => toggleBulkDeleteModal(true)}
               disabled={bulkData.length === 0}
             >
@@ -130,7 +131,7 @@ const ViewUsersTable: React.FC = () => {
           </div>
         </div>
       </div>
-      <Table>
+      <Table className="border-1 border-slate-500">
         <TableHeader className="bg-slate-600 text-slate-50 rounded overflow-hidden border-1 border-slate-600">
           <TableRow>
             <TableHead>
@@ -150,7 +151,7 @@ const ViewUsersTable: React.FC = () => {
         </TableHeader>
         <TableBody>{renderTableRows()}</TableBody>
       </Table>
-      <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData.total} />
+      <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData?.data?.total} />
       <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">
         <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin pl-2">
           User per page
@@ -167,7 +168,7 @@ const ViewUsersTable: React.FC = () => {
           </SelectTrigger>
           <SelectContent>
             {pageLimitArr.map(i => (
-              <SelectItem key={i} value={i.toString()}>
+              <SelectItem key={i} value={i.toString()} className="cursor-pointer hover:bg-slate-200">
                 {i}
               </SelectItem>
             ))}

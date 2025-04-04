@@ -44,10 +44,15 @@ const BulkDeleteUser: React.FC = () => {
           </div>
         </ScrollArea>
         <DialogFooter>
-          <Button variant="outline" onClick={() => toggleBulkDeleteModal(false)}>
+          <Button className="cursor-pointer" variant="outline" onClick={() => toggleBulkDeleteModal(false)}>
             Cancel
           </Button>
-          <Button disabled={isLoading} variant="outline" className="text-rose-500 border-rose-400 hover:border-rose-500" onClick={handleBulkDeleteUser}>
+          <Button
+            disabled={isLoading}
+            variant="outline"
+            className="cursor-pointer text-rose-500 border-rose-400 hover:border-rose-500"
+            onClick={handleBulkDeleteUser}
+          >
             Delete Selected
           </Button>
         </DialogFooter>

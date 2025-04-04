@@ -1,30 +1,37 @@
-import { NextResponse } from 'next/server';
 import User from './userModel';
 import connectDB from '@/lib/mongoose';
+import { IResponse } from './route';
 
 // Helper to handle database connection and errors
-async function withDB(handler: () => Promise<unknown>) {
+async function withDB(handler: () => Promise<IResponse>): Promise<IResponse> {
   try {
     await connectDB();
     return await handler();
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: (error as Error).message, status: 400 }, { status: 400 });
+    return { data: null, message: (error as Error).message, status: 400 };
   }
 }
 
 // Helper to format responses
 function formatResponse(data: unknown, message: string, status: number) {
-  return NextResponse.json({ data, message, status }, { status });
+  return { data, message, status };
 }
 
 // CREATE user
-export async function createUser(req: Request) {
+export async function createUser(req: Request): Promise<IResponse> {
   return withDB(async () => {
-    const userData = await req.json();
-    const newUser = await User.create({ ...userData });
-    console.log(newUser, ' => Line No: 26');
-    return formatResponse(newUser, 'User created successfully', 201);
+    try {
+      const userData = await req.json();
+      const newUser = await User.create({ ...userData });
+      return formatResponse(newUser, 'User created successfully', 201);
+    } catch (error: unknown) {
+      if ((error as { code?: number }).code === 11000) {
+        const err = error as { keyValue?: Record<string, unknown> };
+        return formatResponse(null, `Duplicate key error: ${JSON.stringify(err.keyValue)}`, 400);
+      }
+      throw error; // Re-throw other errors to be handled by `withDB`
+    }
   });
 }
 
@@ -51,9 +58,6 @@ export async function getUsers(req: Request) {
 
     const users = await User.find({}).sort({ updatedAt: -1, createdAt: -1 }).skip(skip).limit(limit);
     const totalUsers = await User.countDocuments();
-    console.log('getUsers hit', totalUsers);
-    console.log('getUsers hit', users);
-    console.log(' return ; ', formatResponse({ users: users || [], total: totalUsers, page, limit }, 'Users fetched successfully', 200));
     return formatResponse({ users: users || [], total: totalUsers, page, limit }, 'Users fetched successfully', 200);
   });
 }
@@ -61,11 +65,19 @@ export async function getUsers(req: Request) {
 // UPDATE single user by ID
 export async function updateUser(req: Request) {
   return withDB(async () => {
-    const { id, ...updateData } = await req.json();
-    const updatedUser = await User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+    try {
+      const { id, ...updateData } = await req.json();
+      const updatedUser = await User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
 
-    if (!updatedUser) return formatResponse(null, 'User not found', 404);
-    return formatResponse(updatedUser, 'User updated successfully', 200);
+      if (!updatedUser) return formatResponse(null, 'User not found', 404);
+      return formatResponse(updatedUser, 'User updated successfully', 200);
+    } catch (error: unknown) {
+      if ((error as { code?: number }).code === 11000) {
+        const err = error as { keyValue?: Record<string, unknown> };
+        return formatResponse(null, `Duplicate key error: ${JSON.stringify(err.keyValue)}`, 400);
+      }
+      throw error; // Re-throw other errors to be handled by `withDB`
+    }
   });
 }
 
@@ -91,7 +103,6 @@ export async function deleteUser(req: Request) {
   return withDB(async () => {
     const { id } = await req.json();
     const deletedUser = await User.findByIdAndDelete(id);
-    console.log('deletedUser', deletedUser);
     if (!deletedUser) return formatResponse(deletedUser, 'User not found', 404);
     return formatResponse(deletedUser, 'User deleted successfully', 200);
   });

@@ -67,10 +67,15 @@ const BulkEditUser: React.FC = () => {
           </div>
         </ScrollArea>
         <DialogFooter>
-          <Button variant="outline" onClick={() => toggleBulkEditModal(false)} className="border-slate-400 hover:border-slate-500">
+          <Button variant="outline" onClick={() => toggleBulkEditModal(false)} className="cursor-pointer border-slate-400 hover:border-slate-500">
             Cancel
           </Button>
-          <Button disabled={isLoading} variant="outline" onClick={handleBulkEditUser} className="border-green-400 hover:border-green-500 text-green-500">
+          <Button
+            disabled={isLoading}
+            variant="outline"
+            onClick={handleBulkEditUser}
+            className="cursor-pointer border-green-400 hover:border-green-500 text-green-500"
+          >
             Update Selected
           </Button>
         </DialogFooter>

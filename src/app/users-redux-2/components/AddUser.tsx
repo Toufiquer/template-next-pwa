@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -9,6 +9,8 @@ import { useAddUserMutation } from '@/redux/features/users/usersApi';
 
 import { useUserStore } from '../store/userStore';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { toast } from 'react-toastify';
+import { userRole } from './EditUser';
 
 const InputField: React.FC<{
   id: string;
@@ -28,13 +30,23 @@ const InputField: React.FC<{
 
 const AddUser: React.FC = () => {
   const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
-  const [addUser, { isLoading }] = useAddUserMutation();
+  const [addUser, { isLoading, isError, error }] = useAddUserMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewUser({ ...newUser, [name]: value });
   };
-
+  useEffect(() => {
+    if (isError) {
+      const errorMessage =
+        'status' in error && error.data && typeof error.data === 'object' && 'message' in error.data
+          ? (error.data as { message: string }).message
+          : error instanceof Error
+            ? error.message
+            : 'An unknown error occurred';
+      if (errorMessage) toast.error(errorMessage, { toastId: Math.random() });
+    }
+  }, [isError, error]);
   const handleRoleChange = (value: string) => {
     setNewUser({ ...newUser, role: value as 'user' | 'admin' | 'moderator' });
   };
@@ -84,14 +96,16 @@ const AddUser: React.FC = () => {
               <Label htmlFor="role" className="text-right">
                 Role
               </Label>
-              <Select onValueChange={handleRoleChange} defaultValue="user">
+              <Select onValueChange={handleRoleChange} defaultValue={(newUser.role as string) || ''}>
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="user">User</SelectItem>
-                  <SelectItem value="moderator">Moderator</SelectItem>
-                  <SelectItem value="admin">Admin</SelectItem>
+                  {userRole?.map((i, index) => (
+                    <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
+                      {i}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

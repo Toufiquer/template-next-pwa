@@ -26,19 +26,13 @@ const usersSlice = createSlice({
   initialState,
   reducers: {
     pushAllData: (state, action) => {
-      console.log('rtk : pushAllData', state);
-      console.log('rtk : pushAllData', action);
       state.data.push(action.payload);
     },
     addOneUser: (state, action) => {
-      console.log('rtk : addOneUser', state);
-      console.log('rtk : addOneUser', action);
       // Add the new user to the state data array.
       state.data.push(action.payload);
     },
     removeOneUser: (state, action) => {
-      console.log('rtk : removeOneUser', state);
-      console.log('rtk : removeOneUser', action);
       const idx = state.data.indexOf(action.payload);
       if (idx !== -1) {
         state.data.splice(idx, 1);
