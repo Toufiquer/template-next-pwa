@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { userRole } from './EditUser';
 import { IUser } from '@/app/api/v1/users/userModel';
 import { useBulkUpdateUsersMutation } from '@/redux/features/users/usersApi';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkEditUser: React.FC = () => {
   const { isBulkEditModalOpen, toggleBulkEditModal, bulkData, setBulkData } = useUserStore();
@@ -50,32 +51,34 @@ const BulkEditUser: React.FC = () => {
             </p>
           </div>
         )}
-        <div className="w-full flex flex-col">
-          {bulkData.map((curr, idx) => (
-            <div key={curr._id} className="w-full flex items-center justify-between gap-2 mt-1">
-              <div className="">
-                {idx + 1}. {curr.name}
+                <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+          <div className="w-full flex flex-col">
+            {bulkData.map((curr, idx) => (
+              <div key={curr._id} className="w-full flex items-center justify-between gap-2 mt-1">
+                <div className="">
+                  {idx + 1}. {curr.name}
+                </div>
+                <div className="flex justify-between items-center gap-4 min-w-[180px]">
+                  <Label htmlFor="edit-role" className="text-right">
+                    Role
+                  </Label>
+                  <Select onValueChange={e => handleRoleChange(curr, e)} defaultValue={curr.role}>
+                    <SelectTrigger className="col-span-3 bg-slate-50">
+                      <SelectValue placeholder="Select a role" />
+                    </SelectTrigger>
+                    <SelectContent className=" bg-slate-50">
+                      {userRole?.map((i, index) => (
+                        <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
+                          {i}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
-              <div className="flex justify-between items-center gap-4 min-w-[180px]">
-                <Label htmlFor="edit-role" className="text-right">
-                  Role
-                </Label>
-                <Select onValueChange={e => handleRoleChange(curr, e)} defaultValue={curr.role}>
-                  <SelectTrigger className="col-span-3 bg-slate-50">
-                    <SelectValue placeholder="Select a role" />
-                  </SelectTrigger>
-                  <SelectContent className=" bg-slate-50">
-                    {userRole?.map((i, index) => (
-                      <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
-                        {i}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </ScrollArea>
         <DialogFooter>
           <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleBulkEditModal(false)}>
             Cancel

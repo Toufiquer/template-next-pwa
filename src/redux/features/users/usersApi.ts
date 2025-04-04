@@ -32,6 +32,9 @@ export const usersApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getUserById: builder.query({
+      query: id => `/api/v1/users?id=${id}`,
+    }),
     addUser: builder.mutation({
       query: newUser => ({
         url: '/api/v1/users',
@@ -152,5 +155,12 @@ export const usersApi = apiSlice.injectEndpoints({
     }),
   }),
 });
-export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation, useBulkUpdateUsersMutation, useBulkDeleteUsersMutation } =
-  usersApi;
+export const {
+  useGetUsersQuery,
+  useAddUserMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+  useBulkUpdateUsersMutation,
+  useBulkDeleteUsersMutation,
+  useGetUserByIdQuery,
+} = usersApi;

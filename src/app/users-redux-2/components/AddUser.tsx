@@ -5,11 +5,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { IUser } from '@/app/api/v1/users/userModel';
 import { useAddUserMutation } from '@/redux/features/users/usersApi';
-import { toast } from 'react-toastify';
 
 import { useUserStore } from '../store/userStore';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const AddUser: React.FC = () => {
   const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
@@ -40,10 +39,8 @@ const AddUser: React.FC = () => {
       setUsers([...users, addedUser]); // Use the returned data instead of the local `user` object
       toggleAddModal(false);
       setNewUser({ name: '', email: '', passCode: '', alias: '', role: 'user' });
-      toast.success('User has been added', { updateId: Math.random() * 100 });
     } catch (error) {
       console.error('Failed to add user:', error);
-      toast.error('Failed to add user', { updateId: Math.random() * 100 });
     }
   };
 
@@ -53,47 +50,50 @@ const AddUser: React.FC = () => {
         <DialogHeader>
           <DialogTitle>Add New User</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" name="name" value={newUser.name} onChange={handleInputChange} className="col-span-3" />
+
+        <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Name
+              </Label>
+              <Input id="name" name="name" value={newUser.name} onChange={handleInputChange} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="email" className="text-right">
+                Email
+              </Label>
+              <Input id="email" name="email" type="email" value={newUser.email} onChange={handleInputChange} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="passCode" className="text-right">
+                Pass Code
+              </Label>
+              <Input id="passCode" name="passCode" type="password" value={newUser.passCode} onChange={handleInputChange} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="alias" className="text-right">
+                Alias
+              </Label>
+              <Input id="alias" name="alias" value={newUser.alias} onChange={handleInputChange} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="role" className="text-right">
+                Role
+              </Label>
+              <Select onValueChange={handleRoleChange} defaultValue="user">
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select a role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="user">User</SelectItem>
+                  <SelectItem value="moderator">Moderator</SelectItem>
+                  <SelectItem value="admin">Admin</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="email" className="text-right">
-              Email
-            </Label>
-            <Input id="email" name="email" type="email" value={newUser.email} onChange={handleInputChange} className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="passCode" className="text-right">
-              Pass Code
-            </Label>
-            <Input id="passCode" name="passCode" type="password" value={newUser.passCode} onChange={handleInputChange} className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="alias" className="text-right">
-              Alias
-            </Label>
-            <Input id="alias" name="alias" value={newUser.alias} onChange={handleInputChange} className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="role" className="text-right">
-              Role
-            </Label>
-            <Select onValueChange={handleRoleChange} defaultValue="user">
-              <SelectTrigger className="col-span-3">
-                <SelectValue placeholder="Select a role" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="user">User</SelectItem>
-                <SelectItem value="moderator">Moderator</SelectItem>
-                <SelectItem value="admin">Admin</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+        </ScrollArea>
         <DialogFooter>
           <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(false)}>
             Cancel

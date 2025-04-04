@@ -8,11 +8,12 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 import { useUserStore } from '../store/userStore';
+import { baseIUser } from '../store/userStoreConstants';
 import { useUpdateUserMutation } from '@/redux/features/users/usersApi';
 
 export const userRole = ['user', 'admin', 'moderator'];
 const EditUser: React.FC = () => {
-  const { toggleEditModal, isEditModalOpen, newUser, selectedUser, setNewUser } = useUserStore();
+  const { toggleEditModal, isEditModalOpen, newUser, selectedUser, setNewUser, setSelectedUser } = useUserStore();
   const [updateUser] = useUpdateUserMutation(); // RTK mutation hook
 
   useEffect(() => {
@@ -96,7 +97,14 @@ const EditUser: React.FC = () => {
           <div className="mt-12 pt-12" />
         </ScrollArea>
         <DialogFooter>
-          <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleEditModal(false)}>
+          <Button
+            className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
+            variant="outline"
+            onClick={() => {
+              toggleEditModal(false);
+              setSelectedUser(baseIUser);
+            }}
+          >
             Cancel
           </Button>
           <Button onClick={handleEditUser} className="cursor-pointer border-1 border-slate-400 hover:border-slate-500">

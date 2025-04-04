@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 
 import { useUserStore } from '../store/userStore';
 import { useBulkDeleteUsersMutation } from '@/redux/features/users/usersApi';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkDeleteUser: React.FC = () => {
   const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData, setBulkData } = useUserStore();
@@ -38,13 +39,15 @@ const BulkDeleteUser: React.FC = () => {
             </p>
           </div>
         )}
-        <div className="w-full flex flex-col">
-          {bulkData.map((curr, idx) => (
-            <span key={curr._id} className="text-xs">
-              {idx + 1}. {curr.name}
-            </span>
-          ))}
-        </div>
+        <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+          <div className="w-full flex flex-col">
+            {bulkData.map((curr, idx) => (
+              <span key={curr._id} className="text-xs">
+                {idx + 1}. {curr.name}
+              </span>
+            ))}
+          </div>
+        </ScrollArea>
         <DialogFooter>
           <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleBulkDeleteModal(false)}>
             Cancel

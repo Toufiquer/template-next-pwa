@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import { useUserStore } from '../store/userStore';
+import { baseIUser } from '../store/userStoreConstants';
 import { useDeleteUserMutation } from '@/redux/features/users/usersApi';
 
 const DeleteUser: React.FC = () => {
-  const { toggleDeleteModal, isDeleteModalOpen, selectedUser } = useUserStore();
+  const { toggleDeleteModal, isDeleteModalOpen, selectedUser, setSelectedUser } = useUserStore();
   const [deleteUser] = useDeleteUserMutation();
 
   const handleDeleteUser = async () => {
@@ -34,7 +35,14 @@ const DeleteUser: React.FC = () => {
           </div>
         )}
         <DialogFooter>
-          <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleDeleteModal(false)}>
+          <Button
+            className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
+            variant="outline"
+            onClick={() => {
+              toggleDeleteModal(false);
+              setSelectedUser(baseIUser);
+            }}
+          >
             Cancel
           </Button>
           <Button className="cursor-pointer border-1 border-rose-400 hover:border-rose-500 text-rose-500" variant="outline" onClick={handleDeleteUser}>
