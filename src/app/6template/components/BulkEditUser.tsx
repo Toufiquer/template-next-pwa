@@ -1,19 +1,19 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '@/app/6template/store/userStore';
+import { use_3_template_Store } from '@/app/6template/store/userStore';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { userRole } from '@/app/6template/store/userStoreConstants';
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
 import { useBulkUpdate_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-const BulkEditUser: React.FC = () => {
-  const { isBulkEditModalOpen, toggleBulkEditModal, bulkData, setBulkData } = useUserStore();
+const BulkEdit_3_template_: React.FC = () => {
+  const { isBulkEditModalOpen, toggleBulkEditModal, bulkData, setBulkData } = use_3_template_Store();
   const [bulkUpdate_1_template_, { isLoading }] = useBulkUpdate_1_template_Mutation();
 
-  const handleBulkEditUser = async () => {
+  const handleBulkEdit_3_template_ = async () => {
     if (!bulkData.length) return;
     try {
       const newBulkData = bulkData.map(({ _id, ...rest }) => ({ id: _id, updateData: rest }));
@@ -26,7 +26,7 @@ const BulkEditUser: React.FC = () => {
   };
 
   const handleRoleChange = (userId: string, role: string) => {
-    setBulkData(bulkData.map(user => (user._id === userId ? { ...user, role } : user)) as IUser[]);
+    setBulkData(bulkData.map(user => (user._id === userId ? { ...user, role } : user)) as I_3_template_[]);
   };
 
   return (
@@ -73,7 +73,7 @@ const BulkEditUser: React.FC = () => {
           <Button
             disabled={isLoading}
             variant="outline"
-            onClick={handleBulkEditUser}
+            onClick={handleBulkEdit_3_template_}
             className="cursor-pointer border-green-400 hover:border-green-500 text-green-500"
           >
             Update Selected
@@ -84,4 +84,4 @@ const BulkEditUser: React.FC = () => {
   );
 };
 
-export default BulkEditUser;
+export default BulkEdit_3_template_;

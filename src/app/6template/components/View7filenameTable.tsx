@@ -5,11 +5,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
 import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
-import { useUserStore } from '@/app/6template/store/userStore';
+import { use_3_template_Store } from '@/app/6template/store/userStore';
 import Pagination from '@/app/6template/components/Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -19,16 +19,16 @@ import { pageLimitArr } from '@/app/6template/store/userStoreConstants';
 const View_1_template_Table: React.FC = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(pageLimitArr[0]);
-  const [sortConfig, setSortConfig] = useState<{ key: keyof IUser; direction: 'asc' | 'desc' } | null>(null);
-  const { setSelectedUser, toggleBulkEditModal, toggleViewModal, toggleEditModal, toggleDeleteModal, bulkData, setBulkData, toggleBulkDeleteModal } =
-    useUserStore();
+  const [sortConfig, setSortConfig] = useState<{ key: keyof I_3_template_; direction: 'asc' | 'desc' } | null>(null);
+  const { setSelected_3_template_, toggleBulkEditModal, toggleViewModal, toggleEditModal, toggleDeleteModal, bulkData, setBulkData, toggleBulkDeleteModal } =
+    use_3_template_Store();
 
   const { data: getResponseData, isLoading, isError, error } = useGet_1_template_Query({ page, limit });
   const getAll_1_template_Data = useMemo(() => getResponseData?.data?._2_template_ || [], [getResponseData]);
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
-  const handleSort = (key: keyof IUser) => {
+  const handleSort = (key: keyof I_3_template_) => {
     setSortConfig(prev => (prev?.key === key ? { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' } : { key, direction: 'asc' }));
   };
 
@@ -42,17 +42,17 @@ const View_1_template_Table: React.FC = () => {
   }, [getAll_1_template_Data, sortConfig]);
 
   const handleSelectAll = (isChecked: boolean) => setBulkData(isChecked ? getAll_1_template_Data : []);
-  const handleSelectRow = (isChecked: boolean, user: IUser) =>
+  const handleSelectRow = (isChecked: boolean, user: I_3_template_) =>
     setBulkData(isChecked ? [...bulkData, user] : bulkData.filter(item => item.email !== user.email));
 
-  const renderActions = (user: IUser) => (
+  const renderActions = (user: I_3_template_) => (
     <div className="flex flex-col sm:flex-row gap-2">
       <Button
         className="cursor-pointer "
         variant="outline"
         size="sm"
         onClick={() => {
-          setSelectedUser(user);
+          setSelected_3_template_(user);
           toggleViewModal(true);
         }}
       >
@@ -63,7 +63,7 @@ const View_1_template_Table: React.FC = () => {
         variant="outline"
         size="sm"
         onClick={() => {
-          setSelectedUser(user);
+          setSelected_3_template_(user);
           toggleEditModal(true);
         }}
       >
@@ -74,7 +74,7 @@ const View_1_template_Table: React.FC = () => {
         size="sm"
         className="text-rose-400 hover:text-rose-500 cursor-pointer "
         onClick={() => {
-          setSelectedUser(user);
+          setSelected_3_template_(user);
           toggleDeleteModal(true);
         }}
       >
@@ -83,7 +83,7 @@ const View_1_template_Table: React.FC = () => {
     </div>
   );
   const renderTableRows = () =>
-    sorted_1_template_Data.map((user: IUser, index: number) => (
+    sorted_1_template_Data.map((user: I_3_template_, index: number) => (
       <TableRow key={(user.email as string) || index}>
         <TableCell>
           <Checkbox onCheckedChange={checked => handleSelectRow(!!checked, user)} checked={bulkData.some(item => item.email === user.email)} />
@@ -141,7 +141,7 @@ const View_1_template_Table: React.FC = () => {
               <TableHead
                 key={key}
                 className={`font-bold text-slate-50 cursor-pointer ${key === 'email' || key === 'alias' ? 'hidden md:table-cell' : ''} ${key === 'passCode' || key === 'createdAt' ? 'hidden lg:table-cell' : ''}`}
-                onClick={() => handleSort(key as keyof IUser)}
+                onClick={() => handleSort(key as keyof I_3_template_)}
               >
                 {key.charAt(0).toUpperCase() + key.slice(1)} {sortConfig?.key === key && (sortConfig.direction === 'asc' ? '↑' : '↓')}
               </TableHead>
@@ -154,7 +154,7 @@ const View_1_template_Table: React.FC = () => {
       <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData?.data?.total} />
       <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">
         <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin pl-2">
-          User per page
+          _3_template_ per page
         </Label>
         <Select
           onValueChange={value => {

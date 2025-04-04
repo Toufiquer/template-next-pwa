@@ -1,32 +1,32 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '@/app/6template/store/userStore';
-import { baseIUser } from '@/app/6template/store/userStoreConstants';
-import { useDeleteUserMutation } from '@/redux/features/6template/7filenameApi';
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { use_3_template_Store } from '@/app/6template/store/userStore';
+import { baseI_3_template_ } from '@/app/6template/store/userStoreConstants';
+import { useDelete_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
 
-const DeleteUser: React.FC = () => {
-  const { toggleDeleteModal, isDeleteModalOpen, selectedUser, setSelectedUser } = useUserStore();
-  const [deleteUser] = useDeleteUserMutation();
+const Delete_3_template_: React.FC = () => {
+  const { toggleDeleteModal, isDeleteModalOpen, selected_3_template_, setSelected_3_template_ } = use_3_template_Store();
+  const [delete_3_template_] = useDelete_3_template_Mutation();
 
-  const handleDeleteUser = async () => {
-    if (selectedUser) {
+  const handleDelete_3_template_ = async () => {
+    if (selected_3_template_) {
       try {
-        await deleteUser({ id: selectedUser._id }).unwrap();
+        await delete_3_template_({ id: selected_3_template_._id }).unwrap();
         toggleDeleteModal(false);
       } catch (error) {
-        console.error('Failed to delete user:', error);
+        console.error('Failed to delete _3_template_:', error);
       }
     }
   };
 
   const handleCancel = () => {
     toggleDeleteModal(false);
-    setSelectedUser({ ...baseIUser } as IUser);
+    setSelected_3_template_({ ...baseI_3_template_ } as I_3_template_);
   };
 
-  const { name = '' } = selectedUser || {};
+  const { name = '' } = selected_3_template_ || {};
 
   return (
     <Dialog open={isDeleteModalOpen} onOpenChange={toggleDeleteModal}>
@@ -34,10 +34,10 @@ const DeleteUser: React.FC = () => {
         <DialogHeader>
           <DialogTitle>Confirm Deletion</DialogTitle>
         </DialogHeader>
-        {selectedUser && (
+        {selected_3_template_ && (
           <div className="py-4">
             <p>
-              You are about to delete user: <span className="font-semibold">{(name as string) || ''}</span>
+              You are about to delete _4_template_: <span className="font-semibold">{(name as string) || ''}</span>
             </p>
           </div>
         )}
@@ -45,7 +45,7 @@ const DeleteUser: React.FC = () => {
           <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={handleCancel}>
             Cancel
           </Button>
-          <Button className="cursor-pointer border-1 border-rose-400 hover:border-rose-500 text-rose-500" variant="outline" onClick={handleDeleteUser}>
+          <Button className="cursor-pointer border-1 border-rose-400 hover:border-rose-500 text-rose-500" variant="outline" onClick={handleDelete_3_template_}>
             Delete
           </Button>
         </DialogFooter>
@@ -54,4 +54,4 @@ const DeleteUser: React.FC = () => {
   );
 };
 
-export default DeleteUser;
+export default Delete_3_template_;

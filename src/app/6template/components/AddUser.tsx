@@ -5,12 +5,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { useAddUserMutation } from '@/redux/features/6template/7filenameApi';
+import { useAdd_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
 
-import { useUserStore } from '@/app/6template/store/userStore';
+import { use_3_template_Store } from '@/app/6template/store/userStore';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'react-toastify';
-import { defaultUserData, defaultUserRole, IUserRole, userRole } from '@/app/6template/store/userStoreConstants';
+import { default_3_template_Data, default_3_template_Role, I_3_template_Role, userRole } from '@/app/6template/store/userStoreConstants';
 
 const InputField: React.FC<{
   id: string;
@@ -28,13 +28,13 @@ const InputField: React.FC<{
   </div>
 );
 
-const AddUser: React.FC = () => {
-  const { toggleAddModal, isAddModalOpen, _2_template_, newUser, setNewUser, set_1_template_ } = useUserStore();
-  const [addUser, { isLoading, isError, error }] = useAddUserMutation();
+const Add_3_template_: React.FC = () => {
+  const { toggleAddModal, isAddModalOpen, _2_template_, new_3_template_, setNew_3_template_, set_1_template_ } = use_3_template_Store();
+  const [add_3_template_, { isLoading, isError, error }] = useAdd_3_template_Mutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: value });
+    setNew_3_template_({ ...new_3_template_, [name]: value });
   };
   useEffect(() => {
     if (isError) {
@@ -48,25 +48,25 @@ const AddUser: React.FC = () => {
     }
   }, [isError, error]);
   const handleRoleChange = (value: string) => {
-    setNewUser({ ...newUser, role: value as IUserRole });
+    setNew_3_template_({ ...new_3_template_, role: value as I_3_template_Role });
   };
 
-  const handleAddUser = async () => {
+  const handleAdd_3_template_ = async () => {
     const user = {
-      name: newUser.name || '',
-      email: newUser.email || '',
-      passCode: newUser.passCode || '',
-      alias: newUser.alias || '',
-      role: (newUser.role as IUserRole) || defaultUserRole,
+      name: new_3_template_.name || '',
+      email: new_3_template_.email || '',
+      passCode: new_3_template_.passCode || '',
+      alias: new_3_template_.alias || '',
+      role: (new_3_template_.role as I_3_template_Role) || default_3_template_Role,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
 
     try {
-      const addedUser = await addUser(user).unwrap(); // Get the returned data
-      set_1_template_([..._2_template_, addedUser]); // Use the returned data instead of the local `user` object
+      const added_3_template_ = await add_3_template_(user).unwrap(); // Get the returned data
+      set_1_template_([..._2_template_, added_3_template_]); // Use the returned data instead of the local `user` object
       toggleAddModal(false);
-      setNewUser(defaultUserData);
+      setNew_3_template_(default_3_template_Data);
     } catch (error) {
       console.error('Failed to add user:', error);
     }
@@ -76,27 +76,27 @@ const AddUser: React.FC = () => {
     <Dialog open={isAddModalOpen} onOpenChange={toggleAddModal}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add New User</DialogTitle>
+          <DialogTitle>Add New _3_template_</DialogTitle>
         </DialogHeader>
 
         <ScrollArea className="h-[400px] w-full rounded-md border p-4">
           <div className="grid gap-4 py-4">
-            <InputField id="name" name="name" label="Name" value={(newUser.name as string) || ''} onChange={handleInputChange} />
-            <InputField id="email" name="email" label="Email" type="email" value={(newUser.email as string) || ''} onChange={handleInputChange} />
+            <InputField id="name" name="name" label="Name" value={(new_3_template_.name as string) || ''} onChange={handleInputChange} />
+            <InputField id="email" name="email" label="Email" type="email" value={(new_3_template_.email as string) || ''} onChange={handleInputChange} />
             <InputField
               id="passCode"
               name="passCode"
               label="Pass Code"
               type="password"
-              value={(newUser.passCode as string) || ''}
+              value={(new_3_template_.passCode as string) || ''}
               onChange={handleInputChange}
             />
-            <InputField id="alias" name="alias" label="Alias" value={(newUser.alias as string) || ''} onChange={handleInputChange} />
+            <InputField id="alias" name="alias" label="Alias" value={(new_3_template_.alias as string) || ''} onChange={handleInputChange} />
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="role" className="text-right">
                 Role
               </Label>
-              <Select onValueChange={handleRoleChange} defaultValue={(newUser.role as string) || ''}>
+              <Select onValueChange={handleRoleChange} defaultValue={(new_3_template_.role as string) || ''}>
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
@@ -115,8 +115,13 @@ const AddUser: React.FC = () => {
           <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(false)}>
             Cancel
           </Button>
-          <Button disabled={isLoading} variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={handleAddUser}>
-            Add User
+          <Button
+            disabled={isLoading}
+            variant="outline"
+            className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer"
+            onClick={handleAdd_3_template_}
+          >
+            Add _3_template_
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -124,4 +129,4 @@ const AddUser: React.FC = () => {
   );
 };
 
-export default AddUser;
+export default Add_3_template_;

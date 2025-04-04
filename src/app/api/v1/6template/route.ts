@@ -1,5 +1,13 @@
 import { NextResponse } from 'next/server';
-import { get_1_template_, createUser, updateUser, deleteUser, getUserById, bulkUpdate_1_template_, bulkDelete_1_template_ } from './7filenameController';
+import {
+  get_1_template_,
+  create_3_template_,
+  update_3_template_,
+  delete_3_template_,
+  get_3_template_ById,
+  bulkUpdate_1_template_,
+  bulkDelete_1_template_,
+} from './7filenameController';
 
 export interface IResponse {
   data: unknown;
@@ -10,29 +18,29 @@ const formatResponse = (data: unknown, message: string, status: number) => NextR
 // GET all _1_template_
 export async function GET(req: Request) {
   const id = new URL(req.url).searchParams.get('id');
-  const result: IResponse = id ? await getUserById(req) : await get_1_template_(req);
+  const result: IResponse = id ? await get_3_template_ById(req) : await get_1_template_(req);
   return formatResponse(result.data, result.message, result.status);
 }
 
-// CREATE user
+// CREATE _3_template_
 export async function POST(req: Request) {
-  const result = await createUser(req);
+  const result = await create_3_template_(req);
 
   return formatResponse(result.data, result.message, result.status);
 }
 
-// UPDATE user
+// UPDATE _3_template_
 export async function PUT(req: Request) {
   const isBulk = new URL(req.url).searchParams.get('bulk') === 'true';
-  const result = isBulk ? await bulkUpdate_1_template_(req) : await updateUser(req);
+  const result = isBulk ? await bulkUpdate_1_template_(req) : await update_3_template_(req);
 
   return formatResponse(result.data, result.message, result.status);
 }
 
-// DELETE user
+// DELETE _3_template_
 export async function DELETE(req: Request) {
   const isBulk = new URL(req.url).searchParams.get('bulk') === 'true';
-  const result = isBulk ? await bulkDelete_1_template_(req) : await deleteUser(req);
+  const result = isBulk ? await bulkDelete_1_template_(req) : await delete_3_template_(req);
 
   return formatResponse(result.data, result.message, result.status);
 }

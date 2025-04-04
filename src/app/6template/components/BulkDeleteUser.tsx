@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '@/app/6template/store/userStore';
+import { use_3_template_Store } from '@/app/6template/store/userStore';
 import { useBulkDelete_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-const BulkDeleteUser: React.FC = () => {
-  const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData, setBulkData } = useUserStore();
+const BulkDelete_3_template_: React.FC = () => {
+  const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData, setBulkData } = use_3_template_Store();
   const [bulkDelete_1_template_, { isLoading }] = useBulkDelete_1_template_Mutation();
 
-  const handleBulkDeleteUser = async () => {
+  const handleBulkDelete_3_template_ = async () => {
     if (!bulkData?.length) return;
     try {
       const ids = bulkData.map(user => user._id);
@@ -51,7 +51,7 @@ const BulkDeleteUser: React.FC = () => {
             disabled={isLoading}
             variant="outline"
             className="cursor-pointer text-rose-500 border-rose-400 hover:border-rose-500"
-            onClick={handleBulkDeleteUser}
+            onClick={handleBulkDelete_3_template_}
           >
             Delete Selected
           </Button>
@@ -61,4 +61,4 @@ const BulkDeleteUser: React.FC = () => {
   );
 };
 
-export default BulkDeleteUser;
+export default BulkDelete_3_template_;

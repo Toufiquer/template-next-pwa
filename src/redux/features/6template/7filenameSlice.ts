@@ -7,14 +7,14 @@
 */
 
 // If you want to update store then this file help you to update
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {
   isLoading: boolean;
   isError: boolean;
   error: string;
-  data: IUser[];
+  data: I_3_template_[];
 } = {
   isLoading: false,
   isError: false,
@@ -28,11 +28,11 @@ const _2_template_Slice = createSlice({
     pushAllData: (state, action) => {
       state.data.push(action.payload);
     },
-    addOneUser: (state, action) => {
-      // Add the new user to the state data array.
+    addOne_3_template_: (state, action) => {
+      // Add the new _3_template_ to the state data array.
       state.data.push(action.payload);
     },
-    removeOneUser: (state, action) => {
+    removeOne_3_template_: (state, action) => {
       const idx = state.data.indexOf(action.payload);
       if (idx !== -1) {
         state.data.splice(idx, 1);
@@ -40,5 +40,5 @@ const _2_template_Slice = createSlice({
     },
   },
 });
-export const { pushAllData, addOneUser, removeOneUser } = _2_template_Slice.actions;
+export const { pushAllData, addOne_3_template_, removeOne_3_template_ } = _2_template_Slice.actions;
 export default _2_template_Slice.reducer;

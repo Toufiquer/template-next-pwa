@@ -7,33 +7,33 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { useUserStore } from '@/app/6template/store/userStore';
-import { useUpdateUserMutation } from '@/redux/features/6template/7filenameApi';
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
-import { IUserRole, userRole, baseIUser } from '@/app/6template/store/userStoreConstants';
+import { use_3_template_Store } from '@/app/6template/store/userStore';
+import { useUpdate_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_Role, userRole, baseI_3_template_ } from '@/app/6template/store/userStoreConstants';
 
-const EditUser: React.FC = () => {
-  const { toggleEditModal, isEditModalOpen, newUser, selectedUser, setNewUser, setSelectedUser } = useUserStore();
-  const [updateUser] = useUpdateUserMutation(); // RTK mutation hook
+const Edit_3_template_: React.FC = () => {
+  const { toggleEditModal, isEditModalOpen, new_3_template_, selected_3_template_, setNew_3_template_, setSelected_3_template_ } = use_3_template_Store();
+  const [update_3_template_] = useUpdate_3_template_Mutation(); // RTK mutation hook
 
   useEffect(() => {
-    if (selectedUser) {
-      setNewUser(selectedUser);
+    if (selected_3_template_) {
+      setNew_3_template_(selected_3_template_);
     }
-  }, [selectedUser, setNewUser]);
+  }, [selected_3_template_, setNew_3_template_]);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: value });
+    setNew_3_template_({ ...new_3_template_, [name]: value });
   };
   const handleRoleChange = (value: string) => {
-    setNewUser({ ...newUser, role: value as IUserRole });
+    setNew_3_template_({ ...new_3_template_, role: value as I_3_template_Role });
   };
 
-  const handleEditUser = async () => {
-    if (!selectedUser) return;
+  const handleEdit_3_template_ = async () => {
+    if (!selected_3_template_) return;
 
     try {
-      await updateUser({ id: selectedUser._id, ...newUser }).unwrap(); // Call RTK mutation
+      await update_3_template_({ id: selected_3_template_._id, ...new_3_template_ }).unwrap(); // Call RTK mutation
       toggleEditModal(false);
     } catch (error) {
       console.error('Failed to update user:', error);
@@ -44,7 +44,7 @@ const EditUser: React.FC = () => {
     <Dialog open={isEditModalOpen} onOpenChange={toggleEditModal}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit User</DialogTitle>
+          <DialogTitle>Edit _3_template_</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[400px] w-full rounded-md border p-4">
           <div className="grid gap-4 py-4">
@@ -52,13 +52,20 @@ const EditUser: React.FC = () => {
               <Label htmlFor="edit-name" className="text-right">
                 Name
               </Label>
-              <Input id="edit-name" name="name" value={(newUser.name as string) || ''} onChange={handleInputChange} className="col-span-3" />
+              <Input id="edit-name" name="name" value={(new_3_template_.name as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-email" className="text-right">
                 Email
               </Label>
-              <Input id="edit-email" name="email" type="email" value={(newUser.email as string) || ''} onChange={handleInputChange} className="col-span-3" />
+              <Input
+                id="edit-email"
+                name="email"
+                type="email"
+                value={(new_3_template_.email as string) || ''}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-passCode" className="text-right">
@@ -68,7 +75,7 @@ const EditUser: React.FC = () => {
                 id="edit-passCode"
                 name="passCode"
                 type="password"
-                value={(newUser.passCode as string) || ''}
+                value={(new_3_template_.passCode as string) || ''}
                 onChange={handleInputChange}
                 className="col-span-3"
               />
@@ -77,14 +84,14 @@ const EditUser: React.FC = () => {
               <Label htmlFor="edit-alias" className="text-right">
                 Alias
               </Label>
-              <Input id="edit-alias" name="alias" value={(newUser.alias as string) || ''} onChange={handleInputChange} className="col-span-3" />
+              <Input id="edit-alias" name="alias" value={(new_3_template_.alias as string) || ''} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="edit-role" className="text-right">
                 Role
               </Label>
 
-              <Select onValueChange={handleRoleChange} defaultValue={(newUser.role as string) || ''}>
+              <Select onValueChange={handleRoleChange} defaultValue={(new_3_template_.role as string) || ''}>
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
@@ -106,12 +113,12 @@ const EditUser: React.FC = () => {
             variant="outline"
             onClick={() => {
               toggleEditModal(false);
-              setSelectedUser({ ...baseIUser } as IUser);
+              setSelected_3_template_({ ...baseI_3_template_ } as I_3_template_);
             }}
           >
             Cancel
           </Button>
-          <Button onClick={handleEditUser} className="cursor-pointer border-1 border-slate-400 hover:border-slate-500">
+          <Button onClick={handleEdit_3_template_} className="cursor-pointer border-1 border-slate-400 hover:border-slate-500">
             Save Changes
           </Button>
         </DialogFooter>
@@ -120,4 +127,4 @@ const EditUser: React.FC = () => {
   );
 };
 
-export default EditUser;
+export default Edit_3_template_;

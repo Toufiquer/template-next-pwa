@@ -20,9 +20,9 @@ const userSchema = new Schema(
   { timestamps: true },
 );
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+export default mongoose.models._3_template_ || mongoose.model('_3_template_', userSchema);
 
-export interface IUser extends Document, Pick<mongoose.SchemaDefinition, 'name' | 'email' | 'passCode' | 'alias' | 'role'> {
+export interface I_3_template_ extends Document, Pick<mongoose.SchemaDefinition, 'name' | 'email' | 'passCode' | 'alias' | 'role'> {
   createdAt?: Date;
   updatedAt?: Date;
 }

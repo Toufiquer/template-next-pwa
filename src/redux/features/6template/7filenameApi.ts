@@ -11,7 +11,7 @@
 import { toast } from 'react-toastify';
 
 import { apiSlice } from '@/redux/api/apiSlice';
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
 
 export const _2_template_Api = apiSlice.injectEndpoints({
   endpoints: builder => ({
@@ -30,19 +30,19 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         }
       },
     }),
-    getUserById: builder.query({
+    get_3_template_ById: builder.query({
       query: id => `/api/v1/6template?id=${id}`,
     }),
-    addUser: builder.mutation({
-      query: newUser => ({
+    add_3_template_: builder.mutation({
+      query: new_3_template_ => ({
         url: '/api/v1/6template',
         method: 'POST',
-        body: newUser,
+        body: new_3_template_,
       }),
       invalidatesTags: [{ type: '_5_template_tags_' }], // Automatically invalidate cache after mutation
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
-          const { data }: { data: { data: IUser; message: string } } = await queryFulfilled;
+          const { data }: { data: { data: I_3_template_; message: string } } = await queryFulfilled;
 
           toast.success(data.message, {
             toastId: (Math.random() * 1000).toFixed(0),
@@ -59,7 +59,7 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         }
       },
     }),
-    updateUser: builder.mutation({
+    update_3_template_: builder.mutation({
       query: ({ id, ...data }) => ({
         url: `/api/v1/6template`,
         method: 'PUT',
@@ -82,7 +82,7 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteUser: builder.mutation({
+    delete_3_template_: builder.mutation({
       query: ({ id }) => ({
         url: `/api/v1/6template`,
         method: 'DELETE',
@@ -155,10 +155,10 @@ export const _2_template_Api = apiSlice.injectEndpoints({
 });
 export const {
   useGet_1_template_Query,
-  useAddUserMutation,
-  useUpdateUserMutation,
-  useDeleteUserMutation,
+  useAdd_3_template_Mutation,
+  useUpdate_3_template_Mutation,
+  useDelete_3_template_Mutation,
   useBulkUpdate_1_template_Mutation,
   useBulkDelete_1_template_Mutation,
-  useGetUserByIdQuery,
+  useGet_3_template_ByIdQuery,
 } = _2_template_Api;

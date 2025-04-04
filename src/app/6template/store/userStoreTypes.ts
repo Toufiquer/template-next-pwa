@@ -1,24 +1,24 @@
-import { IUser } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
 
-export interface UserStore {
-  _2_template_: IUser[];
-  selectedUser: IUser | null;
-  newUser: Partial<IUser>;
+export interface _3_template_Store {
+  _2_template_: I_3_template_[];
+  selected_3_template_: I_3_template_ | null;
+  new_3_template_: Partial<I_3_template_>;
   isAddModalOpen: boolean;
   isViewModalOpen: boolean;
   isEditModalOpen: boolean;
   isDeleteModalOpen: boolean;
-  setNewUser: React.Dispatch<React.SetStateAction<Partial<IUser>>>;
+  setNew_3_template_: React.Dispatch<React.SetStateAction<Partial<I_3_template_>>>;
   isBulkEditModalOpen: boolean;
   isBulkDeleteModalOpen: boolean;
-  bulkData: IUser[];
-  set_1_template_: (_2_template_: IUser[]) => void;
-  setSelectedUser: (user: IUser | null) => void;
+  bulkData: I_3_template_[];
+  set_1_template_: (_2_template_: I_3_template_[]) => void;
+  setSelected_3_template_: (user: I_3_template_ | null) => void;
   toggleAddModal: (isOpen: boolean) => void;
   toggleViewModal: (isOpen: boolean) => void;
   toggleEditModal: (isOpen: boolean) => void;
   toggleDeleteModal: (isOpen: boolean) => void;
   toggleBulkEditModal: (user: boolean) => void;
   toggleBulkDeleteModal: (user: boolean) => void;
-  setBulkData: (bulkData: IUser[]) => void;
+  setBulkData: (bulkData: I_3_template_[]) => void;
 }

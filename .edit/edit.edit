@@ -4,7 +4,8 @@
 4. user  = _4_template_
 5. Users = _5_template_tags_ [Tags, redux invalidation]
 6. users = 6template [folder name]
-7. users = 7filename [file name]
+7. users = 7filename [file name, Small  ]
+8. Users = Filename8 [file name, Capital, React-components]
 
 folder path 
   0. folder name
@@ -14,25 +15,25 @@ folder path
   4. app/redux/api/ [edit tags]
 
 
-12  1. api/v1/users/route
-12  2. api/v1/users/userController
-12  3. api/v1/users/useModel
+567123  1. api/v1/users/route
+567123  2. api/v1/users/userController
+567123  3. api/v1/users/useModel
 
-512  1. app/redux/apt/apiSlice
-512  2. app/redux/abb/store
-512  3. app/redux/features/users/usersApi
-512  4. app/redux/features/users/usersSlice
+567123  1. app/redux/api/apiSlice
+567123  2. app/redux/app/store
+567123  3. app/redux/features/users/usersApi
+567123  4. app/redux/features/users/usersSlice
 
-12  1. app/users-redux/page
-12  2. app/users-redux/components/AddUser
-12  3. app/users-redux/components/BulkDeleteUser
-12  4. app/users-redux/components/BulkEditUser
-12  5. app/users-redux/components/DeleteUser
-12  6. app/users-redux/components/EditUser
-12  7. app/users-redux/components/Pagination
-12  8. app/users-redux/components/ViewUser
-12  9. app/users-redux/components/ViewUsersTable
+56712  1. app/users-redux/page
+56712  2. app/users-redux/components/AddUser
+56712  3. app/users-redux/components/BulkDeleteUser
+56712  4. app/users-redux/components/BulkEditUser
+56712  5. app/users-redux/components/DeleteUser
+56712  6. app/users-redux/components/EditUser
+56712  7. app/users-redux/components/Pagination
+56712  8. app/users-redux/components/ViewUser
+56712  9. app/users-redux/components/ViewUsersTable
 
-12  1. app/users-redux/store/userStore
-12  2. app/users-redux/store/StoreConstants
-12  3. app/users-redux/store/userStoreType
+56712  1. app/users-redux/store/userStore
+56712  2. app/users-redux/store/StoreConstants
+56712  3. app/users-redux/store/userStoreType
