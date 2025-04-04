@@ -7,10 +7,10 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useAdd_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
 
-import { use_3_template_Store } from '@/app/6template/store/userStore';
+import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'react-toastify';
-import { default_3_template_Data, default_3_template_Role, I_3_template_Role, userRole } from '@/app/6template/store/userStoreConstants';
+import { default_3_template_Data, default_3_template_Role, I_3_template_Role, userRole } from '@/app/6template/store/filename7StoreConstants';
 
 const InputField: React.FC<{
   id: string;

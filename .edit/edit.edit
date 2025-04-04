@@ -4,7 +4,7 @@
 4. user  = _4_template_
 5. Users = _5_template_tags_ [Tags, redux invalidation]
 6. users = 6template [folder name]
-7. users = 7filename [file name, Small  ]
+7. users = filename7 [file name, Small  ]
 8. Users = Filename8 [file name, Capital, React-components]
 
 folder path 

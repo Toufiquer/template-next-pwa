@@ -4,16 +4,16 @@ import React from 'react';
 import { PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { use_3_template_Store } from '@/app/6template/store/userStore';
-import View_1_template_Table from '@/app/6template/components/View7filenameTable';
+import { use_3_template_Store } from '@/app/6template/store/filename7Store';
+import View_1_template_Table from '@/app/6template/components/ViewFilename8Table';
 import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
 
-import AddUser from '@/app/6template/components/AddUser';
-import EditUser from '@/app/6template/components/EditUser';
-import ViewUser from '@/app/6template/components/ViewUser';
-import DeleteUser from '@/app/6template/components/DeleteUser';
-import BulkDeleteUser from '@/app/6template/components/BulkDeleteUser';
-import BulkEditUser from '@/app/6template/components/BulkEditUser';
+import AddUser from '@/app/6template/components/AddFilename8';
+import EditUser from '@/app/6template/components/EditFilename8';
+import ViewUser from '@/app/6template/components/ViewFilename8';
+import DeleteUser from '@/app/6template/components/DeleteFilename8';
+import BulkDeleteUser from '@/app/6template/components/BulkDeleteFilename8';
+import BulkEditUser from '@/app/6template/components/BulkEditFilename8';
 
 const Filename8Table: React.FC = () => {
   const { toggleAddModal } = use_3_template_Store();

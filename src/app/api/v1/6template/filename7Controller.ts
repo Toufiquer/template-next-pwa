@@ -1,4 +1,4 @@
-import _3_template_ from './7filenameModel';
+import _3_template_ from './filename7Model';
 import connectDB from '@/lib/mongoose';
 import { IResponse } from './route';
 

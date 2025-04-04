@@ -1,4 +1,4 @@
-import { I_3_template_ } from '@/app/api/v1/6template/7filenameModel';
+import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 
 type PartialI_3_template_ = Pick<I_3_template_, '_id' | 'name' | 'email' | 'passCode' | 'alias' | 'role'>;
 

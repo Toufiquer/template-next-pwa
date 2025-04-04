@@ -7,7 +7,7 @@ import {
   get_3_template_ById,
   bulkUpdate_1_template_,
   bulkDelete_1_template_,
-} from './7filenameController';
+} from './filename7Controller';
 
 export interface IResponse {
   data: unknown;
