@@ -55,7 +55,7 @@ const BulkEditUser: React.FC = () => {
                     </SelectTrigger>
                     <SelectContent className="bg-slate-50">
                       {userRole?.map((role, index) => (
-                        <SelectItem key={role + index} value={role}>
+                        <SelectItem key={role + index} value={role} className="cursor-pointer hover:bg-slate-200">
                           {role}
                         </SelectItem>
                       ))}
