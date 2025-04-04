@@ -8,18 +8,23 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { userRole } from './EditUser';
 import { IUser } from '@/app/api/v1/users/userModel';
+import { useBulkUpdateUsersMutation } from '@/redux/features/users/usersApi';
 
 const BulkEditUser: React.FC = () => {
   const { isBulkEditModalOpen, toggleBulkEditModal, bulkData, setBulkData } = useUserStore();
+  const [bulkUpdateUsers] = useBulkUpdateUsersMutation();
 
-  const handleBulkDeleteUser = async () => {
+  const handleBulkEditUser = async () => {
     if (bulkData.length === 0) {
       return;
     }
     try {
+      const newBulkData = bulkData.map(user => ({ id: user._id, updateData: user }));
+      await bulkUpdateUsers(newBulkData).unwrap();
       toggleBulkEditModal(false);
+      setBulkData([]);
     } catch (error) {
-      console.error('Failed to delete user:', error);
+      console.error('Failed to edit users:', error);
     }
   };
   const handleRoleChange = (user: IUser, role: string) => {
@@ -75,7 +80,7 @@ const BulkEditUser: React.FC = () => {
           <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleBulkEditModal(false)}>
             Cancel
           </Button>
-          <Button className="cursor-pointer border-1 border-green-400 hover:border-green-500 text-green-500" variant="outline" onClick={handleBulkDeleteUser}>
+          <Button className="cursor-pointer border-1 border-green-400 hover:border-green-500 text-green-500" variant="outline" onClick={handleBulkEditUser}>
             Update Selected
           </Button>
         </DialogFooter>

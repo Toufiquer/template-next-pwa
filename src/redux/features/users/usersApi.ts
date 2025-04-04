@@ -104,6 +104,53 @@ export const usersApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    bulkUpdateUsers: builder.mutation({
+      query: bulkData => ({
+        url: `/api/v1/users?bulk=true`,
+        method: 'PUT',
+        body: bulkData,
+      }),
+      invalidatesTags: [{ type: 'Users' }], // Invalidate cache after mutation
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data }: { data: { message: string } } = await queryFulfilled;
+
+          toast.success(data.message, {
+            toastId: (Math.random() * 1000).toFixed(0),
+          });
+        } catch (e: unknown) {
+          if (e instanceof Error) {
+            toast.error(e.message, {
+              toastId: (Math.random() * 1000).toFixed(0),
+            });
+          }
+        }
+      },
+    }),
+    bulkDeleteUsers: builder.mutation({
+      query: bulkData => ({
+        url: `/api/v1/users?bulk=true`,
+        method: 'DELETE',
+        body: bulkData,
+      }),
+      invalidatesTags: [{ type: 'Users' }], // Invalidate cache after mutation
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data }: { data: { message: string } } = await queryFulfilled;
+
+          toast.success(data.message, {
+            toastId: (Math.random() * 1000).toFixed(0),
+          });
+        } catch (e: unknown) {
+          if (e instanceof Error) {
+            toast.error(e.message, {
+              toastId: (Math.random() * 1000).toFixed(0),
+            });
+          }
+        }
+      },
+    }),
   }),
 });
-export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation } = usersApi;
+export const { useGetUsersQuery, useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation, useBulkUpdateUsersMutation, useBulkDeleteUsersMutation } =
+  usersApi;

@@ -4,16 +4,22 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 import { useUserStore } from '../store/userStore';
+import { useBulkDeleteUsersMutation } from '@/redux/features/users/usersApi';
 
 const BulkDeleteUser: React.FC = () => {
-  const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData } = useUserStore();
+  const { isBulkDeleteModalOpen, toggleBulkDeleteModal, bulkData, setBulkData } = useUserStore();
+  const [bulkDeleteUsers] = useBulkDeleteUsersMutation();
 
   const handleBulkDeleteUser = async () => {
     if (bulkData.length === 0) {
       return;
     }
     try {
+      const newBulkData = bulkData.map(user => user._id);
+      console.log('newBulkData', newBulkData);
+      await bulkDeleteUsers({ ids: newBulkData }).unwrap();
       toggleBulkDeleteModal(false);
+      setBulkData([]);
     } catch (error) {
       console.error('Failed to delete user:', error);
     }
