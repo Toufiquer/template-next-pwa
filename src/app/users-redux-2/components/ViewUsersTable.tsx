@@ -21,6 +21,7 @@ const ViewUsersTable: React.FC = () => {
   const [limit, setLimit] = useState<number>(pageLimitArr[0]);
   const { setSelectedUser, toggleBulkEditModal, toggleViewModal, toggleEditModal, toggleDeleteModal, bulkData, setBulkData, toggleBulkDeleteModal } =
     useUserStore();
+  const [sortConfig, setSortConfig] = useState<{ key: keyof IUser; direction: 'asc' | 'desc' } | null>(null);
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
@@ -32,6 +33,26 @@ const ViewUsersTable: React.FC = () => {
     toggleBulkEditModal(true);
   };
   const getAllUsersData = getResponseData?.data || [];
+  const handleSort = (key: keyof IUser) => {
+    setSortConfig(prevConfig => {
+      if (prevConfig?.key === key) {
+        return { key, direction: prevConfig.direction === 'asc' ? 'desc' : 'asc' };
+      }
+      return { key, direction: 'asc' };
+    });
+  };
+
+  const sortedUsersData = React.useMemo(() => {
+    if (!sortConfig) return getAllUsersData;
+    const sortedData = [...getAllUsersData];
+    sortedData.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1;
+      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+    return sortedData;
+  }, [getAllUsersData, sortConfig]);
+
   let renderUI = <div>first Load</div>;
   if (isLoading && !isError) {
     renderUI = <LoadingComponent />;
@@ -97,17 +118,29 @@ const ViewUsersTable: React.FC = () => {
               <TableHead className="font-bold text-slate-50">
                 <Checkbox onCheckedChange={checked => handleSelectAll(!!checked)} checked={bulkData.length === getAllUsersData.length} />
               </TableHead>
-              <TableHead className="font-bold text-slate-50">Name</TableHead>
-              <TableHead className="hidden md:table-cell font-bold text-slate-50">Email</TableHead>
-              <TableHead className="hidden lg:table-cell font-bold text-slate-50">Pass Code</TableHead>
-              <TableHead className="hidden md:table-cell font-bold text-slate-50">Alias</TableHead>
-              <TableHead className="hidden md:table-cell font-bold text-slate-50">Role</TableHead>
-              <TableHead className="hidden lg:table-cell font-bold text-slate-50">Created At</TableHead>
+              <TableHead className="font-bold text-slate-50 cursor-pointer" onClick={() => handleSort('name')}>
+                Name {sortConfig?.key === 'name' && (sortConfig.direction === 'asc' ? '↑' : '↓')}
+              </TableHead>
+              <TableHead className="hidden md:table-cell font-bold text-slate-50 cursor-pointer" onClick={() => handleSort('email')}>
+                Email {sortConfig?.key === 'email' && (sortConfig.direction === 'asc' ? '↑' : '↓')}
+              </TableHead>
+              <TableHead className="hidden lg:table-cell font-bold text-slate-50 cursor-pointer" onClick={() => handleSort('passCode')}>
+                Pass Code {sortConfig?.key === 'passCode' && (sortConfig.direction === 'asc' ? '↑' : '↓')}
+              </TableHead>
+              <TableHead className="hidden md:table-cell font-bold text-slate-50 cursor-pointer" onClick={() => handleSort('alias')}>
+                Alias {sortConfig?.key === 'alias' && (sortConfig.direction === 'asc' ? '↑' : '↓')}
+              </TableHead>
+              <TableHead className="hidden md:table-cell font-bold text-slate-50 cursor-pointer" onClick={() => handleSort('role')}>
+                Role {sortConfig?.key === 'role' && (sortConfig.direction === 'asc' ? '↑' : '↓')}
+              </TableHead>
+              <TableHead className="hidden lg:table-cell font-bold text-slate-50 cursor-pointer" onClick={() => handleSort('createdAt')}>
+                Created At {sortConfig?.key === 'createdAt' && (sortConfig.direction === 'asc' ? '↑' : '↓')}
+              </TableHead>
               <TableHead className="hidden lg:table-cell font-bold text-slate-50 text-end pr-4 ">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="border-1 border-slate-600">
-            {getAllUsersData.map((user: IUser, index: number) => (
+            {sortedUsersData.map((user: IUser, index: number) => (
               <TableRow key={user.email || index}>
                 <TableCell>
                   <Checkbox onCheckedChange={checked => handleSelectRow(!!checked, user)} checked={bulkData.some(item => item.email === user.email)} />
