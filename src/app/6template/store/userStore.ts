@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { IUser } from '@/app/api/v1/users/userModel';
-import { UserStore } from '@/app/users-redux/store/userStoreTypes';
-import { baseIUser } from '@/app/users-redux/store/userStoreConstants';
+import { IUser } from '@/app/api/v1/6template/userModel';
+import { UserStore } from '@/app/6template/store/userStoreTypes';
+import { baseIUser } from '@/app/6template/store/userStoreConstants';
 
 export const useUserStore = create<UserStore>(set => ({
-  users: [],
+  _2_template_: [],
   selectedUser: null,
   newUser: baseIUser,
   isBulkEditModalOpen: false,
@@ -15,7 +15,7 @@ export const useUserStore = create<UserStore>(set => ({
   isDeleteModalOpen: false,
   bulkData: [],
   setBulkData: (bulkData: IUser[]) => set({ bulkData }),
-  set_1_template_: (users: IUser[]) => set({ users }),
+  set_1_template_: (_2_template_: IUser[]) => set({ _2_template_ }),
   setSelectedUser: user => set({ selectedUser: user }),
   setNewUser: user =>
     set(state => ({

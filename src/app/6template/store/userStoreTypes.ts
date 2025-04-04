@@ -1,7 +1,7 @@
-import { IUser } from '@/app/api/v1/users/userModel';
+import { IUser } from '@/app/api/v1/6template/userModel';
 
 export interface UserStore {
-  users: IUser[];
+  _2_template_: IUser[];
   selectedUser: IUser | null;
   newUser: Partial<IUser>;
   isAddModalOpen: boolean;
@@ -12,7 +12,7 @@ export interface UserStore {
   isBulkEditModalOpen: boolean;
   isBulkDeleteModalOpen: boolean;
   bulkData: IUser[];
-  set_1_template_: (users: IUser[]) => void;
+  set_1_template_: (_2_template_: IUser[]) => void;
   setSelectedUser: (user: IUser | null) => void;
   toggleAddModal: (isOpen: boolean) => void;
   toggleViewModal: (isOpen: boolean) => void;

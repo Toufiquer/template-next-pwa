@@ -1,4 +1,4 @@
-import { IUser } from '@/app/api/v1/users/userModel';
+import { IUser } from '@/app/api/v1/6template/userModel';
 
 type PartialIUser = Pick<IUser, '_id' | 'name' | 'email' | 'passCode' | 'alias' | 'role'>;
 

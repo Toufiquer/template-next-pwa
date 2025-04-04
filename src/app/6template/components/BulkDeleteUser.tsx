@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '@/app/users-redux/store/userStore';
-import { useBulkDelete_1_template_Mutation } from '@/redux/features/users/usersApi';
+import { useUserStore } from '@/app/6template/store/userStore';
+import { useBulkDelete_1_template_Mutation } from '@/redux/features/6template/_2_template_Api';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkDeleteUser: React.FC = () => {
@@ -30,7 +30,7 @@ const BulkDeleteUser: React.FC = () => {
         {bulkData?.length > 0 && (
           <div className="pt-4">
             <p>
-              You are about to delete <span className="font-semibold">({bulkData.length})</span> users
+              You are about to delete <span className="font-semibold">({bulkData.length})</span> _2_template_
             </p>
           </div>
         )}

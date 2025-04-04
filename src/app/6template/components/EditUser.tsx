@@ -7,10 +7,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { useUserStore } from '@/app/users-redux/store/userStore';
-import { useUpdateUserMutation } from '@/redux/features/users/usersApi';
-import { IUser } from '@/app/api/v1/users/userModel';
-import { IUserRole, userRole, baseIUser } from '@/app/users-redux/store/userStoreConstants';
+import { useUserStore } from '@/app/6template/store/userStore';
+import { useUpdateUserMutation } from '@/redux/features/6template/_2_template_Api';
+import { IUser } from '@/app/api/v1/6template/userModel';
+import { IUserRole, userRole, baseIUser } from '@/app/6template/store/userStoreConstants';
 
 const EditUser: React.FC = () => {
   const { toggleEditModal, isEditModalOpen, newUser, selectedUser, setNewUser, setSelectedUser } = useUserStore();

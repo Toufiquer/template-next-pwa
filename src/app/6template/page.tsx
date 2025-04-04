@@ -4,16 +4,16 @@ import React from 'react';
 import { PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { useUserStore } from '@/app/users-redux/store/userStore';
-import View_1_template_Table from '@/app/users-redux/components/View_1_template_Table';
-import { useGet_1_template_Query } from '@/redux/features/users/usersApi';
+import { useUserStore } from '@/app/6template/store/userStore';
+import View_1_template_Table from '@/app/6template/components/View_1_template_Table';
+import { useGet_1_template_Query } from '@/redux/features/6template/_2_template_Api';
 
-import AddUser from '@/app/users-redux/components/AddUser';
-import EditUser from '@/app/users-redux/components/EditUser';
-import ViewUser from '@/app/users-redux/components/ViewUser';
-import DeleteUser from '@/app/users-redux/components/DeleteUser';
-import BulkDeleteUser from '@/app/users-redux/components/BulkDeleteUser';
-import BulkEditUser from '@/app/users-redux/components/BulkEditUser';
+import AddUser from '@/app/6template/components/AddUser';
+import EditUser from '@/app/6template/components/EditUser';
+import ViewUser from '@/app/6template/components/ViewUser';
+import DeleteUser from '@/app/6template/components/DeleteUser';
+import BulkDeleteUser from '@/app/6template/components/BulkDeleteUser';
+import BulkEditUser from '@/app/6template/components/BulkEditUser';
 
 const UserTable: React.FC = () => {
   const { toggleAddModal } = useUserStore();

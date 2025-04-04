@@ -5,16 +5,16 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import { IUser } from '@/app/api/v1/users/userModel';
+import { IUser } from '@/app/api/v1/6template/userModel';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
-import { useGet_1_template_Query } from '@/redux/features/users/usersApi';
-import { useUserStore } from '@/app/users-redux/store/userStore';
-import Pagination from '@/app/users-redux/components/Pagination';
+import { useGet_1_template_Query } from '@/redux/features/6template/_2_template_Api';
+import { useUserStore } from '@/app/6template/store/userStore';
+import Pagination from '@/app/6template/components/Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { pageLimitArr } from '@/app/users-redux/store/userStoreConstants';
+import { pageLimitArr } from '@/app/6template/store/userStoreConstants';
 
 const View_1_template_Table: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -24,7 +24,7 @@ const View_1_template_Table: React.FC = () => {
     useUserStore();
 
   const { data: getResponseData, isLoading, isError, error } = useGet_1_template_Query({ page, limit });
-  const getAll_1_template_Data = useMemo(() => getResponseData?.data?.users || [], [getResponseData]);
+  const getAll_1_template_Data = useMemo(() => getResponseData?.data?._2_template_ || [], [getResponseData]);
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 

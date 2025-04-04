@@ -7,7 +7,7 @@
 */
 
 // If you want to update store then this file help you to update
-import { IUser } from '@/app/api/v1/users/userModel';
+import { IUser } from '@/app/api/v1/6template/userModel';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {
@@ -21,8 +21,8 @@ const initialState: {
   error: '',
   data: [],
 };
-const usersSlice = createSlice({
-  name: 'users',
+const _2_template_Slice = createSlice({
+  name: '_2_template_',
   initialState,
   reducers: {
     pushAllData: (state, action) => {
@@ -40,5 +40,5 @@ const usersSlice = createSlice({
     },
   },
 });
-export const { pushAllData, addOneUser, removeOneUser } = usersSlice.actions;
-export default usersSlice.reducer;
+export const { pushAllData, addOneUser, removeOneUser } = _2_template_Slice.actions;
+export default _2_template_Slice.reducer;

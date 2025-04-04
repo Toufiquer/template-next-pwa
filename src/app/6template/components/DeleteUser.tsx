@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useUserStore } from '@/app/users-redux/store/userStore';
-import { baseIUser } from '@/app/users-redux/store/userStoreConstants';
-import { useDeleteUserMutation } from '@/redux/features/users/usersApi';
-import { IUser } from '@/app/api/v1/users/userModel';
+import { useUserStore } from '@/app/6template/store/userStore';
+import { baseIUser } from '@/app/6template/store/userStoreConstants';
+import { useDeleteUserMutation } from '@/redux/features/6template/_2_template_Api';
+import { IUser } from '@/app/api/v1/6template/userModel';
 
 const DeleteUser: React.FC = () => {
   const { toggleDeleteModal, isDeleteModalOpen, selectedUser, setSelectedUser } = useUserStore();

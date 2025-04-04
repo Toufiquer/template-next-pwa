@@ -11,13 +11,13 @@
 import { toast } from 'react-toastify';
 
 import { apiSlice } from '@/redux/api/apiSlice';
-import { IUser } from '@/app/api/v1/users/userModel';
+import { IUser } from '@/app/api/v1/6template/userModel';
 
-export const usersApi = apiSlice.injectEndpoints({
+export const _2_template_Api = apiSlice.injectEndpoints({
   endpoints: builder => ({
     // endpoints here
     get_1_template_: builder.query({
-      query: ({ page, limit }) => `/api/v1/users?page=${page || 1}&limit=${limit || 2}`,
+      query: ({ page, limit }) => `/api/v1/6template?page=${page || 1}&limit=${limit || 2}`,
       providesTags: [{ type: '_5_template_tags_', id: 'LIST' }], // Add tag for cache invalidation
       async onQueryStarted() {
         try {
@@ -31,11 +31,11 @@ export const usersApi = apiSlice.injectEndpoints({
       },
     }),
     getUserById: builder.query({
-      query: id => `/api/v1/users?id=${id}`,
+      query: id => `/api/v1/6template?id=${id}`,
     }),
     addUser: builder.mutation({
       query: newUser => ({
-        url: '/api/v1/users',
+        url: '/api/v1/6template',
         method: 'POST',
         body: newUser,
       }),
@@ -49,7 +49,7 @@ export const usersApi = apiSlice.injectEndpoints({
           });
 
           // Invalidate cache for get_1_template_ to trigger re-fetch
-          dispatch(usersApi.util.invalidateTags([{ type: '_5_template_tags_' }]));
+          dispatch(_2_template_Api.util.invalidateTags([{ type: '_5_template_tags_' }]));
         } catch (e: unknown) {
           if (e instanceof Error) {
             toast.error(e.message, {
@@ -61,7 +61,7 @@ export const usersApi = apiSlice.injectEndpoints({
     }),
     updateUser: builder.mutation({
       query: ({ id, ...data }) => ({
-        url: `/api/v1/users`,
+        url: `/api/v1/6template`,
         method: 'PUT',
         body: { id: id, ...data },
       }),
@@ -84,7 +84,7 @@ export const usersApi = apiSlice.injectEndpoints({
     }),
     deleteUser: builder.mutation({
       query: ({ id }) => ({
-        url: `/api/v1/users`,
+        url: `/api/v1/6template`,
         method: 'DELETE',
         body: { id },
       }),
@@ -107,7 +107,7 @@ export const usersApi = apiSlice.injectEndpoints({
     }),
     bulkUpdate_1_template_: builder.mutation({
       query: bulkData => ({
-        url: `/api/v1/users?bulk=true`,
+        url: `/api/v1/6template?bulk=true`,
         method: 'PUT',
         body: bulkData,
       }),
@@ -130,7 +130,7 @@ export const usersApi = apiSlice.injectEndpoints({
     }),
     bulkDelete_1_template_: builder.mutation({
       query: bulkData => ({
-        url: `/api/v1/users?bulk=true`,
+        url: `/api/v1/6template?bulk=true`,
         method: 'DELETE',
         body: bulkData,
       }),
@@ -161,4 +161,4 @@ export const {
   useBulkUpdate_1_template_Mutation,
   useBulkDelete_1_template_Mutation,
   useGetUserByIdQuery,
-} = usersApi;
+} = _2_template_Api;

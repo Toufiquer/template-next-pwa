@@ -5,12 +5,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { useAddUserMutation } from '@/redux/features/users/usersApi';
+import { useAddUserMutation } from '@/redux/features/6template/_2_template_Api';
 
-import { useUserStore } from '@/app/users-redux/store/userStore';
+import { useUserStore } from '@/app/6template/store/userStore';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'react-toastify';
-import { defaultUserData, defaultUserRole, IUserRole, userRole } from '@/app/users-redux/store/userStoreConstants';
+import { defaultUserData, defaultUserRole, IUserRole, userRole } from '@/app/6template/store/userStoreConstants';
 
 const InputField: React.FC<{
   id: string;
@@ -29,7 +29,7 @@ const InputField: React.FC<{
 );
 
 const AddUser: React.FC = () => {
-  const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, set_1_template_ } = useUserStore();
+  const { toggleAddModal, isAddModalOpen, _2_template_, newUser, setNewUser, set_1_template_ } = useUserStore();
   const [addUser, { isLoading, isError, error }] = useAddUserMutation();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +64,7 @@ const AddUser: React.FC = () => {
 
     try {
       const addedUser = await addUser(user).unwrap(); // Get the returned data
-      set_1_template_([...users, addedUser]); // Use the returned data instead of the local `user` object
+      set_1_template_([..._2_template_, addedUser]); // Use the returned data instead of the local `user` object
       toggleAddModal(false);
       setNewUser(defaultUserData);
     } catch (error) {

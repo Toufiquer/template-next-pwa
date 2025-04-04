@@ -54,9 +54,9 @@ export async function get_1_template_(req: Request) {
     const limit = parseInt(url.searchParams.get('limit') || '10', 10);
     const skip = (page - 1) * limit;
 
-    const users = await User.find({}).sort({ updatedAt: -1, createdAt: -1 }).skip(skip).limit(limit);
+    const _2_template_ = await User.find({}).sort({ updatedAt: -1, createdAt: -1 }).skip(skip).limit(limit);
     const total_1_template_ = await User.countDocuments();
-    return formatResponse({ users: users || [], total: total_1_template_, page, limit }, '_1_template_ fetched successfully', 200);
+    return formatResponse({ _2_template_: _2_template_ || [], total: total_1_template_, page, limit }, '_1_template_ fetched successfully', 200);
   });
 }
 
