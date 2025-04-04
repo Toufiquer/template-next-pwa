@@ -6,9 +6,7 @@ export interface IResponse {
   message: string;
   status: number;
 }
-function formatResponse(data: unknown, message: string, status: number) {
-  return NextResponse.json({ data, message, status }, { status });
-}
+const formatResponse = (data: unknown, message: string, status: number) => NextResponse.json({ data, message, status }, { status });
 // GET all users
 export async function GET(req: Request) {
   const id = new URL(req.url).searchParams.get('id');

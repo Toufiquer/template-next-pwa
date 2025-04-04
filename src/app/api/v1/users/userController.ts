@@ -14,9 +14,7 @@ async function withDB(handler: () => Promise<IResponse>): Promise<IResponse> {
 }
 
 // Helper to format responses
-function formatResponse(data: unknown, message: string, status: number) {
-  return { data, message, status };
-}
+const formatResponse = (data: unknown, message: string, status: number) => ({ data, message, status });
 
 // CREATE user
 export async function createUser(req: Request): Promise<IResponse> {
@@ -63,6 +61,7 @@ export async function getUsers(req: Request) {
 }
 
 // UPDATE single user by ID
+
 export async function updateUser(req: Request) {
   return withDB(async () => {
     try {
@@ -104,7 +103,7 @@ export async function deleteUser(req: Request) {
     const { id } = await req.json();
     const deletedUser = await User.findByIdAndDelete(id);
     if (!deletedUser) return formatResponse(deletedUser, 'User not found', 404);
-    return formatResponse(deletedUser, 'User deleted successfully', 200);
+    return formatResponse({ deletedCount: 1 }, 'User deleted successfully', 200);
   });
 }
 
