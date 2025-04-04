@@ -11,6 +11,10 @@
 
 !  Update api
 1. replace 4 word
+    Users => _1_Users_
+    users => _2_users_
+    User  => _3_User_
+    user  => _4_user_
 
 ! install redux and reactToast
 1. copy redux folder

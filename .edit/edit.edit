@@ -1,0 +1,31 @@
+1. Users = _1_template_
+2. users = _2_template_
+3. User  = _3_template_
+4. user  = _4_template_
+
+folder path 
+  1. api/v1/...
+  2. app/...
+  3. app/redux/features/...
+
+
+  1. api/v1/users/route
+  2. api/v1/users/userController
+  3. api/v1/users/useModel
+
+  1. app/redux/features/users/usersApi
+  2. app/redux/features/users/usersSlice
+
+  1. app/users-redux/page
+  2. app/users-redux/components/AddUser
+  3. app/users-redux/components/BulkDeleteUser
+  4. app/users-redux/components/BulkEditUser
+  5. app/users-redux/components/DeleteUser
+  6. app/users-redux/components/EditUser
+  7. app/users-redux/components/Pagination
+  8. app/users-redux/components/ViewUser
+  9. app/users-redux/components/ViewUsersTable
+
+  1. app/users-redux/store/userStore
+  2. app/users-redux/store/StoreConstants
+  3. app/users-redux/store/userStoreType
