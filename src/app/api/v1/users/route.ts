@@ -3,20 +3,26 @@ import { getUsers, createUser, updateUser, deleteUser, getUserById, bulkUpdateUs
 // GET all users
 export async function GET(req: Request) {
   const id = new URL(req.url).searchParams.get('id');
-  return id ? getUserById(req) : getUsers(req);
+  const result = id ? await getUserById(req) : await getUsers(req);
+  return result;
 }
 
 // CREATE user
 export async function POST(req: Request) {
-  return createUser(req);
+  const result = await createUser(req);
+  return result;
 }
 
 // UPDATE user
 export async function PUT(req: Request) {
-  return new URL(req.url).searchParams.get('bulk') === 'true' ? bulkUpdateUsers(req) : updateUser(req);
+  const isBulk = new URL(req.url).searchParams.get('bulk') === 'true';
+  const result = isBulk ? await bulkUpdateUsers(req) : await updateUser(req);
+  return result;
 }
 
 // DELETE user
 export async function DELETE(req: Request) {
-  return new URL(req.url).searchParams.get('bulk') === 'true' ? bulkDeleteUsers(req) : deleteUser(req);
+  const isBulk = new URL(req.url).searchParams.get('bulk') === 'true';
+  const result = isBulk ? await bulkDeleteUsers(req) : await deleteUser(req);
+  return result;
 }

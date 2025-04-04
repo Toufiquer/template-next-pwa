@@ -10,6 +10,22 @@ import { useAddUserMutation } from '@/redux/features/users/usersApi';
 import { useUserStore } from '../store/userStore';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
+const InputField: React.FC<{
+  id: string;
+  name: string;
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}> = ({ id, name, label, type = 'text', value, onChange }) => (
+  <div className="grid grid-cols-4 items-center gap-4">
+    <Label htmlFor={id} className="text-right">
+      {label}
+    </Label>
+    <Input id={id} name={name} type={type} value={value} onChange={onChange} className="col-span-3" />
+  </div>
+);
+
 const AddUser: React.FC = () => {
   const { toggleAddModal, isAddModalOpen, users, newUser, setNewUser, setUsers } = useUserStore();
   const [addUser, { isLoading }] = useAddUserMutation();
@@ -53,37 +69,17 @@ const AddUser: React.FC = () => {
 
         <ScrollArea className="h-[400px] w-full rounded-md border p-4">
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" name="name" value={(newUser.name as string) || ''} onChange={handleInputChange} className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right">
-                Email
-              </Label>
-              <Input id="email" name="email" type="email" value={(newUser.email as string) || ''} onChange={handleInputChange} className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="passCode" className="text-right">
-                Pass Code
-              </Label>
-              <Input
-                id="passCode"
-                name="passCode"
-                type="password"
-                value={(newUser.passCode as string) || ''}
-                onChange={handleInputChange}
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="alias" className="text-right">
-                Alias
-              </Label>
-              <Input id="alias" name="alias" value={(newUser.alias as string) || ''} onChange={handleInputChange} className="col-span-3" />
-            </div>
+            <InputField id="name" name="name" label="Name" value={(newUser.name as string) || ''} onChange={handleInputChange} />
+            <InputField id="email" name="email" label="Email" type="email" value={(newUser.email as string) || ''} onChange={handleInputChange} />
+            <InputField
+              id="passCode"
+              name="passCode"
+              label="Pass Code"
+              type="password"
+              value={(newUser.passCode as string) || ''}
+              onChange={handleInputChange}
+            />
+            <InputField id="alias" name="alias" label="Alias" value={(newUser.alias as string) || ''} onChange={handleInputChange} />
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="role" className="text-right">
                 Role

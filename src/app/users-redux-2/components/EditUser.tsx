@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useUserStore } from '../store/userStore';
 import { baseIUser } from '../store/userStoreConstants';
 import { useUpdateUserMutation } from '@/redux/features/users/usersApi';
+import { IUser } from '@/app/api/v1/users/userModel';
 
 export const userRole = ['user', 'admin', 'moderator'];
 const EditUser: React.FC = () => {
@@ -109,7 +110,7 @@ const EditUser: React.FC = () => {
             variant="outline"
             onClick={() => {
               toggleEditModal(false);
-              setSelectedUser(baseIUser);
+              setSelectedUser({ ...baseIUser } as IUser);
             }}
           >
             Cancel

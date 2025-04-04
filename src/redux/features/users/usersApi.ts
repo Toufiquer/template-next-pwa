@@ -19,7 +19,7 @@ export const usersApi = apiSlice.injectEndpoints({
     getUsers: builder.query({
       query: ({ page, limit }) => `/api/v1/users?page=${page || 1}&limit=${limit || 2}`,
       providesTags: [{ type: 'Users', id: 'LIST' }], // Add tag for cache invalidation
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const query = await queryFulfilled;
           console.log('query : ', query);

@@ -11,7 +11,6 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsPerPage, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  // Calculate range of pages to show
   const getPageNumbers = () => {
     const maxPagesToShow = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
@@ -24,6 +23,18 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsP
 
     return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
   };
+
+  const renderPageButton = (page: number, isCurrent: boolean) => (
+    <button
+      key={page}
+      onClick={() => onPageChange(page)}
+      className={`flex items-center justify-center h-10 w-10 rounded-md transition-colors ${
+        isCurrent ? 'bg-blue-400 cursor-text text-white' : 'cursor-pointer text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+      }`}
+    >
+      {page}
+    </button>
+  );
 
   if (totalPages <= 1) return null;
 
@@ -45,43 +56,19 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsP
         {/* First page */}
         {getPageNumbers()[0] > 1 && (
           <>
-            <button
-              onClick={() => onPageChange(1)}
-              className={`flex items-center justify-center h-10 w-10 rounded-md transition-colors ${
-                currentPage === 1 ? 'bg-blue-400 cursor-text text-white' : 'cursor-pointer text-gray-700 hover:bg-blue-50 hover:text-blue-600'
-              }`}
-            >
-              1
-            </button>
+            {renderPageButton(1, currentPage === 1)}
             {getPageNumbers()[0] > 2 && <span className="h-10 flex items-center justify-center text-gray-500">...</span>}
           </>
         )}
 
         {/* Page numbers */}
-        {getPageNumbers().map(page => (
-          <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={`flex items-center justify-center h-10 w-10 rounded-md transition-colors ${
-              currentPage === page ? 'bg-blue-400 cursor-text text-white' : 'cursor-pointer text-gray-700 hover:bg-blue-50 hover:text-blue-600'
-            }`}
-          >
-            {page}
-          </button>
-        ))}
+        {getPageNumbers().map(page => renderPageButton(page, currentPage === page))}
 
         {/* Last page */}
         {getPageNumbers()[getPageNumbers().length - 1] < totalPages && (
           <>
             {getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1 && <span className="h-10 flex items-center justify-center text-gray-500">...</span>}
-            <button
-              onClick={() => onPageChange(totalPages)}
-              className={`flex cursor-pointer items-center justify-center h-10 w-10 rounded-md transition-colors ${
-                currentPage === totalPages ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
-              }`}
-            >
-              {totalPages}
-            </button>
+            {renderPageButton(totalPages, currentPage === totalPages)}
           </>
         )}
 

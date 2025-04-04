@@ -8,6 +8,7 @@ import { useUserStore } from '../store/userStore';
 import { baseIUser } from '../store/userStoreConstants';
 import { useGetUserByIdQuery } from '@/redux/features/users/usersApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { IUser } from '@/app/api/v1/users/userModel';
 
 const ViewUser: React.FC = () => {
   const { isViewModalOpen, selectedUser, toggleViewModal, setSelectedUser } = useUserStore();
@@ -27,6 +28,13 @@ const ViewUser: React.FC = () => {
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
+  const DetailRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
+    <div className="grid grid-cols-3 gap-2">
+      <div className="font-semibold">{label}:</div>
+      <div className="col-span-2">{value || 'N/A'}</div>
+    </div>
+  );
+
   return (
     <Dialog open={isViewModalOpen} onOpenChange={toggleViewModal}>
       <DialogContent>
@@ -36,25 +44,13 @@ const ViewUser: React.FC = () => {
         {selectedUser && (
           <ScrollArea className="h-[400px] w-full rounded-md border p-4">
             <div className="grid gap-2">
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Name:</div>
-                <div className="col-span-2">{(selectedUser.name as string) || ''}</div>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Email:</div>
-                <div className="col-span-2">{(selectedUser.email as string) || ''}</div>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Pass Code:</div>
-                <div className="col-span-2">{(selectedUser.passCode as string) || ''}</div>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Alias:</div>
-                <div className="col-span-2">{(selectedUser.alias as string) || ''}</div>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Role:</div>
-                <div className="col-span-2">
+              <DetailRow label="Name" value={selectedUser.name as string} />
+              <DetailRow label="Email" value={selectedUser.email as string} />
+              <DetailRow label="Pass Code" value={selectedUser.passCode as string} />
+              <DetailRow label="Alias" value={selectedUser.alias as string} />
+              <DetailRow
+                label="Role"
+                value={
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-medium ${
                       selectedUser.role === 'admin'
@@ -64,18 +60,12 @@ const ViewUser: React.FC = () => {
                           : 'bg-green-100 text-green-700'
                     }`}
                   >
-                    {(selectedUser.role as string) || ''}
+                    {selectedUser.role as string}
                   </span>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Created At:</div>
-                <div className="col-span-2">{formatDate(selectedUser.createdAt)}</div>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="font-semibold">Updated At:</div>
-                <div className="col-span-2">{formatDate(selectedUser.updatedAt)}</div>
-              </div>
+                }
+              />
+              <DetailRow label="Created At" value={formatDate(selectedUser.createdAt)} />
+              <DetailRow label="Updated At" value={formatDate(selectedUser.updatedAt)} />
             </div>
           </ScrollArea>
         )}
@@ -84,7 +74,7 @@ const ViewUser: React.FC = () => {
             className="cursor-pointer border-1 border-slate-400 hover:border-slate-500"
             onClick={() => {
               toggleViewModal(false);
-              setSelectedUser(baseIUser);
+              setSelectedUser({ ...baseIUser } as IUser);
             }}
           >
             Close

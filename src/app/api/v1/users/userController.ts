@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import User from './userModel';
-import { connectDB } from '@/lib/mongoose';
+import connectDB from '@/lib/mongoose';
 
 // Helper to handle database connection and errors
-async function withDB(handler: () => Promise<any>) {
+async function withDB(handler: () => Promise<unknown>) {
   try {
     await connectDB();
     return await handler();
@@ -14,7 +14,7 @@ async function withDB(handler: () => Promise<any>) {
 }
 
 // Helper to format responses
-function formatResponse(data: any, message: string, status: number) {
+function formatResponse(data: unknown, message: string, status: number) {
   return NextResponse.json({ data, message, status }, { status });
 }
 
@@ -23,6 +23,7 @@ export async function createUser(req: Request) {
   return withDB(async () => {
     const userData = await req.json();
     const newUser = await User.create({ ...userData });
+    console.log(newUser, ' => Line No: 26');
     return formatResponse(newUser, 'User created successfully', 201);
   });
 }
@@ -50,7 +51,9 @@ export async function getUsers(req: Request) {
 
     const users = await User.find({}).sort({ updatedAt: -1, createdAt: -1 }).skip(skip).limit(limit);
     const totalUsers = await User.countDocuments();
-
+    console.log('getUsers hit', totalUsers);
+    console.log('getUsers hit', users);
+    console.log(' return ; ', formatResponse({ users: users || [], total: totalUsers, page, limit }, 'Users fetched successfully', 200));
     return formatResponse({ users: users || [], total: totalUsers, page, limit }, 'Users fetched successfully', 200);
   });
 }
@@ -88,9 +91,9 @@ export async function deleteUser(req: Request) {
   return withDB(async () => {
     const { id } = await req.json();
     const deletedUser = await User.findByIdAndDelete(id);
-
-    if (!deletedUser) return formatResponse(null, 'User not found', 404);
-    return formatResponse(null, 'User deleted successfully', 200);
+    console.log('deletedUser', deletedUser);
+    if (!deletedUser) return formatResponse(deletedUser, 'User not found', 404);
+    return formatResponse(deletedUser, 'User deleted successfully', 200);
   });
 }
 

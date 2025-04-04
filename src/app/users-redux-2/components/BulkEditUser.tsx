@@ -1,8 +1,6 @@
 import React from 'react';
-
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-
 import { useUserStore } from '../store/userStore';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -16,11 +14,9 @@ const BulkEditUser: React.FC = () => {
   const [bulkUpdateUsers, { isLoading }] = useBulkUpdateUsersMutation();
 
   const handleBulkEditUser = async () => {
-    if (bulkData.length === 0) {
-      return;
-    }
+    if (!bulkData.length) return;
     try {
-      const newBulkData = bulkData.map(user => ({ id: user._id, updateData: user }));
+      const newBulkData = bulkData.map(({ _id, ...rest }) => ({ id: _id, updateData: rest }));
       await bulkUpdateUsers(newBulkData).unwrap();
       toggleBulkEditModal(false);
       setBulkData([]);
@@ -28,16 +24,11 @@ const BulkEditUser: React.FC = () => {
       console.error('Failed to edit users:', error);
     }
   };
-  const handleRoleChange = (user: IUser, role: string) => {
-    const updatedBulkData = bulkData.map(curr => {
-      if (curr._id === user._id) {
-        return { ...curr, role: role };
-      }
-      return curr;
-    });
-    setBulkData(updatedBulkData as IUser[]);
-    console.log('Updated bulkData:', bulkData);
+
+  const handleRoleChange = (userId: string, role: string) => {
+    setBulkData(bulkData.map(user => (user._id === userId ? { ...user, role } : user)) as IUser[]);
   };
+
   return (
     <Dialog open={isBulkEditModalOpen} onOpenChange={toggleBulkEditModal}>
       <DialogContent>
@@ -45,31 +36,27 @@ const BulkEditUser: React.FC = () => {
           <DialogTitle>Confirm Update</DialogTitle>
         </DialogHeader>
         {bulkData.length > 0 && (
-          <div className="pt-4">
-            <p>
-              You are about to update <span className="font-semibold">({bulkData.length})</span> users
-            </p>
-          </div>
+          <p className="pt-4">
+            You are about to update <span className="font-semibold">({bulkData.length})</span> users
+          </p>
         )}
         <ScrollArea className="h-[400px] w-full rounded-md border p-4">
-          <div className="w-full flex flex-col">
-            {bulkData.map((curr, idx) => (
-              <div key={(curr._id as string) || idx} className="w-full flex items-center justify-between gap-2 mt-1">
-                <div className="">
-                  {idx + 1}. {(curr.name as string) || ''}
-                </div>
-                <div className="flex justify-between items-center gap-4 min-w-[180px]">
-                  <Label htmlFor="edit-role" className="text-right">
-                    Role
-                  </Label>
-                  <Select onValueChange={e => handleRoleChange(curr, e)} defaultValue={(curr.role as string) || ''}>
-                    <SelectTrigger className="col-span-3 bg-slate-50">
+          <div className="flex flex-col gap-2">
+            {bulkData.map((user, idx) => (
+              <div key={(user._id as string) || idx} className="flex items-center justify-between">
+                <span>
+                  {idx + 1}. {(user.name as string) || ''}
+                </span>
+                <div className="flex items-center gap-4 min-w-[180px]">
+                  <Label htmlFor="edit-role">Role</Label>
+                  <Select onValueChange={role => handleRoleChange(user._id as string, role)} defaultValue={(user.role as string) || ''}>
+                    <SelectTrigger className="bg-slate-50">
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
-                    <SelectContent className=" bg-slate-50">
-                      {userRole?.map((i, index) => (
-                        <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
-                          {i}
+                    <SelectContent className="bg-slate-50">
+                      {userRole?.map((role, index) => (
+                        <SelectItem key={role + index} value={role}>
+                          {role}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -80,15 +67,10 @@ const BulkEditUser: React.FC = () => {
           </div>
         </ScrollArea>
         <DialogFooter>
-          <Button className="cursor-pointer border-1 border-slate-400 hover:border-slate-500" variant="outline" onClick={() => toggleBulkEditModal(false)}>
+          <Button variant="outline" onClick={() => toggleBulkEditModal(false)} className="border-slate-400 hover:border-slate-500">
             Cancel
           </Button>
-          <Button
-            disabled={isLoading}
-            className="cursor-pointer border-1 border-green-400 hover:border-green-500 text-green-500"
-            variant="outline"
-            onClick={handleBulkEditUser}
-          >
+          <Button disabled={isLoading} variant="outline" onClick={handleBulkEditUser} className="border-green-400 hover:border-green-500 text-green-500">
             Update Selected
           </Button>
         </DialogFooter>
