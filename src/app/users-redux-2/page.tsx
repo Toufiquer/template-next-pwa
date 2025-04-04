@@ -13,6 +13,8 @@ import ViewUser from './components/ViewUser';
 import DeleteUser from './components/DeleteUser';
 import ViewUsersTable from './components/ViewUsersTable';
 import { useGetUsersQuery } from '@/redux/features/users/usersApi';
+import BulkDeleteUser from './components/BulkDeleteUser';
+import BulkEditUser from './components/BulkEditUser';
 
 const UserTable: React.FC = () => {
   const { toggleAddModal } = useUserStore();
@@ -37,6 +39,8 @@ const UserTable: React.FC = () => {
       <ViewUsersTable />
       <AddUser />
       <ViewUser />
+      <BulkDeleteUser />
+      <BulkEditUser />
       <EditUser />
       <DeleteUser />
     </div>

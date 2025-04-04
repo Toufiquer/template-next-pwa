@@ -19,12 +19,18 @@ const ViewUsersTable: React.FC = () => {
   const pageLimitArr = [2, 10, 50, 100, 200];
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(pageLimitArr[0]);
-  const { setSelectedUser, toggleViewModal, toggleEditModal, toggleDeleteModal, bulkData, setBulkData } = useUserStore();
+  const { setSelectedUser, toggleBulkEditModal, toggleViewModal, toggleEditModal, toggleDeleteModal, bulkData, setBulkData, toggleBulkDeleteModal } =
+    useUserStore();
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
   const { data: getResponseData, isLoading, isError, error } = useGetUsersQuery({ page, limit });
-
+  const handleBulkDeleteModalOpen = () => {
+    toggleBulkDeleteModal(true);
+  };
+  const handleBulkEditModalOpen = () => {
+    toggleBulkEditModal(true);
+  };
   const getAllUsersData = getResponseData?.data || [];
   let renderUI = <div>first Load</div>;
   if (isLoading && !isError) {
@@ -60,19 +66,44 @@ const ViewUsersTable: React.FC = () => {
   if (getAllUsersData.length > 0) {
     renderUI = (
       <div className="w-full flex flex-col">
+        <div className="w-full my-4">
+          <div className="w-full flex items-center justify-between gap-4 pb-2 border-b-1 border-slat-400">
+            <div className="px-2 gap-2 flex items-center justify-start w-full">
+              Total Selected <span className="text-xs text-slate-500">({bulkData.length})</span>
+            </div>
+            <div className="px-2 flex items-center justify-end w-full">
+              <div className="w-full flex items-center justify-end gap-4">
+                <Button variant="outline" className="cursor-pointer" size="sm" onClick={handleBulkEditModalOpen} disabled={bulkData.length === 0}>
+                  <PencilIcon className="w-4 h-4 mr-1" />
+                  Edit
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleBulkDeleteModalOpen}
+                  className="text-rose-400 hover:text-rose-500 cursor-pointer"
+                  disabled={bulkData.length === 0}
+                >
+                  <TrashIcon className="w-4 h-4 mr-1" />
+                  Delete
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-slate-600 text-slate-50 rounded overflow-hidden border-1 border-slate-600">
             <TableRow>
-              <TableHead className="font-bold text-slate-900">
+              <TableHead className="font-bold text-slate-50">
                 <Checkbox onCheckedChange={checked => handleSelectAll(!!checked)} checked={bulkData.length === getAllUsersData.length} />
               </TableHead>
-              <TableHead className="font-bold text-slate-900">Name</TableHead>
-              <TableHead className="hidden md:table-cell font-bold text-slate-900">Email</TableHead>
-              <TableHead className="hidden lg:table-cell font-bold text-slate-900">Pass Code</TableHead>
-              <TableHead className="hidden md:table-cell font-bold text-slate-900">Alias</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead className="hidden lg:table-cell font-bold text-slate-900">Created At</TableHead>
-              <TableHead className="font-bold text-slate-900 justify-end flex">Actions</TableHead>
+              <TableHead className="font-bold text-slate-50">Name</TableHead>
+              <TableHead className="hidden md:table-cell font-bold text-slate-50">Email</TableHead>
+              <TableHead className="hidden lg:table-cell font-bold text-slate-50">Pass Code</TableHead>
+              <TableHead className="hidden md:table-cell font-bold text-slate-50">Alias</TableHead>
+              <TableHead className="hidden md:table-cell font-bold text-slate-50">Role</TableHead>
+              <TableHead className="hidden lg:table-cell font-bold text-slate-50">Created At</TableHead>
+              <TableHead className="hidden lg:table-cell font-bold text-slate-50 text-end pr-4 ">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="border-1 border-slate-600">
@@ -145,7 +176,7 @@ const ViewUsersTable: React.FC = () => {
         </Table>
         <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData.total} />
         <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">
-          <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin">
+          <Label htmlFor="set-limit" className="text-right text-slate-500 font-thin pl-2">
             User per page
           </Label>
           <Select

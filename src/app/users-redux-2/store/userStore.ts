@@ -10,7 +10,8 @@ interface UserStore {
   isEditModalOpen: boolean;
   isDeleteModalOpen: boolean;
   setNewUser: React.Dispatch<React.SetStateAction<Partial<IUser>>>;
-  isOpenBulkModal: boolean;
+  isBulkEditModalOpen: boolean;
+  isBulkDeleteModalOpen: boolean;
   bulkData: IUser[];
   setUsers: (users: IUser[]) => void;
   setSelectedUser: (user: IUser | null) => void;
@@ -18,7 +19,8 @@ interface UserStore {
   toggleViewModal: (isOpen: boolean) => void;
   toggleEditModal: (isOpen: boolean) => void;
   toggleDeleteModal: (isOpen: boolean) => void;
-  toggleOpenBulkModal: (user: boolean) => void;
+  toggleBulkEditModal: (user: boolean) => void;
+  toggleBulkDeleteModal: (user: boolean) => void;
   setBulkData: (bulkData: IUser[]) => void;
 }
 
@@ -26,7 +28,8 @@ export const useUserStore = create<UserStore>(set => ({
   users: [],
   selectedUser: null,
   newUser: { name: '', email: '', passCode: '', alias: '', role: 'user' },
-  isOpenBulkModal: false,
+  isBulkEditModalOpen: false,
+  isBulkDeleteModalOpen: false,
   isAddModalOpen: false,
   isViewModalOpen: false,
   isEditModalOpen: false,
@@ -43,5 +46,6 @@ export const useUserStore = create<UserStore>(set => ({
   toggleViewModal: data => set({ isViewModalOpen: data }),
   toggleEditModal: data => set({ isEditModalOpen: data }),
   toggleDeleteModal: data => set({ isDeleteModalOpen: data }),
-  toggleOpenBulkModal: data => set({ isOpenBulkModal: data }),
+  toggleBulkEditModal: data => set({ isBulkEditModalOpen: data }),
+  toggleBulkDeleteModal: data => set({ isBulkDeleteModalOpen: data }),
 }));
