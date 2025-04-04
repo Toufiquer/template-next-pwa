@@ -13,12 +13,12 @@ export interface _3_template_Store {
   isBulkDeleteModalOpen: boolean;
   bulkData: I_3_template_[];
   set_1_template_: (_2_template_: I_3_template_[]) => void;
-  setSelected_3_template_: (user: I_3_template_ | null) => void;
+  setSelected_3_template_: (_4_template_: I_3_template_ | null) => void;
   toggleAddModal: (isOpen: boolean) => void;
   toggleViewModal: (isOpen: boolean) => void;
   toggleEditModal: (isOpen: boolean) => void;
   toggleDeleteModal: (isOpen: boolean) => void;
-  toggleBulkEditModal: (user: boolean) => void;
-  toggleBulkDeleteModal: (user: boolean) => void;
+  toggleBulkEditModal: (_4_template_: boolean) => void;
+  toggleBulkDeleteModal: (_4_template_: boolean) => void;
   setBulkData: (bulkData: I_3_template_[]) => void;
 }

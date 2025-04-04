@@ -20,8 +20,8 @@ const formatResponse = (data: unknown, message: string, status: number) => ({ da
 export async function create_3_template_(req: Request): Promise<IResponse> {
   return withDB(async () => {
     try {
-      const userData = await req.json();
-      const new_3_template_ = await _3_template_.create({ ...userData });
+      const _4_template_Data = await req.json();
+      const new_3_template_ = await _3_template_.create({ ..._4_template_Data });
       return formatResponse(new_3_template_, '_3_template_ created successfully', 201);
     } catch (error: unknown) {
       if ((error as { code?: number }).code === 11000) {
@@ -39,10 +39,10 @@ export async function get_3_template_ById(req: Request) {
     const id = new URL(req.url).searchParams.get('id');
     if (!id) return formatResponse(null, '_3_template_ ID is required', 400);
 
-    const user = await _3_template_.findById(id);
-    if (!user) return formatResponse(null, '_3_template_ not found', 404);
+    const _4_template_ = await _3_template_.findById(id);
+    if (!_4_template_) return formatResponse(null, '_3_template_ not found', 404);
 
-    return formatResponse(user, '_3_template_ fetched successfully', 200);
+    return formatResponse(_4_template_, '_3_template_ fetched successfully', 200);
   });
 }
 
@@ -116,8 +116,8 @@ export async function bulkDelete_1_template_(req: Request) {
 
     for (const id of ids) {
       try {
-        const user = await _3_template_.findById(id);
-        if (user) {
+        const _4_template_ = await _3_template_.findById(id);
+        if (_4_template_) {
           const deleted_3_template_ = await _3_template_.findByIdAndDelete(id);
           if (deleted_3_template_) deletedIds.push(id);
         } else {

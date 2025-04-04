@@ -16,10 +16,10 @@ export const use_3_template_Store = create<_3_template_Store>(set => ({
   bulkData: [],
   setBulkData: (bulkData: I_3_template_[]) => set({ bulkData }),
   set_1_template_: (_2_template_: I_3_template_[]) => set({ _2_template_ }),
-  setSelected_3_template_: user => set({ selected_3_template_: user }),
-  setNew_3_template_: user =>
+  setSelected_3_template_: _4_template_ => set({ selected_3_template_: _4_template_ }),
+  setNew_3_template_: _4_template_ =>
     set(state => ({
-      new_3_template_: typeof user === 'function' ? user(state.new_3_template_) : user,
+      new_3_template_: typeof _4_template_ === 'function' ? _4_template_(state.new_3_template_) : _4_template_,
     })),
   toggleAddModal: data => set({ isAddModalOpen: data }),
   toggleViewModal: data => set({ isViewModalOpen: data }),

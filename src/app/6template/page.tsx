@@ -8,18 +8,18 @@ import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import View_1_template_Table from '@/app/6template/components/ViewFilename8Table';
 import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
 
-import AddUser from '@/app/6template/components/AddFilename8';
-import EditUser from '@/app/6template/components/EditFilename8';
-import ViewUser from '@/app/6template/components/ViewFilename8';
-import DeleteUser from '@/app/6template/components/DeleteFilename8';
-import BulkDeleteUser from '@/app/6template/components/BulkDeleteFilename8';
-import BulkEditUser from '@/app/6template/components/BulkEditFilename8';
+import AddFilename8 from '@/app/6template/components/AddFilename8';
+import EditFilename8 from '@/app/6template/components/EditFilename8';
+import ViewFilename8 from '@/app/6template/components/ViewFilename8';
+import DeleteFilename8 from '@/app/6template/components/DeleteFilename8';
+import BulkDeleteFilename8 from '@/app/6template/components/BulkDeleteFilename8';
+import BulkEditFilename8 from '@/app/6template/components/BulkEditFilename8';
 
 const Filename8Table: React.FC = () => {
   const { toggleAddModal } = use_3_template_Store();
   const { data: getResponseData, isSuccess } = useGet_1_template_Query({ page: 1, limit: 1 });
 
-  const modals = [AddUser, ViewUser, BulkDeleteUser, BulkEditUser, EditUser, DeleteUser];
+  const modals = [AddFilename8, ViewFilename8, BulkDeleteFilename8, BulkEditFilename8, EditFilename8, DeleteFilename8];
 
   return (
     <div className="container mx-auto p-4">

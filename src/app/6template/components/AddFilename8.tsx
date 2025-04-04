@@ -10,7 +10,7 @@ import { useAdd_3_template_Mutation } from '@/redux/features/6template/7filename
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'react-toastify';
-import { default_3_template_Data, default_3_template_Role, I_3_template_Role, userRole } from '@/app/6template/store/filename7StoreConstants';
+import { default_3_template_Data, default_3_template_Role, I_3_template_Role, _4_template_Role } from '@/app/6template/store/filename7StoreConstants';
 
 const InputField: React.FC<{
   id: string;
@@ -52,7 +52,7 @@ const Add_3_template_: React.FC = () => {
   };
 
   const handleAdd_3_template_ = async () => {
-    const user = {
+    const _4_template_ = {
       name: new_3_template_.name || '',
       email: new_3_template_.email || '',
       passCode: new_3_template_.passCode || '',
@@ -63,12 +63,12 @@ const Add_3_template_: React.FC = () => {
     };
 
     try {
-      const added_3_template_ = await add_3_template_(user).unwrap(); // Get the returned data
-      set_1_template_([..._2_template_, added_3_template_]); // Use the returned data instead of the local `user` object
+      const added_3_template_ = await add_3_template_(_4_template_).unwrap(); // Get the returned data
+      set_1_template_([..._2_template_, added_3_template_]); // Use the returned data instead of the local `_4_template_` object
       toggleAddModal(false);
       setNew_3_template_(default_3_template_Data);
     } catch (error) {
-      console.error('Failed to add user:', error);
+      console.error('Failed to add _4_template_:', error);
     }
   };
 
@@ -101,7 +101,7 @@ const Add_3_template_: React.FC = () => {
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
-                  {userRole?.map((i, index) => (
+                  {_4_template_Role?.map((i, index) => (
                     <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
                       {i}
                     </SelectItem>

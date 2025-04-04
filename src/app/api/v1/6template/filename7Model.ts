@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-const userSchema = new Schema(
+const _4_template_Schema = new Schema(
   {
     name: { type: String, required: true },
     email: {
@@ -13,14 +13,14 @@ const userSchema = new Schema(
     alias: { type: String, required: true },
     role: {
       type: String,
-      enum: ['user', 'admin', 'moderator'],
-      default: 'user',
+      enum: ['_4_template_', 'admin', 'moderator'],
+      default: '_4_template_',
     },
   },
   { timestamps: true },
 );
 
-export default mongoose.models._3_template_ || mongoose.model('_3_template_', userSchema);
+export default mongoose.models._3_template_ || mongoose.model('_3_template_', _4_template_Schema);
 
 export interface I_3_template_ extends Document, Pick<mongoose.SchemaDefinition, 'name' | 'email' | 'passCode' | 'alias' | 'role'> {
   createdAt?: Date;

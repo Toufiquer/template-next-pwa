@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { userRole } from '@/app/6template/store/filename7StoreConstants';
+import { _4_template_Role } from '@/app/6template/store/filename7StoreConstants';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 import { useBulkUpdate_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -25,8 +25,8 @@ const BulkEdit_3_template_: React.FC = () => {
     }
   };
 
-  const handleRoleChange = (userId: string, role: string) => {
-    setBulkData(bulkData.map(user => (user._id === userId ? { ...user, role } : user)) as I_3_template_[]);
+  const handleRoleChange = (_4_template_Id: string, role: string) => {
+    setBulkData(bulkData.map(_4_template_ => (_4_template_._id === _4_template_Id ? { ..._4_template_, role } : _4_template_)) as I_3_template_[]);
   };
 
   return (
@@ -42,19 +42,19 @@ const BulkEdit_3_template_: React.FC = () => {
         )}
         <ScrollArea className="h-[400px] w-full rounded-md border p-4">
           <div className="flex flex-col gap-2">
-            {bulkData.map((user, idx) => (
-              <div key={(user._id as string) || idx} className="flex items-center justify-between">
+            {bulkData.map((_4_template_, idx) => (
+              <div key={(_4_template_._id as string) || idx} className="flex items-center justify-between">
                 <span>
-                  {idx + 1}. {(user.name as string) || ''}
+                  {idx + 1}. {(_4_template_.name as string) || ''}
                 </span>
                 <div className="flex items-center gap-4 min-w-[180px]">
                   <Label htmlFor="edit-role">Role</Label>
-                  <Select onValueChange={role => handleRoleChange(user._id as string, role)} defaultValue={(user.role as string) || ''}>
+                  <Select onValueChange={role => handleRoleChange(_4_template_._id as string, role)} defaultValue={(_4_template_.role as string) || ''}>
                     <SelectTrigger className="bg-slate-50">
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-50">
-                      {userRole?.map((role, index) => (
+                      {_4_template_Role?.map((role, index) => (
                         <SelectItem key={role + index} value={role} className="cursor-pointer hover:bg-slate-200">
                           {role}
                         </SelectItem>

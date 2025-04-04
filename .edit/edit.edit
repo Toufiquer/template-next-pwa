@@ -15,25 +15,25 @@ folder path
   4. app/redux/api/ [edit tags]
 
 
-567123  1. api/v1/users/route
-567123  2. api/v1/users/userController
-567123  3. api/v1/users/useModel
+56781234  1. api/v1/users/route
+56781234  2. api/v1/users/userController
+56781234  3. api/v1/users/useModel
 
-567123  1. app/redux/api/apiSlice
-567123  2. app/redux/app/store
-567123  3. app/redux/features/users/usersApi
-567123  4. app/redux/features/users/usersSlice
+56781234  1. app/redux/api/apiSlice
+56781234  2. app/redux/app/store
+56781234  3. app/redux/features/users/usersApi
+56781234  4. app/redux/features/users/usersSlice
 
-56712  1. app/users-redux/page
-56712  2. app/users-redux/components/AddUser
-56712  3. app/users-redux/components/BulkDeleteUser
-56712  4. app/users-redux/components/BulkEditUser
-56712  5. app/users-redux/components/DeleteUser
-56712  6. app/users-redux/components/EditUser
-56712  7. app/users-redux/components/Pagination
-56712  8. app/users-redux/components/ViewUser
-56712  9. app/users-redux/components/ViewUsersTable
+5678123  1. app/users-redux/page
+5678123  2. app/users-redux/components/AddUser
+5678123  3. app/users-redux/components/BulkDeleteUser
+5678123  4. app/users-redux/components/BulkEditUser
+5678123  5. app/users-redux/components/DeleteUser
+5678123  6. app/users-redux/components/EditUser
+5678123  7. app/users-redux/components/Pagination
+5678123  8. app/users-redux/components/ViewUser
+5678123  9. app/users-redux/components/ViewUsersTable
 
-56712  1. app/users-redux/store/userStore
-56712  2. app/users-redux/store/StoreConstants
-56712  3. app/users-redux/store/userStoreType
+5678123  1. app/users-redux/store/userStore
+5678123  2. app/users-redux/store/StoreConstants
+5678123  3. app/users-redux/store/userStoreType

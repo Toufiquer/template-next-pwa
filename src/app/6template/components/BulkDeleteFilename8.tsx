@@ -12,12 +12,12 @@ const BulkDelete_3_template_: React.FC = () => {
   const handleBulkDelete_3_template_ = async () => {
     if (!bulkData?.length) return;
     try {
-      const ids = bulkData.map(user => user._id);
+      const ids = bulkData.map(_4_template_ => _4_template_._id);
       await bulkDelete_1_template_({ ids }).unwrap();
       toggleBulkDeleteModal(false);
       setBulkData([]);
     } catch (error) {
-      console.error('Failed to delete user:', error);
+      console.error('Failed to delete _4_template_:', error);
     }
   };
 
@@ -36,9 +36,9 @@ const BulkDelete_3_template_: React.FC = () => {
         )}
         <ScrollArea className="h-[400px] w-full rounded-md border p-4">
           <div className="flex flex-col">
-            {bulkData.map((user, idx) => (
-              <span key={(user._id as string) + idx} className="text-xs">
-                {idx + 1}. {(user.name as string) || ''}
+            {bulkData.map((_4_template_, idx) => (
+              <span key={(_4_template_._id as string) + idx} className="text-xs">
+                {idx + 1}. {(_4_template_.name as string) || ''}
               </span>
             ))}
           </div>

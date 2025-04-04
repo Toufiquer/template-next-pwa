@@ -42,17 +42,17 @@ const View_1_template_Table: React.FC = () => {
   }, [getAll_1_template_Data, sortConfig]);
 
   const handleSelectAll = (isChecked: boolean) => setBulkData(isChecked ? getAll_1_template_Data : []);
-  const handleSelectRow = (isChecked: boolean, user: I_3_template_) =>
-    setBulkData(isChecked ? [...bulkData, user] : bulkData.filter(item => item.email !== user.email));
+  const handleSelectRow = (isChecked: boolean, _4_template_: I_3_template_) =>
+    setBulkData(isChecked ? [...bulkData, _4_template_] : bulkData.filter(item => item.email !== _4_template_.email));
 
-  const renderActions = (user: I_3_template_) => (
+  const renderActions = (_4_template_: I_3_template_) => (
     <div className="flex flex-col sm:flex-row gap-2">
       <Button
         className="cursor-pointer "
         variant="outline"
         size="sm"
         onClick={() => {
-          setSelected_3_template_(user);
+          setSelected_3_template_(_4_template_);
           toggleViewModal(true);
         }}
       >
@@ -63,7 +63,7 @@ const View_1_template_Table: React.FC = () => {
         variant="outline"
         size="sm"
         onClick={() => {
-          setSelected_3_template_(user);
+          setSelected_3_template_(_4_template_);
           toggleEditModal(true);
         }}
       >
@@ -74,7 +74,7 @@ const View_1_template_Table: React.FC = () => {
         size="sm"
         className="text-rose-400 hover:text-rose-500 cursor-pointer "
         onClick={() => {
-          setSelected_3_template_(user);
+          setSelected_3_template_(_4_template_);
           toggleDeleteModal(true);
         }}
       >
@@ -83,24 +83,24 @@ const View_1_template_Table: React.FC = () => {
     </div>
   );
   const renderTableRows = () =>
-    sorted_1_template_Data.map((user: I_3_template_, index: number) => (
-      <TableRow key={(user.email as string) || index}>
+    sorted_1_template_Data.map((_4_template_: I_3_template_, index: number) => (
+      <TableRow key={(_4_template_.email as string) || index}>
         <TableCell>
-          <Checkbox onCheckedChange={checked => handleSelectRow(!!checked, user)} checked={bulkData.some(item => item.email === user.email)} />
+          <Checkbox onCheckedChange={checked => handleSelectRow(!!checked, _4_template_)} checked={bulkData.some(item => item.email === _4_template_.email)} />
         </TableCell>
-        <TableCell className="font-medium">{(user.name as string) || ''}</TableCell>
-        <TableCell className="hidden md:table-cell">{(user.email as string) || ''}</TableCell>
-        <TableCell className="hidden lg:table-cell">{(user.passCode as string) || ''}</TableCell>
-        <TableCell className="hidden md:table-cell">{(user.alias as string) || ''}</TableCell>
+        <TableCell className="font-medium">{(_4_template_.name as string) || ''}</TableCell>
+        <TableCell className="hidden md:table-cell">{(_4_template_.email as string) || ''}</TableCell>
+        <TableCell className="hidden lg:table-cell">{(_4_template_.passCode as string) || ''}</TableCell>
+        <TableCell className="hidden md:table-cell">{(_4_template_.alias as string) || ''}</TableCell>
         <TableCell>
           <span
-            className={`px-2 py-1 rounded-full text-xs font-medium ${user.role === 'admin' ? 'bg-amber-100 text-amber-700' : user.role === 'moderator' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}
+            className={`px-2 py-1 rounded-full text-xs font-medium ${_4_template_.role === 'admin' ? 'bg-amber-100 text-amber-700' : _4_template_.role === 'moderator' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'}`}
           >
-            {(user.role as string) || ''}
+            {(_4_template_.role as string) || ''}
           </span>
         </TableCell>
-        <TableCell className="hidden lg:table-cell">{formatDate(user.createdAt)}</TableCell>
-        <TableCell className="justify-end flex">{renderActions(user)}</TableCell>
+        <TableCell className="hidden lg:table-cell">{formatDate(_4_template_.createdAt)}</TableCell>
+        <TableCell className="justify-end flex">{renderActions(_4_template_)}</TableCell>
       </TableRow>
     ));
 

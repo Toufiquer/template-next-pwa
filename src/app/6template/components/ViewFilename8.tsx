@@ -12,7 +12,7 @@ import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 
 const View_3_template_: React.FC = () => {
   const { isViewModalOpen, selected_3_template_, toggleViewModal, setSelected_3_template_ } = use_3_template_Store();
-  const { data: userData, refetch } = useGet_3_template_ByIdQuery(selected_3_template_?._id, { skip: !selected_3_template_?._id });
+  const { data: _4_template_Data, refetch } = useGet_3_template_ByIdQuery(selected_3_template_?._id, { skip: !selected_3_template_?._id });
 
   useEffect(() => {
     if (selected_3_template_?._id) {
@@ -21,10 +21,10 @@ const View_3_template_: React.FC = () => {
   }, [selected_3_template_?._id, refetch]);
 
   useEffect(() => {
-    if (userData?.data) {
-      setSelected_3_template_(userData.data); // Update selected_3_template_ with the latest data
+    if (_4_template_Data?.data) {
+      setSelected_3_template_(_4_template_Data.data); // Update selected_3_template_ with the latest data
     }
-  }, [userData, setSelected_3_template_]);
+  }, [_4_template_Data, setSelected_3_template_]);
 
   const formatDate = (date?: Date) => (date ? format(date, 'MMM dd, yyyy') : 'N/A');
 
