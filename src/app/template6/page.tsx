@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { PlusIcon } from 'lucide-react';
+import { ArrowRightIcon, PlusIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { use_3_template_Store } from '@/app/template6/store/filename7Store';
@@ -19,6 +20,7 @@ import TooManyRequests from '@/app/template6/components/TooManyRequest';
 
 const Filename8Table: React.FC = () => {
   const { toggleAddModal } = use_3_template_Store();
+  const router = useRouter();
   const {
     data: getResponseData,
     isSuccess,
@@ -39,13 +41,19 @@ const Filename8Table: React.FC = () => {
   let renderUI = (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-bold w-full">
           _3_template_ Management {isSuccess && <sup className="text-xs">(total:{getResponseData?.data?.total || '00'})</sup>}
         </h1>
-        <Button className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(true)}>
-          <PlusIcon className="w-4 h-4 mr-2" />
-          Add _3_template_
-        </Button>
+        <div className="w-full flex gap-2 item-center justify-end">
+          <Button className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => router.push('/template6/all-template6')}>
+            View Grid
+            <ArrowRightIcon className="w-4 h-4 mr-2" />
+          </Button>
+          <Button className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(true)}>
+            <PlusIcon className="w-4 h-4 mr-2" />
+            Add _3_template_
+          </Button>
+        </div>
       </div>
       <View_1_template_Table />
       {modals.map((ModalComponent, index) => (

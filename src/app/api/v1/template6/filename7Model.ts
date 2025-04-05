@@ -26,4 +26,5 @@ export default mongoose.models._3_template_ || mongoose.model('_3_template_', _4
 export interface I_3_template_ extends Document, Pick<mongoose.SchemaDefinition, 'name' | 'email' | 'passCode' | 'alias' | 'role'> {
   createdAt?: Date;
   updatedAt?: Date;
+  img?: string;
 }
