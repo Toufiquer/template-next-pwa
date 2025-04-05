@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import {
   get_1_template_,
   create_3_template_,
@@ -9,14 +8,13 @@ import {
   bulkDelete_1_template_,
 } from './filename7Controller';
 
-export interface IResponse {
-  data: unknown;
-  message: string;
-  status: number;
-}
-const formatResponse = (data: unknown, message: string, status: number) => NextResponse.json({ data, message, status }, { status });
+import { formatResponse, handleRateLimit, IResponse } from './utils';
+
 // GET all _1_template_
 export async function GET(req: Request) {
+  const rateLimitResponse = handleRateLimit(req);
+  if (rateLimitResponse) return rateLimitResponse;
+
   const id = new URL(req.url).searchParams.get('id');
   const result: IResponse = id ? await get_3_template_ById(req) : await get_1_template_(req);
   return formatResponse(result.data, result.message, result.status);
@@ -24,13 +22,18 @@ export async function GET(req: Request) {
 
 // CREATE _3_template_
 export async function POST(req: Request) {
-  const result = await create_3_template_(req);
+  const rateLimitResponse = handleRateLimit(req);
+  if (rateLimitResponse) return rateLimitResponse;
 
+  const result = await create_3_template_(req);
   return formatResponse(result.data, result.message, result.status);
 }
 
 // UPDATE _3_template_
 export async function PUT(req: Request) {
+  const rateLimitResponse = handleRateLimit(req);
+  if (rateLimitResponse) return rateLimitResponse;
+
   const isBulk = new URL(req.url).searchParams.get('bulk') === 'true';
   const result = isBulk ? await bulkUpdate_1_template_(req) : await update_3_template_(req);
 
@@ -39,6 +42,9 @@ export async function PUT(req: Request) {
 
 // DELETE _3_template_
 export async function DELETE(req: Request) {
+  const rateLimitResponse = handleRateLimit(req);
+  if (rateLimitResponse) return rateLimitResponse;
+
   const isBulk = new URL(req.url).searchParams.get('bulk') === 'true';
   const result = isBulk ? await bulkDelete_1_template_(req) : await delete_3_template_(req);
 
