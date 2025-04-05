@@ -1,5 +1,3 @@
-import { NextResponse } from 'next/server';
-
 /*
 |-----------------------------------------
 | setting up Utils for the App
@@ -7,6 +5,12 @@ import { NextResponse } from 'next/server';
 | @copyright: Toufiquer, April, 2025
 |-----------------------------------------
 */
+
+import { NextResponse } from 'next/server';
+
+export const RATE_LIMIT = 100; // 50 requests
+export const TIME_WINDOW = 60 * 1000; // 1 minute
+
 export interface IResponse {
   data: unknown;
   message: string;
@@ -15,8 +19,6 @@ export interface IResponse {
 export const formatResponse = (data: unknown, message: string, status: number) => NextResponse.json({ data, message, status }, { status });
 
 export const rateLimitMap = new Map<string, { count: number; timer: NodeJS.Timeout }>();
-export const RATE_LIMIT = 50; // 50 requests
-export const TIME_WINDOW = 60 * 1000; // 1 minute
 
 export const rateLimit = (ip: string, RATE_LIMIT: number = 50, TIME_WINDOW: number = 60 * 1000) => {
   if (!rateLimitMap.has(ip)) {

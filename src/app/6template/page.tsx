@@ -34,7 +34,6 @@ const Filename8Table: React.FC = () => {
       }),
     },
   );
-  console.log('HTTP status code:', statusCode);
 
   const modals = [AddFilename8, ViewFilename8, BulkDeleteFilename8, BulkEditFilename8, EditFilename8, DeleteFilename8];
   let renderUI = (
