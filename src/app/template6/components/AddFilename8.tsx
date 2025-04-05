@@ -5,9 +5,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { useAdd_3_template_Mutation } from '@/redux/features/6template/filename7Api';
+import { useAdd_3_template_Mutation } from '@/redux/features/template6/filename7Api';
 
-import { use_3_template_Store } from '@/app/6template/store/filename7Store';
+import { use_3_template_Store } from '@/app/template6/store/filename7Store';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 import {
@@ -15,8 +15,8 @@ import {
   __default_selector__,
   __I_custom_selector_Type__,
   __custom_selector_arr__,
-} from '@/app/6template/store/filename7StoreConstants';
-import { handleError } from '@/app/6template/components/utils';
+} from '@/app/template6/store/filename7StoreConstants';
+import { handleError } from '@/app/template6/components/utils';
 
 const InputField: React.FC<{
   id: string;

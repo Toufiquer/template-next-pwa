@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
-import { _3_template_Store } from '@/app/6template/store/filename7StoreTypes';
-import { baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
+import { _3_template_Store } from '@/app/template6/store/filename7StoreTypes';
+import { baseI_3_template_ } from '@/app/template6/store/filename7StoreConstants';
 
 export const use_3_template_Store = create<_3_template_Store>(set => ({
   _2_template_: [],

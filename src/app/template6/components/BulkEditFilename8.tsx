@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { use_3_template_Store } from '@/app/6template/store/filename7Store';
+import { use_3_template_Store } from '@/app/template6/store/filename7Store';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { __custom_selector_arr__ } from '@/app/6template/store/filename7StoreConstants';
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
-import { useBulkUpdate_1_template_Mutation } from '@/redux/features/6template/filename7Api';
+import { __custom_selector_arr__ } from '@/app/template6/store/filename7StoreConstants';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
+import { useBulkUpdate_1_template_Mutation } from '@/redux/features/template6/filename7Api';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkEdit_3_template_: React.FC = () => {

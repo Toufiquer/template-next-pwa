@@ -5,16 +5,16 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { EyeIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
-import { useGet_1_template_Query } from '@/redux/features/6template/filename7Api';
-import { use_3_template_Store } from '@/app/6template/store/filename7Store';
-import Pagination from '@/app/6template/components/Pagination';
+import { useGet_1_template_Query } from '@/redux/features/template6/filename7Api';
+import { use_3_template_Store } from '@/app/template6/store/filename7Store';
+import Pagination from '@/app/template6/components/Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { pageLimitArr } from '@/app/6template/store/filename7StoreConstants';
+import { pageLimitArr } from '@/app/template6/store/filename7StoreConstants';
 
 const View_1_template_Table: React.FC = () => {
   const [page, setPage] = useState(1);

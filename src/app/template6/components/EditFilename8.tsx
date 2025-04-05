@@ -7,10 +7,10 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-import { use_3_template_Store } from '@/app/6template/store/filename7Store';
-import { useUpdate_3_template_Mutation } from '@/redux/features/6template/filename7Api';
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
-import { __I_custom_selector_Type__, __custom_selector_arr__, baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
+import { use_3_template_Store } from '@/app/template6/store/filename7Store';
+import { useUpdate_3_template_Mutation } from '@/redux/features/template6/filename7Api';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
+import { __I_custom_selector_Type__, __custom_selector_arr__, baseI_3_template_ } from '@/app/template6/store/filename7StoreConstants';
 
 const Edit_3_template_: React.FC = () => {
   const { toggleEditModal, isEditModalOpen, new_3_template_, selected_3_template_, setNew_3_template_, setSelected_3_template_ } = use_3_template_Store();

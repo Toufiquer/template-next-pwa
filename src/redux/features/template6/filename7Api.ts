@@ -8,13 +8,13 @@
 
 // This file is use for rest api
 import { apiSlice } from '@/redux/api/apiSlice';
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
-import { handleError, handleSuccess } from '@/app/6template/components/utils';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
+import { handleError, handleSuccess } from '@/app/template6/components/utils';
 
 export const _2_template_Api = apiSlice.injectEndpoints({
   endpoints: builder => ({
     get_1_template_: builder.query({
-      query: ({ page, limit }) => `/api/v1/6template?page=${page || 1}&limit=${limit || 2}`,
+      query: ({ page, limit }) => `/api/v1/template6?page=${page || 1}&limit=${limit || 2}`,
       providesTags: [{ type: '_5_template_tags_', id: 'LIST' }],
       async onQueryStarted() {
         try {
@@ -24,11 +24,11 @@ export const _2_template_Api = apiSlice.injectEndpoints({
       },
     }),
     get_3_template_ById: builder.query({
-      query: id => `/api/v1/6template?id=${id}`,
+      query: id => `/api/v1/template6?id=${id}`,
     }),
     add_3_template_: builder.mutation({
       query: new_3_template_ => ({
-        url: '/api/v1/6template',
+        url: '/api/v1/template6',
         method: 'POST',
         body: new_3_template_,
       }),
@@ -45,7 +45,7 @@ export const _2_template_Api = apiSlice.injectEndpoints({
     }),
     update_3_template_: builder.mutation({
       query: ({ id, ...data }) => ({
-        url: `/api/v1/6template`,
+        url: `/api/v1/template6`,
         method: 'PUT',
         body: { id: id, ...data },
       }),
@@ -61,7 +61,7 @@ export const _2_template_Api = apiSlice.injectEndpoints({
     }),
     delete_3_template_: builder.mutation({
       query: ({ id }) => ({
-        url: `/api/v1/6template`,
+        url: `/api/v1/template6`,
         method: 'DELETE',
         body: { id },
       }),
@@ -77,7 +77,7 @@ export const _2_template_Api = apiSlice.injectEndpoints({
     }),
     bulkUpdate_1_template_: builder.mutation({
       query: bulkData => ({
-        url: `/api/v1/6template?bulk=true`,
+        url: `/api/v1/template6?bulk=true`,
         method: 'PUT',
         body: bulkData,
       }),
@@ -93,7 +93,7 @@ export const _2_template_Api = apiSlice.injectEndpoints({
     }),
     bulkDelete_1_template_: builder.mutation({
       query: bulkData => ({
-        url: `/api/v1/6template?bulk=true`,
+        url: `/api/v1/template6?bulk=true`,
         method: 'DELETE',
         body: bulkData,
       }),

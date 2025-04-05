@@ -1,4 +1,4 @@
-import { __custom_selector_arr__, __default_selector__ } from '@/app/6template/store/filename7StoreConstants';
+import { __custom_selector_arr__, __default_selector__ } from '@/app/template6/store/filename7StoreConstants';
 import mongoose, { Schema, Document } from 'mongoose';
 
 const _4_template_Schema = new Schema(

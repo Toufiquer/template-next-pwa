@@ -7,7 +7,7 @@
 */
 
 // If you want to update store then this file help you to update
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {

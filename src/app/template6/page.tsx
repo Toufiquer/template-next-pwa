@@ -4,18 +4,18 @@ import React from 'react';
 import { PlusIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { use_3_template_Store } from '@/app/6template/store/filename7Store';
-import View_1_template_Table from '@/app/6template/components/ViewFilename8Table';
-import { useGet_1_template_Query } from '@/redux/features/6template/filename7Api';
+import { use_3_template_Store } from '@/app/template6/store/filename7Store';
+import View_1_template_Table from '@/app/template6/components/ViewFilename8Table';
+import { useGet_1_template_Query } from '@/redux/features/template6/filename7Api';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-import AddFilename8 from '@/app/6template/components/AddFilename8';
-import EditFilename8 from '@/app/6template/components/EditFilename8';
-import ViewFilename8 from '@/app/6template/components/ViewFilename8';
-import DeleteFilename8 from '@/app/6template/components/DeleteFilename8';
-import BulkDeleteFilename8 from '@/app/6template/components/BulkDeleteFilename8';
-import BulkEditFilename8 from '@/app/6template/components/BulkEditFilename8';
-import TooManyRequests from '@/app/6template/components/TooManyRequest';
+import AddFilename8 from '@/app/template6/components/AddFilename8';
+import EditFilename8 from '@/app/template6/components/EditFilename8';
+import ViewFilename8 from '@/app/template6/components/ViewFilename8';
+import DeleteFilename8 from '@/app/template6/components/DeleteFilename8';
+import BulkDeleteFilename8 from '@/app/template6/components/BulkDeleteFilename8';
+import BulkEditFilename8 from '@/app/template6/components/BulkEditFilename8';
+import TooManyRequests from '@/app/template6/components/TooManyRequest';
 
 const Filename8Table: React.FC = () => {
   const { toggleAddModal } = use_3_template_Store();

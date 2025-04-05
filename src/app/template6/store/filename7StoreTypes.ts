@@ -1,4 +1,4 @@
-import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
+import { I_3_template_ } from '@/app/api/v1/template6/filename7Model';
 
 export interface _3_template_Store {
   _2_template_: I_3_template_[];

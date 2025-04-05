@@ -3,7 +3,7 @@
 3. User  = _3_template_
 4. user  = _4_template_
 5. Users = _5_template_tags_ [Tags, redux invalidation]
-6. users = 6template [folder name]
+6. users = template6 [folder name]
 7. users = filename7 [file name, Small  ]
 8. Users = Filename8 [file name, Capital, React-components]
 9. User  = __role9__ [edit custom role] 
