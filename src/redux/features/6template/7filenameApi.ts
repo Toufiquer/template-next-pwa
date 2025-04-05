@@ -7,26 +7,19 @@
 */
 
 // This file is use for rest api
-
-import { toast } from 'react-toastify';
-
 import { apiSlice } from '@/redux/api/apiSlice';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
+import { handleError, handleSuccess } from '@/app/6template/components/utils';
 
 export const _2_template_Api = apiSlice.injectEndpoints({
   endpoints: builder => ({
-    // endpoints here
     get_1_template_: builder.query({
       query: ({ page, limit }) => `/api/v1/6template?page=${page || 1}&limit=${limit || 2}`,
-      providesTags: [{ type: '_5_template_tags_', id: 'LIST' }], // Add tag for cache invalidation
+      providesTags: [{ type: '_5_template_tags_', id: 'LIST' }],
       async onQueryStarted() {
         try {
         } catch (e: unknown) {
-          if (e instanceof Error) {
-            toast.error(e.message, {
-              toastId: (Math.random() * 1000).toFixed(0),
-            });
-          }
+          handleError(e);
         }
       },
     }),
@@ -39,23 +32,14 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         method: 'POST',
         body: new_3_template_,
       }),
-      invalidatesTags: [{ type: '_5_template_tags_' }], // Automatically invalidate cache after mutation
+      invalidatesTags: [{ type: '_5_template_tags_' }],
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const { data }: { data: { data: I_3_template_; message: string } } = await queryFulfilled;
-
-          toast.success(data.message, {
-            toastId: (Math.random() * 1000).toFixed(0),
-          });
-
-          // Invalidate cache for get_1_template_ to trigger re-fetch
+          handleSuccess(data.message);
           dispatch(_2_template_Api.util.invalidateTags([{ type: '_5_template_tags_' }]));
         } catch (e: unknown) {
-          if (e instanceof Error) {
-            toast.error(e.message, {
-              toastId: (Math.random() * 1000).toFixed(0),
-            });
-          }
+          handleError(e);
         }
       },
     }),
@@ -65,20 +49,13 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         method: 'PUT',
         body: { id: id, ...data },
       }),
-      invalidatesTags: [{ type: '_5_template_tags_' }], // Invalidate cache after mutation
+      invalidatesTags: [{ type: '_5_template_tags_' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data }: { data: { message: string } } = await queryFulfilled;
-
-          toast.success(data.message, {
-            toastId: (Math.random() * 1000).toFixed(0),
-          });
+          handleSuccess(data.message);
         } catch (e: unknown) {
-          if (e instanceof Error) {
-            toast.error(e.message, {
-              toastId: (Math.random() * 1000).toFixed(0),
-            });
-          }
+          handleError(e);
         }
       },
     }),
@@ -88,20 +65,13 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         method: 'DELETE',
         body: { id },
       }),
-      invalidatesTags: [{ type: '_5_template_tags_' }], // Invalidate cache after mutation
+      invalidatesTags: [{ type: '_5_template_tags_' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data }: { data: { message: string } } = await queryFulfilled;
-
-          toast.success(data.message, {
-            toastId: (Math.random() * 1000).toFixed(0),
-          });
+          handleSuccess(data.message);
         } catch (e: unknown) {
-          if (e instanceof Error) {
-            toast.error(e.message, {
-              toastId: (Math.random() * 1000).toFixed(0),
-            });
-          }
+          handleError(e);
         }
       },
     }),
@@ -111,20 +81,13 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         method: 'PUT',
         body: bulkData,
       }),
-      invalidatesTags: [{ type: '_5_template_tags_' }], // Invalidate cache after mutation
+      invalidatesTags: [{ type: '_5_template_tags_' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data }: { data: { message: string } } = await queryFulfilled;
-
-          toast.success(data.message, {
-            toastId: (Math.random() * 1000).toFixed(0),
-          });
+          handleSuccess(data.message);
         } catch (e: unknown) {
-          if (e instanceof Error) {
-            toast.error(e.message, {
-              toastId: (Math.random() * 1000).toFixed(0),
-            });
-          }
+          handleError(e);
         }
       },
     }),
@@ -134,25 +97,19 @@ export const _2_template_Api = apiSlice.injectEndpoints({
         method: 'DELETE',
         body: bulkData,
       }),
-      invalidatesTags: [{ type: '_5_template_tags_' }], // Invalidate cache after mutation
+      invalidatesTags: [{ type: '_5_template_tags_' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           const { data }: { data: { message: string } } = await queryFulfilled;
-
-          toast.success(data.message, {
-            toastId: (Math.random() * 1000).toFixed(0),
-          });
+          handleSuccess(data.message);
         } catch (e: unknown) {
-          if (e instanceof Error) {
-            toast.error(e.message, {
-              toastId: (Math.random() * 1000).toFixed(0),
-            });
-          }
+          handleError(e);
         }
       },
     }),
   }),
 });
+
 export const {
   useGet_1_template_Query,
   useAdd_3_template_Mutation,

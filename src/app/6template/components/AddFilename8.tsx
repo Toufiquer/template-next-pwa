@@ -9,13 +9,14 @@ import { useAdd_3_template_Mutation } from '@/redux/features/6template/7filename
 
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { toast } from 'react-toastify';
+
 import {
   default_3_template_Data,
   __default_selector__,
   __I_custom_selector_Type__,
   __custom_selector_arr__,
 } from '@/app/6template/store/filename7StoreConstants';
+import { handleError } from '@/app/6template/components/utils';
 
 const InputField: React.FC<{
   id: string;
@@ -49,7 +50,7 @@ const Add_3_template_: React.FC = () => {
           : error instanceof Error
             ? error.message
             : 'An unknown error occurred';
-      if (errorMessage) toast.error(errorMessage, { toastId: Math.random() });
+      if (errorMessage) handleError(errorMessage);
     }
   }, [isError, error]);
   const handleRoleChange = (value: string) => {
