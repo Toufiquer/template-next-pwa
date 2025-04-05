@@ -1,6 +1,6 @@
 import _3_template_ from './filename7Model';
 import connectDB from '@/lib/mongoose';
-import { IResponse } from './route';
+import { IResponse } from '@/app/api/v1/6template/utils';
 
 // Helper to handle database connection and errors
 async function withDB(handler: () => Promise<IResponse>): Promise<IResponse> {

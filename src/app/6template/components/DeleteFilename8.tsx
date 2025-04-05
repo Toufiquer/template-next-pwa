@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
-import { useDelete_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
+import { useDelete_3_template_Mutation } from '@/redux/features/6template/filename7Api';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 
 const Delete_3_template_: React.FC = () => {

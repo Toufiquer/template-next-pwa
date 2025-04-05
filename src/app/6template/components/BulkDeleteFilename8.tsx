@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
-import { useBulkDelete_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
+import { useBulkDelete_1_template_Mutation } from '@/redux/features/6template/filename7Api';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BulkDelete_3_template_: React.FC = () => {

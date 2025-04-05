@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
-import { useUpdate_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
+import { useUpdate_3_template_Mutation } from '@/redux/features/6template/filename7Api';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 import { __I_custom_selector_Type__, __custom_selector_arr__, baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
 

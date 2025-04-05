@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 import LoadingComponent from '@/components/common/Loading';
 import ErrorMessageComponent from '@/components/common/Error';
-import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
+import { useGet_1_template_Query } from '@/redux/features/6template/filename7Api';
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import Pagination from '@/app/6template/components/Pagination';
 import { Label } from '@/components/ui/label';

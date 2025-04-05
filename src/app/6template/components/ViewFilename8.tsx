@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
-import { useGet_3_template_ByIdQuery } from '@/redux/features/6template/7filenameApi';
+import { useGet_3_template_ByIdQuery } from '@/redux/features/6template/filename7Api';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 

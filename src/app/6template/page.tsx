@@ -6,7 +6,7 @@ import { PlusIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import View_1_template_Table from '@/app/6template/components/ViewFilename8Table';
-import { useGet_1_template_Query } from '@/redux/features/6template/7filenameApi';
+import { useGet_1_template_Query } from '@/redux/features/6template/filename7Api';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 import AddFilename8 from '@/app/6template/components/AddFilename8';

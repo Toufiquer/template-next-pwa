@@ -26,7 +26,7 @@ const TooManyRequests: React.FC<TooManyRequestsProps> = ({ message = 'Too many r
 
   const pulseVariants = {
     initial: { scale: 1 },
-    animate: { scale: [1, 1.05, 1], transition: { repeat: Infinity, repeatType: 'reverse' as 'reverse', duration: 2 } },
+    animate: { scale: [1, 1.05, 1], transition: { repeat: Infinity, repeatType: 'reverse', duration: 2 } as const },
   };
 
   return (

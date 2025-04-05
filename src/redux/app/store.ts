@@ -13,7 +13,7 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 import { apiSlice } from '@/redux/api/apiSlice';
 
-import _2_template_Slice from '@/redux/features/6template/7filenameSlice';
+import _2_template_Slice from '@/redux/features/6template/filename7Slice';
 
 export const store = configureStore({
   reducer: {
