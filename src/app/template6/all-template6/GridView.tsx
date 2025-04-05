@@ -9,7 +9,7 @@ import Pagination from '@/app/template6/components/Pagination';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { pageLimitArr } from '@/app/template6/store/filename7StoreConstants';
-import UserCardGrid from './UserCardGrid';
+import _3_template_CardGrid from '@/app/template6/all-template6/Filename8CardGrid';
 
 const GridView: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -25,7 +25,7 @@ const GridView: React.FC = () => {
   return (
     <div className="w-full flex flex-col">
       <div className="min-h-screen bg-gray-50">
-        <UserCardGrid users={renderData} />
+        <_3_template_CardGrid _2_template_={renderData} />
       </div>
       <Pagination currentPage={page} itemsPerPage={limit} onPageChange={setPage} totalItems={getResponseData?.data?.total} />
       <div className="max-w-[380px] flex items-center justify-between pl-2 gap-4 border-1 border-slate-200 rounded-xl w-full mx-auto mt-8">

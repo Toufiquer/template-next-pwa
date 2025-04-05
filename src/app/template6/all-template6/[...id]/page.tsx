@@ -1,4 +1,4 @@
-// pages/user/[id].js
+// pages/_4_template_/[id].js
 
 'use client';
 
@@ -6,28 +6,27 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Head from 'next/head';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { ChevronLeft, Mail, Phone, MapPin, Calendar, Briefcase, Shield, Edit, Settings, Share2, Heart, MessageCircle } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { ChevronLeft, Mail, Phone, MapPin, Calendar, Briefcase, Shield, Settings, Share2, Heart, MessageCircle } from 'lucide-react';
 
 import { useGet_3_template_ByIdQuery } from '@/redux/features/template6/filename7Api';
-export default function UserProfilePage() {
+export default function Filename8ProfilePage() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState('overview');
-  const userId = pathname.split('/')[3];
-  const { data: _4_template_Data, refetch } = useGet_3_template_ByIdQuery(userId, { skip: !userId });
+  const _4_template_Id = pathname.split('/')[3];
+  const { data: _4_template_Data } = useGet_3_template_ByIdQuery(_4_template_Id, { skip: !_4_template_Id });
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.5 },
   };
-  const user = _4_template_Data?.data || {};
+  const _4_template_ = _4_template_Data?.data || {};
   return (
     <div>
       <Head>
-        <title>{user.name} | Profile</title>
-        <meta name="description" content={`Profile page for ${user.name}`} />
+        <title>{_4_template_.name} | Profile</title>
+        <meta name="description" content={`Profile page for ${_4_template_.name}`} />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
@@ -57,7 +56,7 @@ export default function UserProfilePage() {
 
         {/* Hero Section with Cover Photo */}
         <div className="relative h-48 sm:h-64 lg:h-80 bg-gradient-to-r from-indigo-500 to-purple-600 overflow-hidden">
-          {user.img && <Image src={user.img} alt="Cover photo" fill className="object-cover opacity-40" priority />}
+          {_4_template_.img && <Image src={_4_template_.img} alt="Cover photo" fill className="object-cover opacity-40" priority />}
         </div>
 
         <div className="container mx-auto px-4">
@@ -78,25 +77,25 @@ export default function UserProfilePage() {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
-                    {user.img ? (
-                      <Image src={user.img} alt={user.name} fill className="object-cover" />
+                    {_4_template_.img ? (
+                      <Image src={_4_template_.img} alt={_4_template_.name} fill className="object-cover" />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                        <span className="text-4xl text-white font-bold">{user.name?.charAt(0) || user.alias?.charAt(0) || '?'}</span>
+                        <span className="text-4xl text-white font-bold">{_4_template_.name?.charAt(0) || _4_template_.alias?.charAt(0) || '?'}</span>
                       </div>
                     )}
                     <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                   </motion.div>
 
-                  {/* User Info */}
+                  {/* _4_template_ Info */}
                   <div className="text-center sm:text-left flex-1">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                       <div>
                         <motion.h1 className="text-2xl sm:text-3xl font-bold text-gray-900" {...fadeIn}>
-                          {user.name}
+                          {_4_template_.name}
                         </motion.h1>
                         <motion.p className="text-gray-500 text-lg" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-                          @{user.alias}
+                          @{_4_template_.alias}
                         </motion.p>
                       </div>
 
@@ -126,37 +125,39 @@ export default function UserProfilePage() {
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.4 }}
                     >
-                      {user.position && (
+                      {_4_template_.position && (
                         <div className="flex items-center text-gray-600">
                           <Briefcase size={18} className="mr-2" />
                           <span>
-                            {user.position}
-                            {user.company ? ` at ${user.company}` : ''}
+                            {_4_template_.position}
+                            {_4_template_.company ? ` at ${_4_template_.company}` : ''}
                           </span>
                         </div>
                       )}
 
-                      {user.location && (
+                      {_4_template_.location && (
                         <div className="flex items-center text-gray-600">
                           <MapPin size={18} className="mr-2" />
-                          <span>{user.location}</span>
+                          <span>{_4_template_.location}</span>
                         </div>
                       )}
 
                       <div className="flex items-center text-gray-600">
                         <Calendar size={18} className="mr-2" />
-                        <span>Joined {user.joinedDate || new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+                        <span>
+                          Joined {_4_template_.joinedDate || new Date(_4_template_.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                        </span>
                       </div>
 
                       <div className="flex items-center text-gray-600">
                         <Shield size={18} className="mr-2" />
-                        <span className="capitalize">{user.role?.replace(/__/g, '')}</span>
+                        <span className="capitalize">{_4_template_.role?.replace(/__/g, '')}</span>
                       </div>
                     </motion.div>
 
-                    {user.bio && (
+                    {_4_template_.bio && (
                       <motion.p className="mt-5 text-gray-700" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-                        {user.bio}
+                        {_4_template_.bio}
                       </motion.p>
                     )}
                   </div>
@@ -170,15 +171,15 @@ export default function UserProfilePage() {
                   transition={{ delay: 0.6 }}
                 >
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-900">{user.stats?.posts || 0}</div>
+                    <div className="text-2xl font-bold text-gray-900">{_4_template_.stats?.posts || 0}</div>
                     <div className="text-sm text-gray-500">Posts</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-900">{user.stats?.followers || 0}</div>
+                    <div className="text-2xl font-bold text-gray-900">{_4_template_.stats?.followers || 0}</div>
                     <div className="text-sm text-gray-500">Followers</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-900">{user.stats?.following || 0}</div>
+                    <div className="text-2xl font-bold text-gray-900">{_4_template_.stats?.following || 0}</div>
                     <div className="text-sm text-gray-500">Following</div>
                   </div>
                 </motion.div>
@@ -215,7 +216,7 @@ export default function UserProfilePage() {
                     <Mail className="text-gray-500 mr-3" size={20} />
                     <div>
                       <div className="text-sm text-gray-500">Email Address</div>
-                      <div className="text-gray-900">{user.email}</div>
+                      <div className="text-gray-900">{_4_template_.email}</div>
                     </div>
                   </div>
 
@@ -223,7 +224,7 @@ export default function UserProfilePage() {
                     <Phone className="text-gray-500 mr-3" size={20} />
                     <div>
                       <div className="text-sm text-gray-500">Phone Number</div>
-                      <div className="text-gray-900">{user.phone || 'Not provided'}</div>
+                      <div className="text-gray-900">{_4_template_.phone || 'Not provided'}</div>
                     </div>
                   </div>
 
@@ -231,7 +232,7 @@ export default function UserProfilePage() {
                     <MapPin className="text-gray-500 mr-3" size={20} />
                     <div>
                       <div className="text-sm text-gray-500">Location</div>
-                      <div className="text-gray-900">{user.location || 'Not provided'}</div>
+                      <div className="text-gray-900">{_4_template_.location || 'Not provided'}</div>
                     </div>
                   </div>
                 </div>
@@ -240,23 +241,23 @@ export default function UserProfilePage() {
                   <h2 className="text-xl font-semibold mb-6">Account Information</h2>
                   <div className="space-y-4">
                     <div className="flex items-start">
-                      <div className="w-1/4 text-sm text-gray-500">User ID</div>
-                      <div className="w-3/4 text-gray-900 break-all">{user._id}</div>
+                      <div className="w-1/4 text-sm text-gray-500">_4_template_ ID</div>
+                      <div className="w-3/4 text-gray-900 break-all">{_4_template_._id}</div>
                     </div>
 
                     <div className="flex items-start">
                       <div className="w-1/4 text-sm text-gray-500">Role</div>
-                      <div className="w-3/4 text-gray-900 capitalize">{user.role?.replace(/__/g, '')}</div>
+                      <div className="w-3/4 text-gray-900 capitalize">{_4_template_.role?.replace(/__/g, '')}</div>
                     </div>
 
                     <div className="flex items-start">
                       <div className="w-1/4 text-sm text-gray-500">Alias</div>
-                      <div className="w-3/4 text-gray-900">@{user.alias}</div>
+                      <div className="w-3/4 text-gray-900">@{_4_template_.alias}</div>
                     </div>
 
                     <div className="flex items-start">
                       <div className="w-1/4 text-sm text-gray-500">Created</div>
-                      <div className="w-3/4 text-gray-900">{new Date(user.createdAt).toLocaleString()}</div>
+                      <div className="w-3/4 text-gray-900">{new Date(_4_template_.createdAt).toLocaleString()}</div>
                     </div>
                   </div>
                 </div>
