@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion'; // Import framer-motion
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -81,73 +80,58 @@ const Add_3_template_: React.FC = () => {
 
   return (
     <Dialog open={isAddModalOpen} onOpenChange={toggleAddModal}>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
-      >
-        <DialogContent>
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-            <DialogHeader>
-              <DialogTitle>Add New _3_template_</DialogTitle>
-            </DialogHeader>
-          </motion.div>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add New _3_template_</DialogTitle>
+        </DialogHeader>
 
-          <ScrollArea className="h-[400px] w-full rounded-md border p-4">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
-              <div className="grid gap-4 py-4">
-                <InputField id="name" name="name" label="Name" value={(new_3_template_.name as string) || ''} onChange={handleInputChange} />
-                <InputField id="email" name="email" label="Email" type="email" value={(new_3_template_.email as string) || ''} onChange={handleInputChange} />
-                <InputField
-                  id="passCode"
-                  name="passCode"
-                  label="Pass Code"
-                  type="password"
-                  value={(new_3_template_.passCode as string) || ''}
-                  onChange={handleInputChange}
-                />
-                <InputField id="alias" name="alias" label="Alias" value={(new_3_template_.alias as string) || ''} onChange={handleInputChange} />
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="role" className="text-right">
-                    Role
-                  </Label>
-                  <Select onValueChange={handleRoleChange} defaultValue={(new_3_template_.role as string) || ''}>
-                    <SelectTrigger className="col-span-3">
-                      <SelectValue placeholder="Select a role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {__custom_selector_arr__?.map((i, index) => (
-                        <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
-                          {i}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </motion.div>
-          </ScrollArea>
+        <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+          <div className="grid gap-4 py-4">
+            <InputField id="name" name="name" label="Name" value={(new_3_template_.name as string) || ''} onChange={handleInputChange} />
+            <InputField id="email" name="email" label="Email" type="email" value={(new_3_template_.email as string) || ''} onChange={handleInputChange} />
+            <InputField
+              id="passCode"
+              name="passCode"
+              label="Pass Code"
+              type="password"
+              value={(new_3_template_.passCode as string) || ''}
+              onChange={handleInputChange}
+            />
+            <InputField id="alias" name="alias" label="Alias" value={(new_3_template_.alias as string) || ''} onChange={handleInputChange} />
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="role" className="text-right">
+                Role
+              </Label>
+              <Select onValueChange={handleRoleChange} defaultValue={(new_3_template_.role as string) || ''}>
+                <SelectTrigger className="col-span-3">
+                  <SelectValue placeholder="Select a role" />
+                </SelectTrigger>
+                <SelectContent>
+                  {__custom_selector_arr__?.map((i, index) => (
+                    <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
+                      {i}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </ScrollArea>
 
-          <DialogFooter>
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 300 }}>
-              <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(false)}>
-                Cancel
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 300 }}>
-              <Button
-                disabled={isLoading}
-                variant="outline"
-                className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer"
-                onClick={handleAdd_3_template_}
-              >
-                Add _3_template_
-              </Button>
-            </motion.div>
-          </DialogFooter>
-        </DialogContent>
-      </motion.div>
+        <DialogFooter>
+          <Button variant="outline" className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer" onClick={() => toggleAddModal(false)}>
+            Cancel
+          </Button>
+          <Button
+            disabled={isLoading}
+            variant="outline"
+            className="border-slate-500 hover:border-slate-600 border-1 cursor-pointer"
+            onClick={handleAdd_3_template_}
+          >
+            Add _3_template_
+          </Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
   );
 };
