@@ -1,3 +1,4 @@
+import { __custom_selector_arr__, __default_selector__ } from '@/app/6template/store/filename7StoreConstants';
 import mongoose, { Schema, Document } from 'mongoose';
 
 const _4_template_Schema = new Schema(
@@ -13,8 +14,8 @@ const _4_template_Schema = new Schema(
     alias: { type: String, required: true },
     role: {
       type: String,
-      enum: ['_4_template_', 'admin', 'moderator'],
-      default: '_4_template_',
+      enum: __custom_selector_arr__,
+      default: __default_selector__,
     },
   },
   { timestamps: true },

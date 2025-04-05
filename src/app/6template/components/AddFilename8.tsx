@@ -10,7 +10,12 @@ import { useAdd_3_template_Mutation } from '@/redux/features/6template/7filename
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'react-toastify';
-import { default_3_template_Data, default_3_template_Role, I_3_template_Role, _4_template_Role } from '@/app/6template/store/filename7StoreConstants';
+import {
+  default_3_template_Data,
+  __default_selector__,
+  __I_custom_selector_Type__,
+  __custom_selector_arr__,
+} from '@/app/6template/store/filename7StoreConstants';
 
 const InputField: React.FC<{
   id: string;
@@ -48,7 +53,7 @@ const Add_3_template_: React.FC = () => {
     }
   }, [isError, error]);
   const handleRoleChange = (value: string) => {
-    setNew_3_template_({ ...new_3_template_, role: value as I_3_template_Role });
+    setNew_3_template_({ ...new_3_template_, role: value as __I_custom_selector_Type__ });
   };
 
   const handleAdd_3_template_ = async () => {
@@ -57,7 +62,7 @@ const Add_3_template_: React.FC = () => {
       email: new_3_template_.email || '',
       passCode: new_3_template_.passCode || '',
       alias: new_3_template_.alias || '',
-      role: (new_3_template_.role as I_3_template_Role) || default_3_template_Role,
+      role: (new_3_template_.role as __I_custom_selector_Type__) || __default_selector__,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -101,7 +106,7 @@ const Add_3_template_: React.FC = () => {
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
-                  {_4_template_Role?.map((i, index) => (
+                  {__custom_selector_arr__?.map((i, index) => (
                     <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
                       {i}
                     </SelectItem>

@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { useUpdate_3_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
-import { I_3_template_Role, _4_template_Role, baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
+import { __I_custom_selector_Type__, __custom_selector_arr__, baseI_3_template_ } from '@/app/6template/store/filename7StoreConstants';
 
 const Edit_3_template_: React.FC = () => {
   const { toggleEditModal, isEditModalOpen, new_3_template_, selected_3_template_, setNew_3_template_, setSelected_3_template_ } = use_3_template_Store();
@@ -26,7 +26,7 @@ const Edit_3_template_: React.FC = () => {
     setNew_3_template_({ ...new_3_template_, [name]: value });
   };
   const handleRoleChange = (value: string) => {
-    setNew_3_template_({ ...new_3_template_, role: value as I_3_template_Role });
+    setNew_3_template_({ ...new_3_template_, role: value as __I_custom_selector_Type__ });
   };
 
   const handleEdit_3_template_ = async () => {
@@ -96,7 +96,7 @@ const Edit_3_template_: React.FC = () => {
                   <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
-                  {_4_template_Role?.map((i, index) => (
+                  {__custom_selector_arr__?.map((i, index) => (
                     <SelectItem key={i + index} className="cursor-pointer hover:bg-slate-200" value={i}>
                       {i}
                     </SelectItem>

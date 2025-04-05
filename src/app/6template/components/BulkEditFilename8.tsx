@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { use_3_template_Store } from '@/app/6template/store/filename7Store';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { _4_template_Role } from '@/app/6template/store/filename7StoreConstants';
+import { __custom_selector_arr__ } from '@/app/6template/store/filename7StoreConstants';
 import { I_3_template_ } from '@/app/api/v1/6template/filename7Model';
 import { useBulkUpdate_1_template_Mutation } from '@/redux/features/6template/7filenameApi';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -54,7 +54,7 @@ const BulkEdit_3_template_: React.FC = () => {
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-50">
-                      {_4_template_Role?.map((role, index) => (
+                      {__custom_selector_arr__?.map((role, index) => (
                         <SelectItem key={role + index} value={role} className="cursor-pointer hover:bg-slate-200">
                           {role}
                         </SelectItem>
