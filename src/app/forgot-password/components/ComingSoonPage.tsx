@@ -47,7 +47,6 @@ const ComingSoonPage: React.FC<ComingSoonPageProps> = ({
   teaserText = 'Our revolutionary new platform is launching soon. Get ready!',
   launchDate,
   socialLinks = [],
-  featuresTeaser = [],
   gradientStart = '#4F46E5',
   gradientEnd = '#7C3AED',
 }) => {
@@ -271,7 +270,7 @@ const ComingSoonPage: React.FC<ComingSoonPageProps> = ({
           </form>
           {submitStatus === 'success' && (
             <motion.p className="mt-2 text-center text-green-200" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-              Thanks for subscribing! We'll keep you updated.
+              Thanks for subscribing! We`&apos`ll keep you updated.
             </motion.p>
           )}
         </motion.div>

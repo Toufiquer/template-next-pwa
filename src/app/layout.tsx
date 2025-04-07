@@ -5,6 +5,7 @@ import { ReduxProvider } from '@/redux/provider';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NextAuthProvider from '@/provider/SessionProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,7 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ReduxProvider>{children}</ReduxProvider>
+        <NextAuthProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </NextAuthProvider>
         <ToastContainer />
       </body>
     </html>
